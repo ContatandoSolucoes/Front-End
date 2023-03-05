@@ -13,7 +13,7 @@ function Cadastro() {
                 <TextInput placeholder='Email'style={styles.input} secureTextEntry={true}></TextInput>
                 <TextInput placeholder='Senha'style={styles.input}></TextInput>
                 <TextInput placeholder='Confirmar senha'style={styles.input} secureTextEntry={true}></TextInput>
-                <TouchableOpacity><Text style={styles.entrar}>Cadastrar</Text></TouchableOpacity>
+                <TouchableOpacity><Text style={styles.entrar}>Cadastrar</Text></TouchableOpacity>{/**On press vai dentro do touchable oppacity*/}
             </View>
         </View>
     </React.Fragment>
