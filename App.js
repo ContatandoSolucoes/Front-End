@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View, Image} from 'react-native';
 import React from 'react';
 
+
 //Import dos componentes e telas
 import Login from './src/Pages/Login';
 import Cadastro from './src/Pages/Cadastro';
@@ -38,3 +39,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+

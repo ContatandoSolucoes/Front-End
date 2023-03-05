@@ -7,13 +7,11 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function FormCad() {
-  const navigation = useNavigation();{/**Essa variavel foi a forma que eu achei pra usar o metodo navigate que leva de uma tela a outra */}
+  const navigation = useNavigation();
 
   return (
     <React.Fragment>
         <View style={styles.container}>
-
-        {/**O metodo navigate pega uma das rotas criadas lá no app.js e leva pra aquela página/componente */}
         <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate('Cadastro')}><Text style={styles.cadastre}>Cadastre-se</Text></TouchableOpacity>
       </View>
     </React.Fragment>

@@ -1,19 +1,80 @@
 import React from 'react'
 import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity } from 'react-native'
 
+import api from '../api.js'
+import useState from 'react-hook-use-state'
+
 function Cadastro() {
+
+    const [email,setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [nome, setUserName] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [nascimento, setNascimento] = useState('');
+    
+    async function handleRegister(event){
+      event.preventDefault()
+      try{
+        const data = {
+          email, senha, nome, telefone, nascimento
+        };
+        const response = await api.post('/user', data)
+    
+        alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
+  
+        setEmail('');
+        setSenha('');
+        setUserName('');
+        setTelefone('');
+        setNascimento('');
+      } catch(error){
+        alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
+      }
+    }
+
   return (
     <React.Fragment>
         <View style={styles.container}>
             <View style={styles.form}>
                 <Text style={styles.title}>Cadastro</Text>
-                <TextInput placeholder='Nome'style={styles.input}></TextInput>
-                <TextInput placeholder='Telefone'style={styles.input} secureTextEntry={true}></TextInput>
-                <TextInput placeholder='Data de Nascimento'style={styles.input}></TextInput>
-                <TextInput placeholder='Email'style={styles.input} secureTextEntry={true}></TextInput>
-                <TextInput placeholder='Senha'style={styles.input}></TextInput>
-                <TextInput placeholder='Confirmar senha'style={styles.input} secureTextEntry={true}></TextInput>
-                <TouchableOpacity><Text style={styles.entrar}>Cadastrar</Text></TouchableOpacity>{/**On press vai dentro do touchable oppacity*/}
+                
+                <TextInput 
+                placeholder='Nome'style={styles.input}
+                value={nome}
+                onChange={e => setUserName(e.target.value)}
+                ></TextInput>
+
+                <TextInput 
+                placeholder='Telefone'style={styles.input} secureTextEntry={true}
+                value={telefone}
+                onChange={e => setTelefone(e.target.value)}
+                ></TextInput>
+                
+                <TextInput 
+                placeholder='Data de Nascimento'style={styles.input}
+                value={nascimento}
+                onChange={e => setNascimento(e.target.value)}
+                ></TextInput>
+                
+                <TextInput 
+                placeholder='Email'style={styles.input} secureTextEntry={true}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                ></TextInput>
+                
+                <TextInput 
+                placeholder='Senha'style={styles.input}
+                ></TextInput>
+                
+                <TextInput 
+                placeholder='Confirmar senha'style={styles.input} secureTextEntry={true}
+                value={senha}
+                onChange={e => setSenha(e.target.value)}
+                ></TextInput>
+                
+                <TouchableOpacity onPress={handleRegister}><Text 
+                style={styles.entrar}
+                >Cadastrar</Text></TouchableOpacity>
             </View>
         </View>
     </React.Fragment>

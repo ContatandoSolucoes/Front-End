@@ -4,13 +4,17 @@ import Form from '../Components/Form/Form';
 import FormCad from '../Components/FormCad/FormCad';
 import React from 'react';
 
+
+
 function Login() {
+
   return (
     <React.Fragment>
     <View style={styles.container}>
       <Form>
       </Form>
       <FormCad></FormCad>
+    
     </View>
     </React.Fragment>
   );

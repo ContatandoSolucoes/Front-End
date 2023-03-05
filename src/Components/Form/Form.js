@@ -17,8 +17,8 @@ function Form() {
         <View style={styles.container}>
           <Text style={styles.title}>LOGIN</Text>
           <TextInput placeholder='Email'style={styles.input}></TextInput>
-          <TextInput placeholder='Senha'style={styles.input} secureTextEntry={true}></TextInput>{/**secureTextEntry é para aparecer somente as bolinhas ao inves da senha*/}
-          <TouchableOpacity><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>{/**Aqui funciona como o botão e para chamar uma função com ele é pelo método on press */}
+          <TextInput placeholder='Senha'style={styles.input} secureTextEntry={true}></TextInput>
+          <TouchableOpacity><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
         </View>
     </React.Fragment>
   )

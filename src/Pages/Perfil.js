@@ -1,12 +1,17 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button} from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
+
+
+
 
 function Perfil() {
+  
   return (
     <React.Fragment>
         <View style={styles.container}>
             {/**Aqui acima eu ainda vou colocar a imagem */}
-
+            <TouchableOpacity></TouchableOpacity>
             {/**Nos text daqui de baixo temos que substuir pelas informações fornecidas pelo usuário no cadastro logo quando o cadastro for feito*/}
             <View style={styles.form}>
                 <Text style={styles.infos}>Nome</Text>{/**Nome */}
