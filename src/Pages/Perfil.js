@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button} from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
 
 
 

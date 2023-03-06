@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert } from 'react-native'
 
 import api from '../api.js'
 import useState from 'react-hook-use-state'
@@ -16,11 +16,11 @@ function Cadastro() {
       event.preventDefault()
       try{
         const data = {
-          email, senha, nome, telefone, nascimento
+          nome, email, senha, telefone, nascimento
         };
         const response = await api.post('/user', data)
     
-        alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
+        Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
   
         setEmail('');
         setSenha('');
@@ -28,7 +28,7 @@ function Cadastro() {
         setTelefone('');
         setNascimento('');
       } catch(error){
-        alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
+        Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
       }
     }
 
@@ -45,7 +45,7 @@ function Cadastro() {
                 ></TextInput>
 
                 <TextInput 
-                placeholder='Telefone'style={styles.input} secureTextEntry={true}
+                placeholder='Telefone'style={styles.input}
                 value={telefone}
                 onChange={e => setTelefone(e.target.value)}
                 ></TextInput>
@@ -57,7 +57,7 @@ function Cadastro() {
                 ></TextInput>
                 
                 <TextInput 
-                placeholder='Email'style={styles.input} secureTextEntry={true}
+                placeholder='Email'style={styles.input}
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 ></TextInput>
