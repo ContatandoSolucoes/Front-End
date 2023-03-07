@@ -10,6 +10,7 @@ function Cadastro() {
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
     const [nome, setUserName] = useState('');
+    const [cpf, setCpf] = useState('');
     const [telefone, setTelefone] = useState('');
     const [nascimento, setNascimento] = useState('');
     
@@ -55,6 +56,12 @@ function Cadastro() {
                 placeholder='Data de Nascimento'style={styles.input}
                 value={nascimento}
                 onChange={e => setNascimento(e.target.value)}
+                ></TextInput>
+
+                <TextInput 
+                placeholder='Cpf'style={styles.input}
+                value={cpf}
+                onChange={e => setCpf(e.target.value)}
                 ></TextInput>
                 
                 <TextInput 
