@@ -17,7 +17,7 @@ function Form() {
     event.preventDefault()
     try{
       const user = {
-        nome, email, senha, telefone, nascimento
+        email, senha
       };
       const response = api.post('/user', user)
   
