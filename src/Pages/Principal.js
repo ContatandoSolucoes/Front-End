@@ -26,7 +26,12 @@ function Principal() {
   }, []);
 
   return (
-    <React.Fragment>
+      <View style={styles.tela}>
+        <View style={styles.header}>
+          <TouchableOpacity style={styles.menu}></TouchableOpacity>
+          <TextInput style={styles.pesquisa}></TextInput>
+        </View>
+
         <MapView style={styles.map}
         initialRegion={{ /**Aqui ele vai indicar onde o app irá começar eu coloquei a localizção do embu de inicio */
             latitude : -23.6491,
@@ -37,13 +42,42 @@ function Principal() {
         showsUserLocation  /**Aqui nessa configuração ele mostra onde o usuário está */
         loadingEnabled
         />
-    </React.Fragment>
+
+        <View style={styles.formDenuncia}>
+          <TouchableOpacity><Text style={styles.relatar}>Relatar Problema</Text></TouchableOpacity>
+        </View>
+      </View>
   )
 }
 
 const styles = StyleSheet.create({
+    tela:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex : 1,
+    },
     map:{
-        flex: 1,
+        width : "100%",
+        height : "75%",
+    },
+    formDenuncia:{
+      width: "100%",
+      height: 80,
+      justifyContent: 'center',
+      backgroundColor: '#57bee7',
+      alignItems : 'center',
+      marginBottom: -60,
+    },
+    relatar:{
+      backgroundColor : "#13827c",
+        fontSize : 25,
+        width : 250,
+        height : 50,
+        textAlign : 'center',
+        borderColor : '#5e5e5e',
+        borderWidth : 2,
+        borderRadius : 7,
+        color : 'white'
     }
 
 })

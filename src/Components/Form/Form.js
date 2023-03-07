@@ -49,7 +49,7 @@ function Form() {
                 value={senha}
                 onChange={e=>setSenha(e.target.value)}
           ></TextInput>
-          <TouchableOpacity onPress={touch}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
+          <TouchableOpacity /*onPress={touch}*/ onPress={() => navigation.navigate('Principal')} ><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
         </View>
     </React.Fragment>
   )

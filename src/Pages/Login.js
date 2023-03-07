@@ -14,7 +14,6 @@ function Login() {
       <Form>
       </Form>
       <FormCad></FormCad>
-    
     </View>
     </React.Fragment>
   );

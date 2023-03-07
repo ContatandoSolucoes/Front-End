@@ -22,7 +22,7 @@ export default function App() {
     //Navigation Container é a tag que envolve as outras
     <NavigationContainer>
       {/* initial route name é para definir em qual tela teu app irá começar */}
-    <Stack.Navigator initialRouteName='Principal'> 
+    <Stack.Navigator initialRouteName='Home'> 
       <Stack.Screen name='Home' component={Home} options={{title:'', headerTransparent:'true',}}></Stack.Screen>{/**Essas options servem para esconder um header que aparece comum titulo toda vez que você entra naquela tela */}
       <Stack.Screen name='Cadastro' component={Cadastro} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='login' component={Login} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
