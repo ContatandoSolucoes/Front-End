@@ -19,14 +19,14 @@ function Form() {
       const data = {
         email, senha
       };
-      const response = await api.post('/user', data)
+      const response = await api.get('/user', data)
   
-      Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
+      Alert.alert(`Login realizado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
 
       setEmail('');
       setSenha('');
     } catch(error){
-      Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
+      Alert.alert(`Erro no login. Tente novamente. \nCodigo Erro: ${error}`)
     }
 
   }
