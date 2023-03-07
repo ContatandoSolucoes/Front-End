@@ -16,10 +16,10 @@ function Form() {
   const touch=()=>{
     event.preventDefault()
     try{
-      const user = {
-        email, senha
+      const data = {
+        nome, email, senha, telefone, nascimento
       };
-      const response = api.post('/user', user)
+      const response = api.post('/user', data)
   
       Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
 
