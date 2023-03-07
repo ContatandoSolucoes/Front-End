@@ -17,7 +17,7 @@ function Form() {
     event.preventDefault()
     try{
       const data = {
-        nome, email, senha, telefone, nascimento
+        email, senha
       };
       const response = await api.post('/user', data)
   
