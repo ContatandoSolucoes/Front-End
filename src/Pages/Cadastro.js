@@ -8,6 +8,7 @@ function Cadastro() {
 
     const [email,setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [confirmaSenha, setConfirmaSenha] = useState('');
     const [nome, setUserName] = useState('');
     const [telefone, setTelefone] = useState('');
     const [nascimento, setNascimento] = useState('');
@@ -64,12 +65,16 @@ function Cadastro() {
                 
                 <TextInput 
                 placeholder='Senha'style={styles.input}
+                secureTextEntry={true}
+                value={senha}
+                onChange={e=>setSenha(e.target.value)}
                 ></TextInput>
                 
                 <TextInput 
-                placeholder='Confirmar senha'style={styles.input} secureTextEntry={true}
-                value={senha}
-                onChange={e => setSenha(e.target.value)}
+                placeholder='Confirmar senha'style={styles.input}
+                secureTextEntry={true}
+                value={confirmaSenha}
+                onChange={e => setConfirmaSenha(e.target.value)}
                 ></TextInput>
                 
                 <TouchableOpacity onPress={handleRegister}><Text 

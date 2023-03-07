@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity } from 'react-native'
 import logo from "./icon.png"
 import { getHeaderTitle } from '@react-navigation/elements';
@@ -9,6 +9,27 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 function Form() {
+
+  const [email,setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  const touch=()=>{
+    event.preventDefault()
+    try{
+      const data = {
+        nome, email, senha, telefone, nascimento
+      };
+      const response = await api.post('/user', data)
+  
+      Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
+
+      setEmail('');
+      setSenha('');
+    } catch(error){
+      Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
+    }
+
+  }
   const navigation = useNavigation();
 
   return (
@@ -16,9 +37,19 @@ function Form() {
       <Image source={logo} style={styles.img}/>
         <View style={styles.container}>
           <Text style={styles.title}>LOGIN</Text>
-          <TextInput placeholder='Email'style={styles.input}></TextInput>
-          <TextInput placeholder='Senha'style={styles.input} secureTextEntry={true}></TextInput>
-          <TouchableOpacity><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
+          <TextInput 
+                placeholder='Email'style={styles.input}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+          ></TextInput>
+
+          <TextInput 
+                placeholder='Senha'style={styles.input}
+                secureTextEntry={true}
+                value={senha}
+                onChange={e=>setSenha(e.target.value)}
+          ></TextInput>
+          <TouchableOpacity onPress={touch}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
         </View>
     </React.Fragment>
   )
