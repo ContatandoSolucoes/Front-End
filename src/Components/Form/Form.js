@@ -17,16 +17,16 @@ function Form() {
     event.preventDefault()
     try{
       const data = {
-        email, senha
+        nome, email, senha, telefone, nascimento
       };
-      const response = await api.get('/user', data)
+      const response = api.post('/user', data)
   
-      Alert.alert(`Login realizado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
+      Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
 
       setEmail('');
       setSenha('');
     } catch(error){
-      Alert.alert(`Erro no login. Tente novamente. \nCodigo Erro: ${error}`)
+      Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
     }
 
   }
