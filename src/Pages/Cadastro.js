@@ -24,11 +24,11 @@ function Cadastro() {
     
         Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome_usuario}`)
   
-        setEmail('');
-        setSenha('');
-        setUserName('');
-        setTelefone('');
-        setNascimento('');
+        //setEmail('');
+        //setSenha('');
+        //setUserName('');
+        //setTelefone('');
+        //setNascimento('');
       } catch(error){
         Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
       }

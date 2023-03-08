@@ -13,22 +13,22 @@ function Form() {
   const [email,setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const touch=()=>{
+  async function handleLogin(event){
     event.preventDefault()
     try{
       const data = {
-        email, senha
+        email,senha
       };
-      const response = api.post('/user', data)
+      const response = await api.post('/login', data)
   
-      Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
+      Alert.alert(`Usuario logado com sucesso!`)
 
-      setEmail('');
-      setSenha('');
+      //setEmail('');
+      //setSenha('');
+
     } catch(error){
-      Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
+      Alert.alert(`Erro no login. Tente novamente. \nCodigo Erro: ${error}`)
     }
-
   }
   const navigation = useNavigation();
 
@@ -49,7 +49,7 @@ function Form() {
                 value={senha}
                 onChange={e=>setSenha(e.target.value)}
           ></TextInput>
-          <TouchableOpacity onPress={touch}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
+          <TouchableOpacity onPress={handleLogin}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
         </View>
     </React.Fragment>
   )
