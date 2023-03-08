@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert } from 'react-native'
+
 import api from '../api.js'
 import useState from 'react-hook-use-state'
 
@@ -9,7 +10,7 @@ function Cadastro() {
     const [email,setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
-    const [nome, setUserName] = useState('');
+    const [nome_usuario, setUserName] = useState('');
     const [telefone, setTelefone] = useState('');
     const [nascimento, setNascimento] = useState('');
     
@@ -17,11 +18,11 @@ function Cadastro() {
       event.preventDefault()
       try{
         const data = {
-          nome, email, senha, telefone, nascimento
+          nome_usuario,email,senha,telefone,nascimento
         };
         const response = await api.post('/user', data)
     
-        Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome}`)
+        Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome_usuario}`)
   
         setEmail('');
         setSenha('');
@@ -41,40 +42,40 @@ function Cadastro() {
                 
                 <TextInput 
                 placeholder='Nome'style={styles.input}
-                value={nome}
-                onChange={e => setUserName(e.target.value)}
+                value={nome_usuario}
+                onChangeText={e => setUserName(e)}
                 ></TextInput>
 
                 <TextInput 
                 placeholder='Telefone'style={styles.input}
                 value={telefone}
-                onChange={e => setTelefone(e.target.value)}
+                onChangeText={e => setTelefone(e)}
                 ></TextInput>
                 
                 <TextInput 
                 placeholder='Data de Nascimento'style={styles.input}
                 value={nascimento}
-                onChange={e => setNascimento(e.target.value)}
+                onChangeText={e => setNascimento(e)}
                 ></TextInput>
 
                 <TextInput 
                 placeholder='Email'style={styles.input}
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChangeText={e => setEmail(e)}
                 ></TextInput>
                 
                 <TextInput 
                 placeholder='Senha'style={styles.input}
                 secureTextEntry={true}
                 value={senha}
-                onChange={e=>setSenha(e.target.value)}
+                onChangeText={e=>setSenha(e)}
                 ></TextInput>
                 
                 <TextInput 
                 placeholder='Confirmar senha'style={styles.input}
                 secureTextEntry={true}
                 value={confirmaSenha}
-                onChange={e => setConfirmaSenha(e.target.value)}
+                onChangeText={e => setConfirmaSenha(e)}
                 ></TextInput>
                 
                 <TouchableOpacity onPress={handleRegister}><Text 
