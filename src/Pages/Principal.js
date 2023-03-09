@@ -1,12 +1,15 @@
 import React from 'react'
 import useState from 'react-hook-use-state';
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+
+import menu from "../../assets/menu.png"
 
 import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert } from 'react-native'
 
 //Imports Mapa
 import MapView from 'react-native-maps'
 import * as Location from 'expo-location';
+import { useNavigation } from '@react-navigation/native';
 
 function Principal() {
     const [location, setLocation] = useState(null);
@@ -24,11 +27,13 @@ function Principal() {
       setLocation(location);
     })();
   }, []);
-
+  const navigation = useNavigation();
   return (
       <View style={styles.tela}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.menu}></TouchableOpacity>{/**Botão que irá abrir o menu */}
+          <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
+            <Image source={menu} style={styles.menu}></Image>
+          </TouchableOpacity>{/**Botão que irá abrir o menu */}
           <TextInput style={styles.pesquisa} placeholder="Pesquise alguma localização"></TextInput>{/**Barra de pesquisa de localização */}
         </View>
 
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#659ee4',
       alignItems : 'center',
       flexDirection : "row",
-      paddingLeft : 15,
+      paddingLeft : 6,
     },
     pesquisa:{
       width : "70%",
@@ -98,10 +103,9 @@ const styles = StyleSheet.create({
       paddingLeft : 10
     },
     menu : {
-      backgroundColor : "#5271ff",
-      width : 50,
+      width : 55,
       height : 47,
-      marginTop : 40,
+      marginTop : 36,
       marginRight : 15
     }
 

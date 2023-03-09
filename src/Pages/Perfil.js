@@ -19,7 +19,7 @@ function Perfil() {
                 <Text style={styles.infos}>Data de nascimento</Text>{/**Data de nascimento */}
                 <Text style={styles.infos}>Número</Text>{/**Número de celular  */}
             </View>
-            <TouchableOpacity><Text style={styles.entrar}>Sair da conta</Text></TouchableOpacity>
+            <TouchableOpacity><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
         </View>
     </React.Fragment>
   )
@@ -28,22 +28,22 @@ function Perfil() {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: '#add8e6',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
     },
     form:{
         width : "85%",
         height : "55%",
-        backgroundColor : "#57bee7",
+        backgroundColor : "#659ee4",
         borderRadius : 15,
         alignItems : 'center',
         justifyContent : 'center',
         borderWidth : 2,
         borderColor : '#5e5e5e'
     },
-    entrar:{
-        backgroundColor : "#13827c",
+    sair:{
+        backgroundColor : "#5271ff",
           fontSize : 25,
           width : 180,
           height : 40,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
           marginTop : 50,
       },
       infos:{
-        backgroundColor : "#13827c",
+        backgroundColor : "#5271ff",
         fontSize : 23,
         width : 190,
         textAlign : 'center',

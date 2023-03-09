@@ -9,6 +9,7 @@ import Cadastro from './src/Pages/Cadastro';
 import Home from './src/Pages/Home';
 import Perfil from './src/Pages/Perfil';
 import Principal from './src/Pages/Principal';
+import Menu from './src/Pages/Menu'
 
 //Import do react navigation
 import 'react-native-gesture-handler';
@@ -28,6 +29,7 @@ export default function App() {
       <Stack.Screen name='login' component={Login} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Perfil' component={Perfil} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name="Principal" component={Principal} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+      <Stack.Screen name='Menu' component={Menu} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
     </Stack.Navigator>
     </NavigationContainer>
   );
