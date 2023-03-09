@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
 import Form from '../Components/Form/Form';
 import FormCad from '../Components/FormCad/FormCad';
 import React from 'react';
-import logo from "../Components/Form/icon.png"
+import back from "../../assets/Inicio.png"
 
 
 
@@ -19,12 +19,10 @@ function Home() {
   return (
     <React.Fragment>
       <View style={styles.container}>
-        <Image source={logo} style={styles.img}></Image>
-        <Text style={styles.title} >
-          {`CONTATANDO SOLUÇÕES`}
-        </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}><Text style={styles.entrar}>Cadastrar-se</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('login')} ><Text style={styles.entrar}>Login</Text></TouchableOpacity>
+        <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+          <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}><Text style={styles.entrar}>Cadastrar-se</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('login')} ><Text style={styles.entrar}>Login</Text></TouchableOpacity>
+        </ImageBackground>
       </View>
 
 
@@ -37,36 +35,26 @@ const styles = StyleSheet.create({
   
   container: {
     flex: 1,
-    backgroundColor: '#add8e6',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  img:{
-    width: 230,
-    height: 200,
-  },
-  title:{
-        backgroundColor : "#13827c",
-        fontSize : 25,
-        width : '80%',
-        textAlign : 'center',
-        color : 'white',
-        // borderColor : '#5e5e5e',
-        // borderWidth : 2,
-        borderRadius : 5,
   },
   entrar:{
-        backgroundColor : "#13827c",
+        backgroundColor : "#5271ff",
           fontSize : 25,
-          width : 150,
+          width : 170,
           height : 40,
           textAlign : 'center',
           borderColor : '#5e5e5e',
           borderWidth : 2,
           borderRadius : 30,
           color : 'white',
-          marginTop : 50,
-        }
+          marginTop : 90,
+          marginBottom : -70
+        },
+    image :{
+      flex : 1,
+      justifyContent : 'center',
+      width : "100%",
+      alignItems : 'center',
+    }
 
 });
 

@@ -28,8 +28,8 @@ function Principal() {
   return (
       <View style={styles.tela}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.menu}></TouchableOpacity>
-          <TextInput style={styles.pesquisa}></TextInput>
+          <TouchableOpacity style={styles.menu}></TouchableOpacity>{/**Botão que irá abrir o menu */}
+          <TextInput style={styles.pesquisa} placeholder="Pesquise alguma localização"></TextInput>{/**Barra de pesquisa de localização */}
         </View>
 
         <MapView style={styles.map}
@@ -38,13 +38,14 @@ function Principal() {
             longitude :  -46.8526,
             latitudeDelta : 0.0922,
             longitudeDelta: 0.0421,
+            
         }}
         showsUserLocation  /**Aqui nessa configuração ele mostra onde o usuário está */
         loadingEnabled
         />
 
         <View style={styles.formDenuncia}>
-          <TouchableOpacity><Text style={styles.relatar}>Relatar Problema</Text></TouchableOpacity>
+          <TouchableOpacity><Text style={styles.relatar}>Relatar Problema</Text></TouchableOpacity>{/**Aqui é botão de fazer denuncia */}
         </View>
       </View>
   )
@@ -58,18 +59,17 @@ const styles = StyleSheet.create({
     },
     map:{
         width : "100%",
-        height : "75%",
+        height : "77%",
     },
     formDenuncia:{
       width: "100%",
-      height: 80,
+      height: "10%",
       justifyContent: 'center',
-      backgroundColor: '#57bee7',
+      backgroundColor: '#659ee4',
       alignItems : 'center',
-      marginBottom: -60,
     },
     relatar:{
-      backgroundColor : "#13827c",
+      backgroundColor : "#5271ff",
         fontSize : 25,
         width : 250,
         height : 50,
@@ -77,7 +77,32 @@ const styles = StyleSheet.create({
         borderColor : '#5e5e5e',
         borderWidth : 2,
         borderRadius : 7,
-        color : 'white'
+        color : 'white',
+        paddingTop : 7,
+    },
+    header:{
+      width: "100%",
+      height: '13%',
+      // justifyContent: 'center',
+      backgroundColor: '#659ee4',
+      alignItems : 'center',
+      flexDirection : "row",
+      paddingLeft : 15,
+    },
+    pesquisa:{
+      width : "70%",
+      height : 33,
+      backgroundColor : "white",
+      marginTop : 40,
+      borderRadius : 8,
+      paddingLeft : 10
+    },
+    menu : {
+      backgroundColor : "#5271ff",
+      width : 50,
+      height : 47,
+      marginTop : 40,
+      marginRight : 15
     }
 
 })

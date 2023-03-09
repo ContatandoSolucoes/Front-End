@@ -34,23 +34,23 @@ function Form() {
 
   return (
     <React.Fragment>
-      <Image source={logo} style={styles.img}/>
-        <View style={styles.container}>
-          <Text style={styles.title}>LOGIN</Text>
-          <TextInput 
-                placeholder='Email'style={styles.input}
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-          ></TextInput>
+        <Image source={logo} style={styles.img}/>
+          <View style={styles.container}>
+            <Text style={styles.title}>LOGIN</Text>
+            <TextInput 
+                  placeholder='Email'style={styles.input}
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+            ></TextInput>
 
-          <TextInput 
-                placeholder='Senha'style={styles.input}
-                secureTextEntry={true}
-                value={senha}
-                onChange={e=>setSenha(e.target.value)}
-          ></TextInput>
-          <TouchableOpacity onPress={handleLogin}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
-        </View>
+            <TextInput 
+                  placeholder='Senha'style={styles.input}
+                  secureTextEntry={true}
+                  value={senha}
+                  onChange={e=>setSenha(e.target.value)}
+            ></TextInput>
+            <TouchableOpacity onPress={handleLogin}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
+          </View>
     </React.Fragment>
   )
 }
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     container:{
         width : "85%",
         height : "55%",
-        backgroundColor : "#57bee7",
+        backgroundColor : "#659ee4",
         borderRadius : 15,
         alignItems : 'center',
         justifyContent : 'center',
@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
       fontSize: 15,
     },
     img:{
-      width : 110,
-      height : 110,
-      marginBottom : 10,
+      width : 210,
+      height : 210,
+      marginBottom : -25,
     
     },
     title:{
-      backgroundColor : "#13827c",
+      backgroundColor : "#5271ff",
       fontSize : 30,
       width : 130,
       textAlign : 'center',
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
       borderRadius : 5,
     },
     entrar:{
-      backgroundColor : "#13827c",
+      backgroundColor : "#5271ff",
         fontSize : 25,
         width : 140,
         height : 40,

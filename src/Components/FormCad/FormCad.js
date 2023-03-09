@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     container:{
         width : "85%",
         height : "15%",
-        backgroundColor : "#57bee7",
+        backgroundColor : "#659ee4",
         borderRadius : 15,
         alignItems : 'center',
         justifyContent : 'center',
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         marginTop : 15
     },
     cadastre:{
-        backgroundColor : "#13827c",
+        backgroundColor : "#5271ff",
         fontSize : 25,
         width : 250,
         height : 50,
@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
         borderColor : '#5e5e5e',
         borderWidth : 2,
         borderRadius : 7,
-        color : 'white'
+        color : 'white',
+        paddingTop : 6,
       },
 })
 export default FormCad

@@ -90,14 +90,14 @@ function Cadastro() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#add8e6',
+      backgroundColor: 'white',
       alignItems: 'center',
       justifyContent: 'center',
     },
     form:{
         width : "85%",
         height : "75%",
-        backgroundColor : "#57bee7",
+        backgroundColor : "#659ee4",
         borderRadius : 15,
         alignItems : 'center',
         justifyContent : 'center',
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
       },
       title:{
-        backgroundColor : "#13827c",
+        backgroundColor : "#5271ff",
         fontSize : 30,
         width : 150,
         textAlign : 'center',
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         borderRadius : 5,
       },
       entrar:{
-        backgroundColor : "#13827c",
+        backgroundColor : "#5271ff",
           fontSize : 25,
           width : 150,
           height : 40,

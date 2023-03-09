@@ -22,7 +22,7 @@ function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#add8e6',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
