@@ -1,16 +1,41 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button} from 'react-native';
-
-
+import { launchImageLibrary } from 'react-native-image-picker';
+import useState from 'react-hook-use-state';
+import * as ImagePicker from 'expo-image-picker';
 
 
 function Perfil() {
+  const [image, setImage] = useState(null);
+
+
+  //AINDA ESTOU ESTUDANDO O QUE FAZ ISSO PQ ATÉ AGORA NÃO ENTENDI
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   
   return (
     <React.Fragment>
         <View style={styles.container}>
-            {/**Aqui acima eu ainda vou colocar a imagem */}
-            <TouchableOpacity></TouchableOpacity>
+          <TouchableOpacity onPress={pickImage}>
+            <View style={styles.divFoto}>
+              <Image source={image}></Image>
+            </View>
+          </TouchableOpacity>
+            
             {/**Nos text daqui de baixo temos que substuir pelas informações fornecidas pelo usuário no cadastro logo quando o cadastro for feito*/}
             <View style={styles.form}>
                 <Text style={styles.infos}>Nome</Text>{/**Nome */}
@@ -65,7 +90,18 @@ const styles = StyleSheet.create({
         borderColor : '#5e5e5e',
         borderWidth : 2,
     
-      }
+      },
+      divFoto:{
+        width : 150,
+        height : 150,
+        backgroundColor : '#5271ff',
+        borderRadius : 180,
+        marginBottom: 25,
+        alignItems : "center",
+        justifyContent : "center",
+        borderColor : '#5e5e5e',
+        borderWidth : 2,
+    }
 
 })
 
