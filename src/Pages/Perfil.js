@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button, ImageBackground} from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import useState from 'react-hook-use-state';
 import * as ImagePicker from 'expo-image-picker';
+import back from "../../assets/Fundo.png"
 
 
 function Perfil() {
@@ -30,21 +31,22 @@ function Perfil() {
   return (
     <React.Fragment>
         <View style={styles.container}>
-          <TouchableOpacity onPress={pickImage}>
-            <View style={styles.divFoto}>
-              <Image source={image}></Image>
-            </View>
-          </TouchableOpacity>
-            
-            {/**Nos text daqui de baixo temos que substuir pelas informações fornecidas pelo usuário no cadastro logo quando o cadastro for feito*/}
-            <View style={styles.form}>
-                <Text style={styles.infos}>Nome</Text>{/**Nome */}
-                <Text style={styles.infos}>Email</Text>{/**Email */}
-                <Text style={styles.infos}>Cpf</Text>{/**Cpf */}
-                <Text style={styles.infos}>Data de nascimento</Text>{/**Data de nascimento */}
-                <Text style={styles.infos}>Número</Text>{/**Número de celular  */}
-            </View>
-            <TouchableOpacity><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
+          <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+            <TouchableOpacity onPress={pickImage}>
+              <View style={styles.divFoto}>
+                <Image source={image}></Image>
+              </View>
+            </TouchableOpacity>
+              
+              {/**Nos text daqui de baixo temos que substuir pelas informações fornecidas pelo usuário no cadastro logo quando o cadastro for feito*/}
+              <View style={styles.form}>
+                  <Text style={styles.infos}>Nome</Text>{/**Nome */}
+                  <Text style={styles.infos}>Email</Text>{/**Email */}
+                  <Text style={styles.infos}>Data de nascimento</Text>{/**Data de nascimento */}
+                  <Text style={styles.infos}>Número</Text>{/**Número de celular  */}
+              </View>
+              <TouchableOpacity><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
+            </ImageBackground>
         </View>
     </React.Fragment>
   )
@@ -101,6 +103,12 @@ const styles = StyleSheet.create({
         justifyContent : "center",
         borderColor : '#5e5e5e',
         borderWidth : 2,
+    },
+    image :{
+      flex : 1,
+      justifyContent : 'center',
+      width : "100%",
+      alignItems : 'center',
     }
 
 })

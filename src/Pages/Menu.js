@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
+import back from "../../assets/Fundo.png"
 
 function Menu() {
 
@@ -8,14 +9,16 @@ function Menu() {
   return (
        <React.Fragment>
             <View style={styles.container}>
-                <View style={styles.divFoto}>
-                    <Image></Image>
-                </View>
-                <Text style={styles.name}></Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Perfil')}><Text style={styles.options1}>Perfil</Text></TouchableOpacity>{/**Perfil */}
-                <TouchableOpacity><Text style={styles.options2}>Telefones de Emergência</Text></TouchableOpacity>{/**Emergência */}
-                <TouchableOpacity><Text style={styles.options3}>Problemas no aplicativo</Text></TouchableOpacity>{/**Problemas no aplicativo */}
-                <TouchableOpacity><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
+                <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+                    <View style={styles.divFoto}>
+                        <Image></Image>
+                    </View>
+                    <Text style={styles.name}></Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('Perfil')}><Text style={styles.options1}>Perfil</Text></TouchableOpacity>{/**Perfil */}
+                    <TouchableOpacity><Text style={styles.options2}>Telefones de Emergência</Text></TouchableOpacity>{/**Emergência */}
+                    <TouchableOpacity><Text style={styles.options3}>Problemas no aplicativo</Text></TouchableOpacity>{/**Problemas no aplicativo */}
+                    <TouchableOpacity><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
+                </ImageBackground>
             </View>
        </React.Fragment>
   )
@@ -25,7 +28,6 @@ const styles = StyleSheet.create({
         flex : 1,
         justifyContent : "center",
         alignItems : 'center',
-        backgroundColor : '#659ee4',
     },
     options1:{
         backgroundColor : "#5271ff",
@@ -84,8 +86,16 @@ const styles = StyleSheet.create({
     divFoto:{
         width : 150,
         height : 150,
-        backgroundColor : 'white',
-        borderRadius : 180
-    }
+        backgroundColor : '#5271ff',
+        borderRadius : 180,
+        borderColor : '#5e5e5e',
+        borderWidth : 2,
+    },
+    image :{
+        flex : 1,
+        justifyContent : 'center',
+        width : "100%",
+        alignItems : 'center',
+      }
 })
 export default Menu

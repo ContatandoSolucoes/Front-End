@@ -1,11 +1,13 @@
 import React,{useState} from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, ImageBackground } from 'react-native'
 import logo from "./icon.png"
 import { getHeaderTitle } from '@react-navigation/elements';
 import Cadastro from '../../Pages/Cadastro';
 import 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import back from "../../../assets/Fundo.png";
+import FormCad from '../FormCad/FormCad';
 
 
 function Form() {
@@ -34,7 +36,7 @@ function Form() {
 
   return (
     <React.Fragment>
-        <Image source={logo} style={styles.img}/>
+      <ImageBackground source={back} resizeMode="cover" style={styles.image}>
           <View style={styles.container}>
             <Text style={styles.title}>LOGIN</Text>
             <TextInput 
@@ -51,6 +53,8 @@ function Form() {
             ></TextInput>
             <TouchableOpacity onPress={handleLogin}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
           </View>
+          <FormCad></FormCad>
+        </ImageBackground>
     </React.Fragment>
   )
 }
@@ -75,12 +79,7 @@ const styles = StyleSheet.create({
       borderColor : "#5e5e5e",
       borderRadius : 8,
       fontSize: 15,
-    },
-    img:{
-      width : 210,
-      height : 210,
-      marginBottom : -25,
-    
+      padding: 5
     },
     title:{
       backgroundColor : "#5271ff",
@@ -107,6 +106,12 @@ const styles = StyleSheet.create({
         marginTop : 50,
         
         // alignItems : 'center'
+    },
+    image :{
+      flex : 1,
+      justifyContent : 'center',
+      width : "100%",
+      alignItems : 'center',
     }
     
 })

@@ -1,6 +1,8 @@
 
 import React from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert } from 'react-native'
+import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground } from 'react-native'
+import back from "../../assets/Fundo.png"
+
 
 import api from '../api.js'
 import useState from 'react-hook-use-state'
@@ -37,51 +39,53 @@ function Cadastro() {
   return (
     <React.Fragment>
         <View style={styles.container}>
-            <View style={styles.form}>
-                <Text style={styles.title}>Cadastro</Text>
-                
-                <TextInput 
-                placeholder='Nome'style={styles.input}
-                value={nome_usuario}
-                onChangeText={e => setUserName(e)}
-                ></TextInput>
+          <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+              <View style={styles.form}>
+                  <Text style={styles.title}>Cadastro</Text>
+                  
+                  <TextInput 
+                  placeholder='Nome'style={styles.input}
+                  value={nome_usuario}
+                  onChangeText={e => setUserName(e)}
+                  ></TextInput>
 
-                <TextInput 
-                placeholder='Telefone'style={styles.input}
-                value={telefone}
-                onChangeText={e => setTelefone(e)}
-                ></TextInput>
-                
-                <TextInput 
-                placeholder='Data de Nascimento'style={styles.input}
-                value={nascimento}
-                onChangeText={e => setNascimento(e)}
-                ></TextInput>
+                  <TextInput 
+                  placeholder='Telefone'style={styles.input}
+                  value={telefone}
+                  onChangeText={e => setTelefone(e)}
+                  ></TextInput>
+                  
+                  <TextInput 
+                  placeholder='Data de Nascimento'style={styles.input}
+                  value={nascimento}
+                  onChangeText={e => setNascimento(e)}
+                  ></TextInput>
 
-                <TextInput 
-                placeholder='Email'style={styles.input}
-                value={email}
-                onChangeText={e => setEmail(e)}
-                ></TextInput>
-                
-                <TextInput 
-                placeholder='Senha'style={styles.input}
-                secureTextEntry={true}
-                value={senha}
-                onChangeText={e=>setSenha(e)}
-                ></TextInput>
-                
-                <TextInput 
-                placeholder='Confirmar senha'style={styles.input}
-                secureTextEntry={true}
-                value={confirmaSenha}
-                onChangeText={e => setConfirmaSenha(e)}
-                ></TextInput>
-                
-                <TouchableOpacity onPress={handleRegister}><Text 
-                style={styles.entrar}
-                >Cadastrar</Text></TouchableOpacity>
-            </View>
+                  <TextInput 
+                  placeholder='Email'style={styles.input}
+                  value={email}
+                  onChangeText={e => setEmail(e)}
+                  ></TextInput>
+                  
+                  <TextInput 
+                  placeholder='Senha'style={styles.input}
+                  secureTextEntry={true}
+                  value={senha}
+                  onChangeText={e=>setSenha(e)}
+                  ></TextInput>
+                  
+                  <TextInput 
+                  placeholder='Confirmar senha'style={styles.input}
+                  secureTextEntry={true}
+                  value={confirmaSenha}
+                  onChangeText={e => setConfirmaSenha(e)}
+                  ></TextInput>
+                  
+                  <TouchableOpacity onPress={handleRegister}><Text 
+                  style={styles.entrar}
+                  >Cadastrar</Text></TouchableOpacity>
+              </View>
+          </ImageBackground>
         </View>
     </React.Fragment>
   )
@@ -113,6 +117,7 @@ const styles = StyleSheet.create({
         borderColor : "#5e5e5e",
         borderRadius : 8,
         fontSize: 15,
+        padding: 10,
       },
       title:{
         backgroundColor : "#5271ff",
@@ -139,6 +144,13 @@ const styles = StyleSheet.create({
           marginTop : 50,
           
           // alignItems : 'center'
+      },
+      image :{
+        flex : 1,
+        justifyContent : 'center',
+        width : "100%",
+        alignItems : 'center',
+        flexDirection : 'column'
       }
   });
 

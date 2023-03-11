@@ -13,7 +13,6 @@ function Login() {
     <View style={styles.container}>
       <Form>
       </Form>
-      <FormCad></FormCad>
     </View>
     </React.Fragment>
   );
