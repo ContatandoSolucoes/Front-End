@@ -9,6 +9,8 @@ import useState from 'react-hook-use-state'
 
 function Cadastro() {
 
+
+ 
     const [email,setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
@@ -17,7 +19,14 @@ function Cadastro() {
     const [nascimento, setNascimento] = useState('');
     
     async function handleRegister(event){
-      event.preventDefault()
+
+      if(email == "" || senha == "" || nome_usuario == ""|| telefone == "" || nascimento =="" ){
+        alert('preencha todos os dados')
+      }else{
+        if(senha != confirmaSenha){
+          alert('as senhas não conferem!')
+        }else{
+          event.preventDefault()
       try{
         const data = {
           nome_usuario,email,senha,telefone,nascimento
@@ -34,7 +43,9 @@ function Cadastro() {
       } catch(error){
         Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
       }
+        }
     }
+  }
 
   return (
     <React.Fragment>

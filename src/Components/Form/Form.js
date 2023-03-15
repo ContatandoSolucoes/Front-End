@@ -9,9 +9,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import back from "../../../assets/Fundo.png";
 import FormCad from '../FormCad/FormCad';
 
+import api from '../../api.js';
+
 
 function Form() {
-
+  const navigation = useNavigation();
   const [email,setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -23,7 +25,7 @@ function Form() {
       };
       const response = await api.post('/login', data)
   
-      Alert.alert(`Usuario logado com sucesso!`)
+      Alert.alert(`Usuario logado com sucesso. Bem-vindo(a) ao sistema ${nome_usuario}`)
 
       //setEmail('');
       //setSenha('');
@@ -31,8 +33,8 @@ function Form() {
     } catch(error){
       Alert.alert(`Erro no login. Tente novamente. \nCodigo Erro: ${error}`)
     }
-  }
-  const navigation = useNavigation();
+      }
+
 
   return (
     <React.Fragment>
@@ -42,15 +44,15 @@ function Form() {
             <TextInput 
                   placeholder='Email'style={styles.input}
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
-            ></TextInput>
+                  onChangeText={e => setEmail(e)}
+                  ></TextInput>
 
             <TextInput 
                   placeholder='Senha'style={styles.input}
                   secureTextEntry={true}
                   value={senha}
-                  onChange={e=>setSenha(e.target.value)}
-            ></TextInput>
+                  onChangeText={e=>setSenha(e)}
+              ></TextInput>
             <TouchableOpacity onPress={handleLogin}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
           </View>
           <FormCad></FormCad>
