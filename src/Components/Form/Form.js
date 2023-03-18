@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert,ImageBackground } from 'react-native'
 import logo from "./icon.png"
 import { getHeaderTitle } from '@react-navigation/elements';
 import Cadastro from '../../Pages/Cadastro';
@@ -25,13 +25,13 @@ function Form() {
       };
       const response = await api.post('/login', data)
   
-      Alert.alert(`Usuario logado com sucesso. Bem-vindo(a) ao sistema ${nome_usuario}`)
+      Alert.alert(`Usuario logado com sucesso. Bem-vindo(a) ao sistema `)
 
       //setEmail('');
       //setSenha('');
 
     } catch(error){
-      Alert.alert(`Erro no login. Tente novamente. \nCodigo Erro: ${error}`)
+      Alert.alert(`Erro ${error}`)
     }
       }
 
