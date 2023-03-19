@@ -9,6 +9,7 @@ import back from "../../assets/Fundo.png"
 function Perfil() {
   const [image, setImage] = useState(null);
 
+  
 
   //AINDA ESTOU ESTUDANDO O QUE FAZ ISSO PQ ATÉ AGORA NÃO ENTENDI
   const pickImage = async () => {

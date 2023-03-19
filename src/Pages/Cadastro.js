@@ -9,8 +9,6 @@ import useState from 'react-hook-use-state'
 
 function Cadastro() {
 
-
- 
     const [email,setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
@@ -35,13 +33,15 @@ function Cadastro() {
     
         Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome_usuario}`)
   
-        //setEmail('');
-        //setSenha('');
-        //setUserName('');
-        //setTelefone('');
-        //setNascimento('');
+        setEmail('');
+        setSenha('');
+        setConfirmaSenha('');
+        setUserName('');
+        setTelefone('');
+        setNascimento('');
       } catch(error){
         Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
+        console.log(`>>> ${error}`)
       }
         }
     }
