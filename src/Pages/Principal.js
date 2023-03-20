@@ -19,7 +19,7 @@ function Principal() {
       
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        console.log('Permission to access location was denied');// Aqui eles está apontando que se o usuário negar o uso do localizção ele apresentará essa mensagem de erro
+        console.log('Permission to access location was denied');// Aqui ele está apontando que se o usuário negar o uso do localizção ele apresentará essa mensagem de erro
         return;
       }
 

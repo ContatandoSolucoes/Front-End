@@ -54,6 +54,7 @@ function Form() {
                   onChangeText={e=>setSenha(e)}
               ></TextInput>
             <TouchableOpacity onPress={handleLogin}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Recuperação')}><Text style={styles.esqueceu}>Esqueceu sua senha?</Text></TouchableOpacity>
           </View>
           <FormCad></FormCad>
         </ImageBackground>
@@ -114,7 +115,12 @@ const styles = StyleSheet.create({
       justifyContent : 'center',
       width : "100%",
       alignItems : 'center',
-    }
+    },
+    esqueceu:{
+      fontSize : 18,
+      marginTop : 80,
+      marginBottom : -60
+    },
     
 })
 
