@@ -3,15 +3,48 @@ import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackgr
 import back from "../../assets/Fundo.png"
 import { StatusBar } from 'expo-status-bar';
 
+import api from '../api.js'
+import useState from 'react-hook-use-state'
+
 function Recuperação() {
+
+  const [email,setEmail] = useState('');
+
+  async function recuperarUser(event){
+    event.preventDefault()
+    try{
+      const data = {
+        email
+      };
+      const response = await api.post('/reset', data) // fazer alteração de rota aqui
+  
+      alert(`Senha alterada com sucesso.`)
+
+      setEmail('');
+    } catch(error){
+      alert(`Recuperação invalido. Tente novamente. ${error}`)
+    }
+  }
+
   return (
     <React.Fragment>
       
         <ImageBackground source={back} resizeMode="cover" style={styles.image}>
             <View style={styles.container}>
+                
                 <Text style={styles.title}>Recuperação de senha</Text>
-                <TextInput style={styles.input} placeholder="Email"></TextInput>
-                <TouchableOpacity><Text style={styles.entrar}>Enviar</Text></TouchableOpacity>
+
+                <TextInput 
+                style={styles.input} 
+                placeholder="Email"
+                value={email}
+                onChangeText={e=>setEmail(e)}
+                ></TextInput>
+                
+                <TouchableOpacity onPress={recuperarUser}>
+                  <Text style={styles.entrar}>Enviar</Text>
+                </TouchableOpacity>
+
             </View>
         </ImageBackground>
     </React.Fragment>
