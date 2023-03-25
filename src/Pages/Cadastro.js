@@ -28,20 +28,20 @@ function Cadastro() {
       try{
         let nascimentoP = nascimento.split('/').reverse().join('-');
         const data = {
-          nome_usuario,email,senha,telefone,nascimentoP
+          nome_usuario,email,senha,telefone,nascimento
         };
         const response = await api.post('/user', data)
     
         Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome_usuario}`)
   
-        setEmail('');
-        setSenha('');
-        setConfirmaSenha('');
-        setUserName('');
-        setTelefone('');
-        setNascimento('');
+        // setEmail('');
+        // setSenha('');
+        // setConfirmaSenha('');
+        // setUserName('');
+        // setTelefone('');
+        // setNascimento('');
       } catch(error){
-        Alert.alert(`Erro no cadastro. Tente novamente. \nCodigo Erro: ${error}`)
+        Alert.alert(`${error}`)
         console.log(`>>> ${error}`)
       }
         }

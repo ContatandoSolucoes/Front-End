@@ -31,7 +31,7 @@ function Form() {
       setSenha('');
 
     } catch(error){
-      Alert.alert(`Erro no login. Tente novamente. \nCodigo Erro: ${error}`)
+      Alert.alert(`${error}`)
     }
       }
 
