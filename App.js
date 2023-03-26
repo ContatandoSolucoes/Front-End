@@ -11,6 +11,7 @@ import Perfil from './src/Pages/Perfil';
 import Principal from './src/Pages/Principal';
 import Menu from './src/Pages/Menu'
 import Recuperação from './src/Pages/Recuperação';
+import Denuncia from './src/Pages/Denuncia';
 
 //Import do react navigation
 import 'react-native-gesture-handler';
@@ -24,7 +25,7 @@ export default function App() {
     //Navigation Container é a tag que envolve as outras
     <NavigationContainer>
       {/* initial route name é para definir em qual tela teu app irá começar */}
-    <Stack.Navigator initialRouteName='Login'> 
+    <Stack.Navigator initialRouteName='Denuncia'> 
       <Stack.Screen name='Home' component={Home} options={{title:'', headerTransparent:'true',}}></Stack.Screen>{/**Essas options servem para esconder um header que aparece comum titulo toda vez que você entra naquela tela */}
       <Stack.Screen name='Cadastro' component={Cadastro} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Login' component={Login} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
@@ -32,6 +33,8 @@ export default function App() {
       <Stack.Screen name="Principal" component={Principal} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Menu' component={Menu} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Recuperação' component={Recuperação} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+      <Stack.Screen name='Denuncia' component={Denuncia} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+      
     </Stack.Navigator>
     </NavigationContainer>
   );

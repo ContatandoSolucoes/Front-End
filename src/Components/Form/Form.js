@@ -26,10 +26,10 @@ function Form() {
       const response = await api.post('/login', data)
   
       Alert.alert(`Usuario logado com sucesso. Bem-vindo(a) ao sistema`)
+      navigation.navigate("Principal")
 
       setEmail('');
       setSenha('');
-
     } catch(error){
       Alert.alert(`${error}`)
     }
@@ -38,6 +38,7 @@ function Form() {
 
   return (
     <React.Fragment>
+      
       <ImageBackground source={back} resizeMode="cover" style={styles.image}>
           <View style={styles.container}>
             <Text style={styles.title}>LOGIN</Text>

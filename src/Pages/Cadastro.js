@@ -6,8 +6,11 @@ import back from "../../assets/Fundo.png"
 
 import api from '../api.js'
 import useState from 'react-hook-use-state'
+import { useNavigation } from '@react-navigation/native'
 
 function Cadastro() {
+
+    const navigation = useNavigation() 
 
     const [email,setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -33,6 +36,8 @@ function Cadastro() {
         const response = await api.post('/user', data)
     
         Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome_usuario}`)
+
+        navigation.navigate("Login")
   
         // setEmail('');
         // setSenha('');

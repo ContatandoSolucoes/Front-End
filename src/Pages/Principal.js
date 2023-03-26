@@ -12,6 +12,8 @@ import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
 
 function Principal() {
+
+
     const [location, setLocation] = useState(null);
 
      useEffect(() => {
@@ -27,7 +29,9 @@ function Principal() {
       setLocation(location);
     })();
   }, []);
+
   const navigation = useNavigation();
+
   return (
       <View style={styles.tela}>
         <View style={styles.header}>
@@ -50,7 +54,7 @@ function Principal() {
         />
 
         <View style={styles.formDenuncia}>
-          <TouchableOpacity><Text style={styles.relatar}>Relatar Problema</Text></TouchableOpacity>{/**Aqui é botão de fazer denuncia */}
+          <TouchableOpacity onPress={()=>{navigation.navigate("Denuncia")}}><Text style={styles.relatar}>Relatar Problema</Text></TouchableOpacity>{/**Aqui é botão de fazer denuncia */}
         </View>
       </View>
   )

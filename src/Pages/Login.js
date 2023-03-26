@@ -11,8 +11,9 @@ function Login() {
   return (
     <React.Fragment>
     <View style={styles.container}>
-      <Form>
-      </Form>
+      
+        <Form>
+        </Form>
     </View>
     </React.Fragment>
   );
