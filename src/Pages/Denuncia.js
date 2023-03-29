@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     width : "100%",
     alignItems : 'center',
     flexDirection : 'column',
-    paddingTop: "30%"
+    paddingTop: "20%"
   },
   title:{
     backgroundColor : "#5271ff",
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     marginTop: "15%"
   },
   inputImage:{
-    width:100,
-    height: 100,
+    width:80,
+    height: 80,
   },
   inputDesc:{
     margin : 10,
