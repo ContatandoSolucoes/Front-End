@@ -10,6 +10,7 @@ import Home from './src/Pages/Home';
 import Perfil from './src/Pages/Perfil';
 import Principal from './src/Pages/Principal';
 import Menu from './src/Pages/Menu'
+import Camera from './src/Pages/Camera'
 import Recuperação from './src/Pages/Recuperação';
 import Denuncia from './src/Pages/Denuncia';
 import AlterarSenha from './src/Pages/AlterarSenha';
@@ -26,13 +27,14 @@ export default function App() {
     //Navigation Container é a tag que envolve as outras
     <NavigationContainer>
       {/* initial route name é para definir em qual tela teu app irá começar */}
-    <Stack.Navigator initialRouteName='AlterarSenha'> 
+    <Stack.Navigator initialRouteName='Home'> 
       <Stack.Screen name='Home' component={Home} options={{title:'', headerTransparent:'true',}}></Stack.Screen>{/**Essas options servem para esconder um header que aparece comum titulo toda vez que você entra naquela tela */}
       <Stack.Screen name='Cadastro' component={Cadastro} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Login' component={Login} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Perfil' component={Perfil} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name="Principal" component={Principal} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Menu' component={Menu} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+      <Stack.Screen name='Camera' component={Camera} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Recuperação' component={Recuperação} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Denuncia' component={Denuncia} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='AlterarSenha' component={AlterarSenha} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
