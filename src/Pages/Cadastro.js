@@ -28,7 +28,7 @@ function Cadastro() {
           alert('as senhas não conferem!')
         }else{
           event.preventDefault()
-      try{
+      try{ 
         let nascimentoP = nascimento.split('/').reverse().join('-');
         const data = {
           nome_usuario,email,senha,telefone,nascimentoP
@@ -63,39 +63,39 @@ function Cadastro() {
                   <TextInput 
                   placeholder='Nome'style={styles.input}
                   value={nome_usuario}
-                  onChangeText={e => setUserName(e)}
+                  onChangeText={event => setUserName(event)}
                   ></TextInput>
 
                   <TextInput 
                   placeholder='Telefone'style={styles.input}
                   value={telefone}
-                  onChangeText={e => setTelefone(e)}
+                  onChangeText={event => setTelefone(event)}
                   ></TextInput>
                   
                   <TextInput 
                   placeholder='Data de Nascimento'style={styles.input}
                   value={nascimento}
-                  onChangeText={e => setNascimento(e)}
+                  onChangeText={event => setNascimento(event)}
                   ></TextInput>
 
                   <TextInput 
                   placeholder='Email'style={styles.input}
                   value={email}
-                  onChangeText={e => setEmail(e)}
+                  onChangeText={event => setEmail(event)}
                   ></TextInput>
                   
                   <TextInput 
                   placeholder='Senha'style={styles.input}
                   secureTextEntry={true}
                   value={senha}
-                  onChangeText={e=>setSenha(e)}
+                  onChangeText={event=>setSenha(event)}
                   ></TextInput>
                   
                   <TextInput 
                   placeholder='Confirmar senha'style={styles.input}
                   secureTextEntry={true}
                   value={confirmaSenha}
-                  onChangeText={e => setConfirmaSenha(e)}
+                  onChangeText={event => setConfirmaSenha(event)}
                   ></TextInput>
                   
                   <TouchableOpacity onPress={handleRegister}><Text 

@@ -5,10 +5,12 @@ import { StatusBar } from 'expo-status-bar';
 
 import api from '../api.js'
 import useState from 'react-hook-use-state'
+import { useNavigation } from '@react-navigation/native';
 
 function Recuperação() {
 
   const [emailF,setEmail] = useState('');
+  const navigation = useNavigation();
 
   async function recuperarUser(event){
     event.preventDefault()
@@ -18,7 +20,9 @@ function Recuperação() {
       }
       const response = await api.post('/reset', data) 
   
-      alert(`Senha alterada com sucesso. Olhe seu e-mail.`)
+      alert(`Código enviado para seu email`)
+
+      navigation.navigate("AlterarSenha")
 
       setEmail('');
     } catch(error){

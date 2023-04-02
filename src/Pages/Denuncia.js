@@ -2,8 +2,10 @@ import React from 'react'
 import { View, StyleSheet, TextInput, Text, Image, TouchableOpacity,ImageBackground} from 'react-native'
 import back from "../../assets/Fundo.png"
 import camera from "../../assets/camera.png"
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 function Denuncia() {
+  const navigation = useNavigation();
   return (
     <React.Fragment>
 
@@ -20,7 +22,10 @@ function Denuncia() {
           placeholder="Tipo do problema"
           ></TextInput>
 
-          <TouchableOpacity><Image source={camera} style={styles.inputImage}></Image></TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.navigate("Camera")}}>
+            <Image source={camera} style={styles.inputImage}>
+            </Image>
+          </TouchableOpacity>
 
           <TextInput 
           style={styles.inputDesc}
@@ -42,7 +47,7 @@ const styles = StyleSheet.create({
     width : "100%",
     alignItems : 'center',
     flexDirection : 'column',
-    paddingTop: "30%"
+    paddingTop: "20%"
   },
   title:{
     backgroundColor : "#5271ff",
@@ -72,8 +77,8 @@ const styles = StyleSheet.create({
     marginTop: "15%"
   },
   inputImage:{
-    width:100,
-    height: 100,
+    width:80,
+    height: 80,
   },
   inputDesc:{
     margin : 10,
