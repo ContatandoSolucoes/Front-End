@@ -8,8 +8,10 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import back from "../../../assets/Fundo.png";
 import FormCad from '../FormCad/FormCad';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../../api.js';
+import jwtDecode from 'jwt-decode';
 
 
 function Form() {
@@ -24,6 +26,21 @@ function Form() {
         email,senha
       };
       const response = await api.post('/login', data)
+
+      let token = response.data.token
+      console.log(token)
+
+      let decodedHeader = jwtDecode(response.data.token);
+
+      let nome = decodedHeader.nome_usuario
+      let emailUSer = decodedHeader.email
+      let telefone = decodedHeader.telefone
+      let nascimento = decodedHeader.nascimento
+
+      AsyncStorage.setItem("nome_usuario",nome)
+      AsyncStorage.setItem("email",emailUSer)
+      AsyncStorage.setItem("telefone",telefone)
+      AsyncStorage.setItem("nascimento",nascimento)
   
       Alert.alert(`Usuario logado com sucesso. Bem-vindo(a) ao sistema`)
       navigation.navigate("Principal")

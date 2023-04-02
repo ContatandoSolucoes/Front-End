@@ -21,7 +21,7 @@ function Home() {
       <View style={styles.container}>
         <ImageBackground source={back} resizeMode="cover" style={styles.image}>
           <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}><Text style={styles.entrar1}>Cadastrar-se</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('login')} ><Text style={styles.entrar2}>Login</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')} ><Text style={styles.entrar2}>Login</Text></TouchableOpacity>
         </ImageBackground>
       </View>
 

@@ -31,7 +31,7 @@ function Cadastro() {
       try{
         let nascimentoP = nascimento.split('/').reverse().join('-');
         const data = {
-          nome_usuario,email,senha,telefone,nascimento
+          nome_usuario,email,senha,telefone,nascimentoP
         };
         const response = await api.post('/user', data)
     

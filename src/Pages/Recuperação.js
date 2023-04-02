@@ -8,17 +8,17 @@ import useState from 'react-hook-use-state'
 
 function Recuperação() {
 
-  const [email,setEmail] = useState('');
+  const [emailF,setEmail] = useState('');
 
   async function recuperarUser(event){
     event.preventDefault()
     try{
       const data = {
-        email
-      };
-      const response = await api.post('/reset', data) // fazer alteração de rota aqui
+        emailF
+      }
+      const response = await api.post('/reset', data) 
   
-      alert(`Senha alterada com sucesso.`)
+      alert(`Senha alterada com sucesso. Olhe seu e-mail.`)
 
       setEmail('');
     } catch(error){
@@ -37,8 +37,8 @@ function Recuperação() {
                 <TextInput 
                 style={styles.input} 
                 placeholder="Email"
-                value={email}
-                onChangeText={e=>setEmail(e)}
+                value={emailF}
+                onChangeText={event=>setEmail(event)}
                 ></TextInput>
                 
                 <TouchableOpacity onPress={recuperarUser}>

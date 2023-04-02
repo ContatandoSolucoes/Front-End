@@ -4,7 +4,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import useState from 'react-hook-use-state';
 import * as ImagePicker from 'expo-image-picker';
 import back from "../../assets/Fundo.png"
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Perfil() {
   const [image, setImage] = useState(null);
@@ -41,10 +41,10 @@ function Perfil() {
               
               {/**Nos text daqui de baixo temos que substuir pelas informações fornecidas pelo usuário no cadastro logo quando o cadastro for feito*/}
               <View style={styles.form}>
-                  <Text style={styles.infos}>Nome</Text>{/**Nome */}
-                  <Text style={styles.infos}>Email</Text>{/**Email */}
-                  <Text style={styles.infos}>Data de nascimento</Text>{/**Data de nascimento */}
-                  <Text style={styles.infos}>Número</Text>{/**Número de celular  */}
+                  <Text style={styles.infos}>{AsyncStorage.getItem("nome_usuario")}</Text>{/**Nome */}
+                  <Text style={styles.infos}>{AsyncStorage.getItem("email")}</Text>{/**Email */}
+                  <Text style={styles.infos}>{AsyncStorage.getItem("nascimento")}</Text>{/**Data de nascimento */}
+                  <Text style={styles.infos}>{AsyncStorage.getItem("telefone")}</Text>{/**Número de celular  */}
               </View>
               <TouchableOpacity><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
             </ImageBackground>
