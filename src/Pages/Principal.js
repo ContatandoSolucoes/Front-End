@@ -11,6 +11,9 @@ import MapView from 'react-native-maps'
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
 
+//Pesquisa de localização
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 function Principal() {
 
 
@@ -31,14 +34,42 @@ function Principal() {
   }, []);
 
   const navigation = useNavigation();
+  // Barra de pesquisa
+  const [origin, setOrigin] = useState(null)
+  const [Destination, setDestination] = useState(null)
+  
 
   return (
+
+      
+
       <View style={styles.tela}>
         <View style={styles.header}>
+          {/* Barra de pesquisa */}
+         <GooglePlacesAutocomplete
+          placeholder='Local de denúncia'
+          onPress={(data, details = null) => {
+            //Pegar Latitude e longitude
+            setDestination({
+              latitude : details.geometry.location.lat,
+              longitude :  location.coords.location.lng,
+              latitudeDelta : 0.0922,
+              longitudeDelta: 0.0421
+            })
+            console.log(data, details);
+          }}
+          query={{
+            key: 'AIzaSyAZlX4e1MClvjd60gFz78S4J8qN1NWoNm0',
+            language: 'pt-br',
+          }}
+          fetchDetails= {true}
+          style = {styles.pesquisa}
+          // styles={{listView:{height:100}}}
+          />
           <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
             <Image source={menu} style={styles.menu}></Image>
           </TouchableOpacity>{/**Botão que irá abrir o menu */}
-          <TextInput style={styles.pesquisa} placeholder="Pesquise alguma localização"></TextInput>{/**Barra de pesquisa de localização */}
+          {/* <TextInput style={styles.pesquisa} placeholder="Pesquise alguma localização"></TextInput>*Barra de pesquisa de localização */}
         </View>
 
         <MapView style={styles.map}
