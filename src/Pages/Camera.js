@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity ,Text,Image, Modal} from 'react-native';
+import { StyleSheet, View, TouchableOpacity ,Text,Image, Modal, Alert} from 'react-native';
 import { Camera } from 'expo-camera';
+import api from '../api.js'
 import {FontAwesome} from '@expo/vector-icons';
 
 function CameraApk() {
@@ -26,9 +27,21 @@ function CameraApk() {
 
     async function takePicture(){
         if(camRef){
+          try{
             const data = await camRef.current.takePictureAsync();
             setCapturedPhoto(data.uri)
             setOpenPhoto(true)
+            const img ={
+              capturedPhoto
+            }
+            const response = await api.post('/photo', img)
+            console.log(response)
+          } 
+          catch(error){
+            Alert.alert(`${error}`)
+            console.log(`>>> ${error}`)
+          }
+           
         }
     }
 
