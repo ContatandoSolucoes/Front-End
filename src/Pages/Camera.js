@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity ,Text,Image} from 'react-native';
+import { StyleSheet, View, TouchableOpacity ,Text,Image, Modal} from 'react-native';
 import { Camera } from 'expo-camera';
 import {FontAwesome} from '@expo/vector-icons';
 
@@ -7,7 +7,8 @@ function CameraApk() {
     const camRef = useRef(null)
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [hasPermission, setHasPermission] = useState(null);
-    const [capturePhoto, setCapturePhoto] = useState(null);
+    const [capturedPhoto, setCapturedPhoto] = useState(null);
+    const [openPhoto , setOpenPhoto] = useState(false);
   
     useEffect(()=>{
         (async()=>{
@@ -26,8 +27,8 @@ function CameraApk() {
     async function takePicture(){
         if(camRef){
             const data = await camRef.current.takePictureAsync();
-            setCapturePhoto(data.uri)
-            //console.log(data)
+            setCapturedPhoto(data.uri)
+            setOpenPhoto(true)
         }
     }
 
@@ -43,6 +44,25 @@ function CameraApk() {
                 </TouchableOpacity>
             </View>
         </Camera>
+
+        {capturedPhoto &&(
+          <Modal 
+           animationType="slide"
+           transparent={true}
+           visible={openPhoto}
+          >
+            <View style={styles.contentModal}>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={()=>{setOpenPhoto(false)}}
+              >
+                <FontAwesome name='close' size={60} color="blue"></FontAwesome>
+              </TouchableOpacity>
+                  <Image style={styles.imgPhoto} source={{uri : capturedPhoto}}/>
+            </View>
+          </Modal>
+        )}
+   
     </View>
   );
 }
@@ -71,6 +91,23 @@ const styles = StyleSheet.create({
     bottom:50,
     alignItems:"center",
   },
+  contentModal:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:"flex-end",
+    margin:20,
+  },
+  closeButton:{
+    position:"absolute",
+    top:10,
+    left:2,
+    margin:10,
+  },
+  imgPhoto:{
+    width:"100%",
+    height:400,
+    borderRadius:9,
+  }
 });
 
 export default CameraApk;
