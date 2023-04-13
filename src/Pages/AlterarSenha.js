@@ -2,9 +2,32 @@ import React from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
 import back from "../../assets/Fundo.png"
 
+import api from '../api.js'
+import useState from 'react-hook-use-state'
+import { useNavigation } from '@react-navigation/native'
+
 function AlterarSenha() {
 
+  const navigation = useNavigation() 
 
+  const [email,setEmail] = useState('');
+  const [codigo, setCodigo] = useState('');
+  const [senha, setSenha] = useState('');
+
+  async function updateCodigo(event){
+    try{ 
+      const data = {
+        email, senha, codigo
+      };
+      const response = await api.post('/', data)
+
+      navigation.navigate("Login")
+
+    } catch(error){
+      Alert.alert(`${error}`)
+      console.log(`>>> ${error}`)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -16,15 +39,30 @@ function AlterarSenha() {
 
           {/* inputs que pegam os dados */}
           
-          <TextInput style={styles.inputCódigo} placeholder="Coloque seu email"/>
+          <TextInput 
+            style={styles.inputCódigo} 
+            placeholder="Coloque seu email"
+            value={email}
+            onChangeText={event => setEmail(event)}
+          />
 
-          <TextInput style={styles.inputCódigo} placeholder="Coloque o código"/>
+          <TextInput 
+            style={styles.inputCódigo} 
+            placeholder="Coloque o código"
+            value={codigo}
+            onChangeText={event => setCodigo(event)}
+          />
 
-          <TextInput style={styles.inputNovaSenha} placeholder="Digite sua nova senha"/>
+          <TextInput 
+            style={styles.inputNovaSenha} 
+            placeholder="Digite sua nova senha"
+            value={senha}
+            onChangeText={event => setSenha(event)}
+          />
 
           {/* botão para acionar a function para Alterar senha */}
           
-          <TouchableOpacity onPress={}>
+          <TouchableOpacity onPress={updateCodigo}>
             <Text style={styles.entrar}> Alterar</Text>
           </TouchableOpacity>
 
