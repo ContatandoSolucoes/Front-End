@@ -3,6 +3,9 @@ import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackgr
 import back from "../../assets/Fundo.png"
 
 function AlterarSenha() {
+
+
+
   return (
     <React.Fragment>
       <ImageBackground source={back} resizeMode="cover" style={styles.image}>
@@ -11,12 +14,20 @@ function AlterarSenha() {
 
         <View style={styles.container}>
 
+          {/* inputs que pegam os dados */}
+          
+          <TextInput style={styles.inputCódigo} placeholder="Coloque seu email"/>
 
           <TextInput style={styles.inputCódigo} placeholder="Coloque o código"/>
 
-          <TextInput style={styles.inputNovaSenha} placeholder="Digite sua nova senha">
+          <TextInput style={styles.inputNovaSenha} placeholder="Digite sua nova senha"/>
 
-          </TextInput>
+          {/* botão para acionar a function para Alterar senha */}
+          
+          <TouchableOpacity onPress={}>
+            <Text style={styles.entrar}> Alterar</Text>
+          </TouchableOpacity>
+
         </View>
       </ImageBackground>
     </React.Fragment>
@@ -73,6 +84,19 @@ const styles = StyleSheet.create({
     width : '80%',
     marginTop: "15%",
     marginLeft: "10%",
+  },
+  entrar:{
+    backgroundColor : "#5271ff",
+    fontSize : 25,
+    width : 150,
+    height : 40,
+    textAlign : 'center',
+    borderColor : '#5e5e5e',
+    borderWidth : 2,
+    borderRadius : 30,
+    color : 'white',
+    marginTop : 50,  
+     // alignItems : 'center'
   }
 })
 

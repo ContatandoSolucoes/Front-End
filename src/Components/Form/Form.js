@@ -27,9 +27,6 @@ function Form() {
       };
       const response = await api.post('/login', data)
 
-      let token = response.data.token
-      console.log(token)
-
       let decodedHeader = jwtDecode(response.data.token);
 
       let nome = decodedHeader.nome_usuario
