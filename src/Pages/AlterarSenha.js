@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground, Alert} from 'react-native';
 import back from "../../assets/Fundo.png"
 
 import api from '../api.js'
@@ -19,7 +19,10 @@ function AlterarSenha() {
       const data = {
         email, senha, codigo
       };
-      const response = await api.post('/', data)
+      const response = await api.post('/update', data)
+      
+      Alert.alert(`Senha alterada com sucesso.`)
+      console.log('Senha alterada com sucesso')
 
       navigation.navigate("Login")
 
@@ -33,7 +36,7 @@ function AlterarSenha() {
     <React.Fragment>
       <ImageBackground source={back} resizeMode="cover" style={styles.image}>
 
-        <Text style={styles.title}>Recuperar Senha</Text>
+        <Text style={styles.title}>Trocar Senha</Text>
 
         <View style={styles.container}>
 
@@ -63,7 +66,7 @@ function AlterarSenha() {
           {/* botão para acionar a function para Alterar senha */}
           
           <TouchableOpacity onPress={updateCodigo}>
-            <Text style={styles.entrar}> Alterar</Text>
+            <Text style={styles.entrar}> Alterar senha</Text>
           </TouchableOpacity>
 
         </View>
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 5,
     width : '80%',
-    marginTop: "30%",
+    marginTop: "20%",
     marginLeft: "10%",
   },
   inputNovaSenha:{
@@ -126,15 +129,16 @@ const styles = StyleSheet.create({
   entrar:{
     backgroundColor : "#5271ff",
     fontSize : 25,
-    width : 150,
+    width : 210,
     height : 40,
     textAlign : 'center',
     borderColor : '#5e5e5e',
     borderWidth : 2,
     borderRadius : 30,
     color : 'white',
-    marginTop : 50,  
-     // alignItems : 'center'
+    marginTop : 50,
+    // left: 50%  
+    //  alignItems : 'center'
   }
 })
 
