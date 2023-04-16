@@ -20,14 +20,20 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+// Import do toast
+import Toast from 'react-native-toast-message';
+
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
+    
     //Navigation Container é a tag que envolve as outras
     <NavigationContainer>
+      <Toast />
       {/* initial route name é para definir em qual tela teu app irá começar */}
     <Stack.Navigator initialRouteName='Home'> 
+    
       <Stack.Screen name='Home' component={Home} options={{title:'', headerTransparent:'true',}}></Stack.Screen>{/**Essas options servem para esconder um header que aparece comum titulo toda vez que você entra naquela tela */}
       <Stack.Screen name='Cadastro' component={Cadastro} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
       <Stack.Screen name='Login' component={Login} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
@@ -41,6 +47,7 @@ export default function App() {
       
     </Stack.Navigator>
     </NavigationContainer>
+    
   );
 }
 

@@ -1,15 +1,51 @@
-
 import React from 'react'
 import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground } from 'react-native'
 import back from "../../assets/Fundo.png"
-
 
 import api from '../api.js'
 import useState from 'react-hook-use-state'
 import { useNavigation } from '@react-navigation/native'
 
+import Toast from 'react-native-toast-message';
+
 function Cadastro() {
 
+  function showToastErro(){
+    Toast.show({
+      type: "error",
+      text1: "E-mail já cadastrado",
+      text2: "Tente outro e-mail.",
+      visibilityTime: 6000
+    })
+  }
+
+  const showToastIncompleto = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Dados incompletos',
+      text2: 'Preencha todos os dados',
+      visibilityTime: 6000
+    });
+  }
+
+  const showToastSenha = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'Senhas diferentes',
+      text2: 'As senhas não conferem.',
+      visibilityTime: 6000
+    });
+  }
+  
+  function showToastSucesso(){
+    Toast.show({
+      type: "success",
+      text1: "Cadastro realizado",
+      text2: "Faça login no sistema.",
+      visibilityTime: 6000
+    });
+  }
+  
     const navigation = useNavigation() 
 
     const [email,setEmail] = useState('');
@@ -22,38 +58,35 @@ function Cadastro() {
     async function handleRegister(event){
 
       if(email == "" || senha == "" || nome_usuario == ""|| telefone == "" || nascimento =="" ){
-        alert('preencha todos os dados')
-      }else{
-        if(senha != confirmaSenha){
-          alert('as senhas não conferem!')
-        }else{
-          event.preventDefault()
-      try{ 
-        let nascimentoP = nascimento.split('/').reverse().join('-');
-        const data = {
-          nome_usuario,email,senha,telefone,nascimentoP
-        };
-        const response = await api.post('/user', data)
-    
-        Alert.alert(`Usuario cadastrado com sucesso. Bem-vindo(a) ao sistema ${nome_usuario}`)
-
-        navigation.navigate("Login")
-  
-        // setEmail('');
-        // setSenha('');
-        // setConfirmaSenha('');
-        // setUserName('');
-        // setTelefone('');
-        // setNascimento('');
-      } catch(error){
-        Alert.alert(`${error}`)
-        console.log(`>>> ${error}`)
+        showToastIncompleto()
       }
+      else{
+        if(senha != confirmaSenha){
+          showToastSenha()
         }
+        else{
+          event.preventDefault()
+        try{ 
+            let nascimentoP = nascimento.split('/').reverse().join('-');
+
+            showToastSucesso()
+            
+            const data = {
+              nome_usuario,email,senha,telefone,nascimentoP
+            };
+            const response = await api.post('/user', data)
+            
+            navigation.navigate("Login")
+        } catch(error){
+            showToastErro()
+            console.log(`>>> ${error}`)
+        }
+        
     }
   }
-
+}
   return (
+    
     <React.Fragment>
         <View style={styles.container}>
           <ImageBackground source={back} resizeMode="cover" style={styles.image}>
@@ -101,9 +134,11 @@ function Cadastro() {
                   <TouchableOpacity onPress={handleRegister}><Text 
                   style={styles.entrar}
                   >Cadastrar</Text></TouchableOpacity>
+
               </View>
           </ImageBackground>
         </View>
+        <Toast />
     </React.Fragment>
   )
 }

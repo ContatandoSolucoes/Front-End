@@ -7,7 +7,27 @@ import api from '../api.js'
 import useState from 'react-hook-use-state'
 import { useNavigation } from '@react-navigation/native';
 
+import Toast from "react-native-toast-message"
+
 function Recuperação() {
+
+  function showToastErro(){
+    Toast.show({
+      type: "error",
+      text1: "E-mail invalido",
+      text2: "Tente outro e-mail.",
+      visibilityTime: 6000
+    })
+  }
+
+  function showToastSucesso(){
+    Toast.show({
+      type: "success",
+      text1: "Cadastro quase finalizado",
+      text2: "Verifique o código enviado no seu e-mail.",
+      visibilityTime: 6000
+    });
+  }
 
   const [emailF,setEmail] = useState('');
   const navigation = useNavigation();
@@ -15,18 +35,19 @@ function Recuperação() {
   async function recuperarUser(event){
     event.preventDefault()
     try{
+
+      showToastSucesso()
+
       const data = {
         emailF
       }
       const response = await api.post('/reset', data) 
-  
-      alert(`Código enviado para seu email`)
 
       navigation.navigate("AlterarSenha")
 
       setEmail('');
     } catch(error){
-      alert(`Recuperação invalido. Tente novamente. ${error}`)
+      showToastErro()
     }
   }
 
@@ -51,6 +72,7 @@ function Recuperação() {
 
             </View>
         </ImageBackground>
+        <Toast/>
     </React.Fragment>
   )
 }

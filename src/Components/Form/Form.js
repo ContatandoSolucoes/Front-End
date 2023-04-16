@@ -13,8 +13,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../api.js';
 import jwtDecode from 'jwt-decode';
 
+import Toast from "react-native-toast-message"
 
 function Form() {
+
+  function showToastErro(){
+    Toast.show({
+      type: "error",
+      text1: "Login invalido",
+      text2: "Tente outro e-mail ou faça cadastro.",
+      visibilityTime: 6000
+    })
+  }
+
+  function showToastSucesso(){
+    Toast.show({
+      type: "success",
+      text1: "Login realizado",
+      text2: "Bem-vindo ao sistema(a)",
+      visibilityTime: 6000
+    });
+  }
+
   const navigation = useNavigation();
   const [email,setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -22,6 +42,9 @@ function Form() {
   async function handleLogin(event){
     event.preventDefault()
     try{
+
+      showToastSucesso()
+      
       const data = {
         email,senha
       };
@@ -39,15 +62,15 @@ function Form() {
       AsyncStorage.setItem("telefone",telefone)
       AsyncStorage.setItem("nascimento",nascimento)
   
-      Alert.alert(`Usuario logado com sucesso. Bem-vindo(a) ao sistema`)
       navigation.navigate("Principal")
 
       setEmail('');
       setSenha('');
     } catch(error){
-      Alert.alert(`${error}`)
+      showToastErro()
+      console.log(error)
     }
-      }
+  }
 
 
   return (
@@ -73,6 +96,7 @@ function Form() {
           </View>
           <FormCad></FormCad>
         </ImageBackground>
+        <Toast/>
     </React.Fragment>
   )
 }

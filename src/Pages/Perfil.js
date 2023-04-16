@@ -31,7 +31,7 @@ function Perfil() {
   
   return (
     <React.Fragment>
-        <View style={styles.container}>
+      <View style={styles.container}>
           <ImageBackground source={back} resizeMode="cover" style={styles.image}>
             <TouchableOpacity onPress={pickImage}>
               <View style={styles.divFoto}>

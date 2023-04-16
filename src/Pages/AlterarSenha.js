@@ -6,7 +6,27 @@ import api from '../api.js'
 import useState from 'react-hook-use-state'
 import { useNavigation } from '@react-navigation/native'
 
+import Toast from 'react-native-toast-message';
+
 function AlterarSenha() {
+
+  function showToastErro(){
+    Toast.show({
+      type: "error",
+      text1: "Código invalido",
+      text2: "Verifique o código e tente novamente.",
+      visibilityTime: 6000
+    })
+  }
+
+  function showToastSucesso(){
+    Toast.show({
+      type: "success",
+      text1: "Senha alterada.",
+      text2: "Troca de senha realizada. Faça login.",
+      visibilityTime: 6000
+    });
+  }
 
   const navigation = useNavigation() 
 
@@ -16,18 +36,17 @@ function AlterarSenha() {
 
   async function updateCodigo(event){
     try{ 
+      showToastSucesso()
+
       const data = {
         email, senha, codigo
       };
       const response = await api.post('/update', data)
-      
-      Alert.alert(`Senha alterada com sucesso.`)
-      console.log('Senha alterada com sucesso')
 
       navigation.navigate("Login")
 
     } catch(error){
-      Alert.alert(`${error}`)
+      showToastErro()
       console.log(`>>> ${error}`)
     }
   }
@@ -71,6 +90,7 @@ function AlterarSenha() {
 
         </View>
       </ImageBackground>
+      <Toast/>
     </React.Fragment>
   )
 }
