@@ -78,7 +78,8 @@ function Cadastro() {
             
             navigation.navigate("Login")
         } catch(error){
-            showToastErro()
+            //showToastErro()
+            Alert.alert(error)
             console.log(`>>> ${error}`)
         }
         
