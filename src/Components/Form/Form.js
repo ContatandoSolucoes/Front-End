@@ -56,11 +56,14 @@ function Form() {
       let emailUSer = decodedHeader.email
       let telefone = decodedHeader.telefone
       let nascimento = decodedHeader.nascimento
+      
+      console.log(nascimento)
 
       AsyncStorage.setItem("nome_usuario",nome)
       AsyncStorage.setItem("email",emailUSer)
       AsyncStorage.setItem("telefone",telefone)
       AsyncStorage.setItem("nascimento",nascimento)
+
   
       navigation.navigate("Principal")
 

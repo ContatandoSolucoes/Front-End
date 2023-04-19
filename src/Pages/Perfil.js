@@ -1,19 +1,34 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button, ImageBackground} from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
-import useState from 'react-hook-use-state';
+
+// import useState from 'react-hook-use-state';
+
 import * as ImagePicker from 'expo-image-picker';
 import back from "../../assets/Fundo.png"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Perfil() {
   const [image, setImage] = useState(null);
-
   
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [nascimento, setNascimento] = useState('');
+  const [telefone, setTelefone] = useState('');
+  
+  useEffect(() => {
+    // Load user information from AsyncStorage
+    AsyncStorage.getItem('nome_usuario').then((value) => setNome(value));
+    AsyncStorage.getItem('email').then((value) => setEmail(value));
+    AsyncStorage.getItem('nascimento').then((value) => setNascimento(value));
+    AsyncStorage.getItem('telefone').then((value) => setTelefone(value));
 
-  //AINDA ESTOU ESTUDANDO O QUE FAZ ISSO PQ ATÉ AGORA NÃO ENTENDI
+  }, []);
+
+
+  // //AINDA ESTOU ESTUDANDO O QUE FAZ ISSO PQ ATÉ AGORA NÃO ENTENDI
+  //   // No permissions request is necessary for launching the image library
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -32,23 +47,28 @@ function Perfil() {
   return (
     <React.Fragment>
       <View style={styles.container}>
+          
           <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+          
             <TouchableOpacity onPress={pickImage}>
+              
               <View style={styles.divFoto}>
                 <Image source={image}></Image>
               </View>
+            
             </TouchableOpacity>
               
-              {/**Nos text daqui de baixo temos que substuir pelas informações fornecidas pelo usuário no cadastro logo quando o cadastro for feito*/}
-              <View style={styles.form}>
-                  <Text style={styles.infos}>{AsyncStorage.getItem("nome_usuario")}</Text>{/**Nome */}
-                  <Text style={styles.infos}>{AsyncStorage.getItem("email")}</Text>{/**Email */}
-                  <Text style={styles.infos}>{AsyncStorage.getItem("nascimento")}</Text>{/**Data de nascimento */}
-                  <Text style={styles.infos}>{AsyncStorage.getItem("telefone")}</Text>{/**Número de celular  */}
-              </View>
-              <TouchableOpacity><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
-            </ImageBackground>
-        </View>
+            <View style={styles.form}>
+              <Text style={styles.infos}>{nome}</Text>
+              <Text style={styles.infos}>{email}</Text>
+              <Text style={styles.infos}>{nascimento.slice(0,10).split('-').reverse().join('/')}</Text>
+              <Text style={styles.infos}>{telefone}</Text>
+            </View>
+
+            <TouchableOpacity><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
+            
+          </ImageBackground>
+      </View>
     </React.Fragment>
   )
 }

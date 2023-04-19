@@ -7,6 +7,7 @@ import useState from 'react-hook-use-state'
 import { useNavigation } from '@react-navigation/native'
 
 import Toast from 'react-native-toast-message';
+import DateField from 'react-native-datefield';
 
 function Cadastro() {
 
@@ -67,19 +68,19 @@ function Cadastro() {
         else{
           event.preventDefault()
         try{ 
-            let nascimentoP = nascimento.split('/').reverse().join('-');
+            // let nascimentoP = nascimento.split('/').reverse().join('-');
 
             showToastSucesso()
             
             const data = {
-              nome_usuario,email,senha,telefone,nascimentoP
+              nome_usuario,email,senha,telefone,nascimento
             };
+
             const response = await api.post('/user', data)
             
             navigation.navigate("Login")
         } catch(error){
-            //showToastErro()
-            Alert.alert(error)
+            showToastErro()
             console.log(`>>> ${error}`)
         }
         
@@ -94,30 +95,39 @@ function Cadastro() {
               <View style={styles.form}>
                   <Text style={styles.title}>Cadastro</Text>
                   
+                  <Text style={styles.text}>Nome de usuario</Text>
                   <TextInput 
                   placeholder='Nome'style={styles.input}
                   value={nome_usuario}
                   onChangeText={event => setUserName(event)}
                   ></TextInput>
 
+                  <Text style={styles.text}>Número de telefone</Text>
                   <TextInput 
                   placeholder='Telefone'style={styles.input}
+                  inputMode='tel'
                   value={telefone}
                   onChangeText={event => setTelefone(event)}
                   ></TextInput>
                   
-                  <TextInput 
-                  placeholder='Data de Nascimento'style={styles.input}
-                  value={nascimento}
-                  onChangeText={event => setNascimento(event)}
-                  ></TextInput>
+                  <Text style={styles.text}>Data de nascimento</Text>
+                  <DateField 
+                    styleInput={styles.date}
+                    labelDate="Dia"
+                    labelMonth="Mês"
+                    labelYear="Ano"
+                    onSubmit={e => setNascimento(e)}
+                    />
 
+                  <Text style={styles.text}>E-mail </Text>
                   <TextInput 
                   placeholder='Email'style={styles.input}
+                  inputMode='email'
                   value={email}
                   onChangeText={event => setEmail(event)}
                   ></TextInput>
                   
+                  <Text style={styles.text}>Senha</Text>
                   <TextInput 
                   placeholder='Senha'style={styles.input}
                   secureTextEntry={true}
@@ -125,6 +135,7 @@ function Cadastro() {
                   onChangeText={event=>setSenha(event)}
                   ></TextInput>
                   
+                  <Text style={styles.text}>Confirme a senha</Text>
                   <TextInput 
                   placeholder='Confirmar senha'style={styles.input}
                   secureTextEntry={true}
@@ -153,13 +164,14 @@ const styles = StyleSheet.create({
     },
     form:{
         width : "85%",
-        height : "75%",
+        height : "80%",
         backgroundColor : "#659ee4",
         borderRadius : 15,
         alignItems : 'center',
         justifyContent : 'center',
         borderWidth : 2,
-        borderColor : '#5e5e5e'
+        borderColor : '#5e5e5e',
+        marginTop: 20
     },
     input:{
         margin : 10,
@@ -177,11 +189,8 @@ const styles = StyleSheet.create({
         fontSize : 30,
         width : 150,
         textAlign : 'center',
-        marginTop : -80,
-        marginBottom : 50,
+        marginTop : 10,
         color : 'white',
-        // borderColor : '#5e5e5e',
-        // borderWidth : 2,
         borderRadius : 5,
       },
       entrar:{
@@ -194,7 +203,7 @@ const styles = StyleSheet.create({
           borderWidth : 2,
           borderRadius : 30,
           color : 'white',
-          marginTop : 50,
+          marginTop : 10,
           
           // alignItems : 'center'
       },
@@ -204,6 +213,20 @@ const styles = StyleSheet.create({
         width : "100%",
         alignItems : 'center',
         flexDirection : 'column'
+      },
+      date: {
+        backgroundColor : 'white',
+        borderWidth : 1,
+        borderColor : "#5e5e5e",
+        borderRadius : 8,
+        width : '25%',
+        margin: 4,
+        height: 35,
+        fontSize: 15,
+      },
+      text: {
+        fontSize: 16,
+        margin: 5
       }
   });
 
