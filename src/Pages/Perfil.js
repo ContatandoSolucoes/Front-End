@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button, ImageBackground} from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
 
 // import useState from 'react-hook-use-state';
 
@@ -9,7 +8,7 @@ import back from "../../assets/Fundo.png"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Perfil() {
-  const [image, setImage] = useState(null);
+  const [imageUri, setImageUri] = useState();
   
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -26,22 +25,35 @@ function Perfil() {
   }, []);
 
 
-  // //AINDA ESTOU ESTUDANDO O QUE FAZ ISSO PQ ATÉ AGORA NÃO ENTENDI
-  //   // No permissions request is necessary for launching the image library
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  const obterPermissao = async () => {
 
-    console.log(result);
+    const {granted} = await ImagePicker.requestCameraPermissionsAsync()
+    
+      if(!granted){
+        alert('Voce precisa dar permissao')
+      }
+  }
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
+  const obterImage = async() => {
+    const result = await ImagePicker.launchCameraAsync()
+
+    if(!result.canceled){
+      setImageUri(result.assets[0].uri)
     }
-  };
+  }
+
+  const galeriaImage = async() => {
+    const result = await ImagePicker.launchImageLibraryAsync()
+
+    if(!result.canceled){
+      setImageUri(result.assets[0].uri)
+    }
+  }
+
+
+  React.useEffect(() => {
+    obterPermissao()
+  }, [])
 
   
   return (
@@ -50,10 +62,10 @@ function Perfil() {
           
           <ImageBackground source={back} resizeMode="cover" style={styles.image}>
           
-            <TouchableOpacity onPress={pickImage}>
+            <TouchableOpacity onPress={galeriaImage}>
               
               <View style={styles.divFoto}>
-                <Image source={image}></Image>
+                {imageUri && <Image source={{uri: imageUri}} style={styles.imagemPerfil}/> }
               </View>
             
             </TouchableOpacity>
@@ -130,6 +142,11 @@ const styles = StyleSheet.create({
       justifyContent : 'center',
       width : "100%",
       alignItems : 'center',
+    },
+    imagemPerfil: {
+      height: 150,
+      width: 150,
+      borderRadius : 180,
     }
 
 })
