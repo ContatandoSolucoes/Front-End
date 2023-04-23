@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
-import { View, StyleSheet, TextInput, Text, Image, TouchableOpacity,ImageBackground, Button} from 'react-native'
+import { View, StyleSheet, TextInput, Text, Image, TouchableOpacity,ImageBackground, Button,Alert} from 'react-native'
+import api from '../api.js'
 import back from "../../assets/Fundo.png"
 import * as Location from 'expo-location'
 import {FontAwesome} from '@expo/vector-icons';
@@ -8,215 +9,215 @@ import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Denuncia() {
-const navigation = useNavigation();
-const [imageUri, setImageUri] = useState();
-const [location , setLocation] = useState({});
-const [address, setAddress] = useState();
-const [latitude, setLatitude] = useState();
-const [longitude, setLongitude] = useState();
+    const navigation = useNavigation();
+    const [tipo_problema, setTipo_problema] = useState();
+    const [imageUri, setImageUri] = useState();
+    const [location , setLocation] = useState({});
+    const [address, setAddress] = useState();
+    const [latitude, setLatitude] = useState();
+    const [longitude, setLongitude] = useState();
 
-useEffect(()=>{
-const getPermission = async()=>{
-let {status} = await Location.requestForegroundPermissionsAsync();
-if(status !== 'granted'){
-console.log('Please grant location permission');
-return;
-}
-let currentLocation = await Location.getCurrentPositionAsync({});
-setLocation(currentLocation);
-console.log('location');
-console.log(currentLocation);
-};
-getPermission();
-},[]);
+    useEffect(()=>{
+    const getPermission = async()=>{
+        let {status} = await Location.requestForegroundPermissionsAsync();
+        if(status !== 'granted'){
+            console.log('Please grant location permission');
+            return;
+        }
+        let currentLocation = await Location.getCurrentPositionAsync({});
+        setLocation(currentLocation);
+        console.log('location');
+        console.log(currentLocation);
+    };
+        getPermission();
+    },[]);
 
-const geocode = async()=>{
-}
+    const obterPermissao = async () => {
 
-const obterPermissao = async () => {
+        const {granted} = await ImagePicker.requestCameraPermissionsAsync()
+        if(!granted){
+            Alert.alert('Voce precisa dar permissao')
+        }    
+    }
 
-const {granted} = await ImagePicker.requestCameraPermissionsAsync()
-if(!granted){
-alert('Voce precisa dar permissao')
-}
-}
+    const obterImage = async() => {
+        const result = await ImagePicker.launchCameraAsync()
 
-const obterImage = async() => {
-const result = await ImagePicker.launchCameraAsync()
-const geocodedLocation = await Location.geocodeAsync(address);
-console.log("Geocoded Address:");
-console.log(geocodedLocation);
-setLatitude(location.coords.latitude);
-setLongitude(location.coords.longitude);
-console.log(latitude);
-console.log(longitude);
+        if(!result.canceled){
+            setImageUri(result.assets[0].uri)
+        }
+    }
 
-if(!result.canceled){
-setImageUri(result.assets[0].uri)
-}
-}
-
-const galeriaImage = async() => {
-const result = await ImagePicker.launchImageLibraryAsync()
-const geocodedLocation = await Location.geocodeAsync(address);
-console.log("Geocoded Address:");
-console.log(geocodedLocation);
-setLatitude(location.coords.latitude);
-setLongitude(location.coords.longitude);
-console.log(latitude);
-console.log(longitude);
-
-if(!result.canceled){
-setImageUri(result.assets[0].uri)
-}
-}
-
-const envData = async() =>{
-try{
-const data ={
-imageUri,latitude,longitude
-};
-const response = await api.post('/photo', data)
-console.log(response)
-}catch(error){
-Alert.alert(`${error}`)
-console.log(`>>> ${error}`)
-}
-
-setImageUri('')
-}
-
-React.useEffect(() => {
-obterPermissao()
-}, [])
+    const galeriaImage = async() => {
+        const result = await ImagePicker.launchImageLibraryAsync()
 
 
-return (
-<React.Fragment>
+        if(!result.canceled){
+            setImageUri(result.assets[0].uri)
+        }
+    }
 
-<ImageBackground source={back} resizeMode="cover" style={styles.image}>
-<Text style={styles.title}>Relatar Problema</Text>
-<View style={styles.container}>
+    const envData = async() =>{
 
-<TextInput 
-value={address} 
-onChangeText={setAddress}
-style={styles.input}
-placeholder="Endereço"
-></TextInput>
+        const geocodedLocation = await Location.geocodeAsync(address);
+        console.log("Geocoded Address:");
+        console.log(geocodedLocation);
+        setLatitude(location.coords.latitude);
+        setLongitude(location.coords.longitude);
+        console.log(latitude);
+        console.log(longitude);
 
-<TextInput 
-style={styles.input}
-placeholder="Tipo do problema"
-></TextInput>
+        try{
+            const data ={
+                imageUri,tipo_problema,longitude,latitude
+            };
+            const response = await api.post('/denuncia', data)
+            console.log(response)
+            setImageUri('');
+            setAddress('');
+            setTipo_problema('');
+        }catch(error){
+            Alert.alert(`${error}`)
+            console.log(`>>> ${error}`)
+        }
 
-{imageUri && <Image source={{uri: imageUri}} style={styles.imagem}/> }
+        setImageUri('')
+    }
 
-{/* ()=>{navigation.navigate("Camera")} */}
-<View style={styles.button}>
-<TouchableOpacity onPress={obterImage} style={styles.alinhamento}>
-<FontAwesome name='camera' size={60} color="#5271ff"></FontAwesome>
-</TouchableOpacity> 
-<TouchableOpacity onPress={galeriaImage} style={styles.alinhamento}>
-<FontAwesome name='image' size={60} color="#5271ff"></FontAwesome>
-</TouchableOpacity>
-</View>
+    React.useEffect(() => {
+        obterPermissao()
+    }, [])
 
-<TextInput 
-style={styles.inputDesc}
-placeholder="Descrição"
-multiline={true}
-></TextInput>
 
-<TouchableOpacity onPress={envData}><Text style={styles.relatar}>Enviar Relato</Text></TouchableOpacity>
+    return (
+        <React.Fragment>
 
-</View>
-</ImageBackground>
-</React.Fragment>
-)
+            <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+            <Text style={styles.title}>Relatar Problema</Text>
+            <View style={styles.container}>
+
+                <TextInput 
+                    value={address} 
+                    onChangeText={setAddress}
+                    style={styles.input}
+                    placeholder="Endereço"
+                ></TextInput>
+
+                <TextInput 
+                    value={tipo_problema}
+                    onChangeText={setTipo_problema}
+                    style={styles.input}
+                    placeholder="Tipo do problema"
+                ></TextInput>
+
+                {imageUri && <Image source={{uri: imageUri}} style={styles.imagem}/> }
+
+                {/* ()=>{navigation.navigate("Camera")} */}
+                <View style={styles.button}>
+                <TouchableOpacity onPress={obterImage} style={styles.alinhamento}>
+                <FontAwesome name='camera' size={60} color="#5271ff"></FontAwesome>
+                </TouchableOpacity> 
+                <TouchableOpacity onPress={galeriaImage} style={styles.alinhamento}>
+                <FontAwesome name='image' size={60} color="#5271ff"></FontAwesome>
+                </TouchableOpacity>
+                </View>
+
+                <TextInput 
+                    style={styles.inputDesc}
+                    placeholder="Descrição"
+                    multiline={true}
+                ></TextInput>
+
+                <TouchableOpacity
+                    onPress={envData}><Text style={styles.relatar}>Enviar Relato</Text></TouchableOpacity>
+
+            </View>
+            </ImageBackground>
+        </React.Fragment>
+    )
 }
 
 const styles = StyleSheet.create({
-image :{
-flex : 1,
-width : "100%",
-alignItems : 'center',
-flexDirection : 'column',
-paddingTop: "20%"
-},
-title:{
-backgroundColor : "#5271ff",
-fontSize : 30,
-width : 300,
-textAlign : 'center',
-color : 'white',
-// borderColor : '#5e5e5e',
-// borderWidth : 2,
-borderRadius : 5,
-},
-input:{
-margin : 10,
-backgroundColor : 'white',
-width : '80%',
-height : 35,
-borderWidth : 1,
-borderColor : "#5e5e5e",
-borderRadius : 8,
-fontSize: 15,
-padding: 10,
-},
-container:{
-width: "80%",
-justifyContent: 'center',
-alignItems: "center",
-marginTop: "15%"
-},
-imagem:{
-width: 200,
-height: 100,
-borderRadius:2
-},
-inputDesc:{
-margin : 10,
-backgroundColor : 'white',
-width : '90%',
-height : 150,
-borderWidth : 1,
-borderColor : "#5e5e5e",
-borderRadius : 8,
-fontSize: 15,
-padding: 10,
-alignItems: 'center'
-},
-relatar:{
-backgroundColor : "#5271ff",
-fontSize : 25,
-width : 200,
-height : 50,
-borderColor : '#5e5e5e',
-borderWidth : 2,
-borderRadius : 30,
-color : 'white',
-alignItems: 'center',
-textAlign: 'center',
-paddingTop: 6,
-marginTop: 25
-},
-container2: {
-backgroundColor: 'yellow',
-alignItems: 'center',
-justifyContent: 'center',
-marginLeft: 10
-},
-button: {
-justifyContent: "space-between",
-flexDirection: "row",
-margin: 10,
-},
-alinhamento:{
-marginLeft:10,
-marginRight:10
-}
+    image :{
+        flex : 1,
+        width : "100%",
+        alignItems : 'center',
+        flexDirection : 'column',
+        paddingTop: "20%"
+    },
+    title:{
+        backgroundColor : "#5271ff",
+        fontSize : 30,
+        width : 300,
+        textAlign : 'center',
+        color : 'white',
+        // borderColor : '#5e5e5e',
+        // borderWidth : 2,
+        borderRadius : 5,
+    },
+    input:{
+        margin : 10,
+        backgroundColor : 'white',
+        width : '80%',
+        height : 35,
+        borderWidth : 1,
+        borderColor : "#5e5e5e",
+        borderRadius : 8,
+        fontSize: 15,
+        padding: 10,
+    },
+    container:{
+        width: "80%",
+        justifyContent: 'center',
+        alignItems: "center",
+        marginTop: "15%"
+    },
+    imagem:{
+        width: 200,
+        height: 100,
+        borderRadius:2
+    },
+    inputDesc:{
+        margin : 10,
+        backgroundColor : 'white',
+        width : '90%',
+        height : 150,
+        borderWidth : 1,
+        borderColor : "#5e5e5e",
+        borderRadius : 8,
+        fontSize: 15,
+        padding: 10,
+        alignItems: 'center'
+    },
+    relatar:{
+        backgroundColor : "#5271ff",
+        fontSize : 25,
+        width : 200,
+        height : 50,
+        borderColor : '#5e5e5e',
+        borderWidth : 2,
+        borderRadius : 30,
+        color : 'white',
+        alignItems: 'center',
+        textAlign: 'center',
+        paddingTop: 6,
+        marginTop: 25
+    },
+    container2: {
+        backgroundColor: 'yellow',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 10
+    },
+    button: {
+        justifyContent: "space-between",
+        flexDirection: "row",
+        margin: 10,
+    },
+    alinhamento:{
+        marginLeft:10,
+        marginRight:10
+    }
 })
 
 export default Denuncia
