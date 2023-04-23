@@ -2,8 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
 import back from "../../assets/Fundo.png"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
+
 
 function Menu() {
+
+    async function handleLogout(){
+        async () => {await AsyncStorage.removeItem(jwtDecode)}
+        navigation.navigate('Home')
+    }
 
     const navigation = useNavigation();
   return (
@@ -17,7 +25,7 @@ function Menu() {
                     <TouchableOpacity onPress={() => navigation.navigate('Perfil')}><Text style={styles.options1}>Perfil</Text></TouchableOpacity>{/**Perfil */}
                     <TouchableOpacity><Text style={styles.options2}>Telefones de Emergência</Text></TouchableOpacity>{/**Emergência */}
                     <TouchableOpacity><Text style={styles.options3}>Problemas no aplicativo</Text></TouchableOpacity>{/**Problemas no aplicativo */}
-                    <TouchableOpacity><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
+                    <TouchableOpacity onPress={handleLogout}><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
                 </ImageBackground>
             </View>
        </React.Fragment>
