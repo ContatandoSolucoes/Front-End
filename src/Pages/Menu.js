@@ -2,16 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
 import back from "../../assets/Fundo.png"
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from 'jwt-decode';
-
 
 function Menu() {
-
-    async function handleLogout(){
-        async () => {await AsyncStorage.removeItem(jwtDecode)}
-        navigation.navigate('Home')
-    }
 
     const navigation = useNavigation();
   return (
@@ -23,9 +15,8 @@ function Menu() {
                     </View>
                     <Text style={styles.name}></Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Perfil')}><Text style={styles.options1}>Perfil</Text></TouchableOpacity>{/**Perfil */}
-                    <TouchableOpacity><Text style={styles.options2}>Telefones de Emergência</Text></TouchableOpacity>{/**Emergência */}
                     <TouchableOpacity><Text style={styles.options3}>Problemas no aplicativo</Text></TouchableOpacity>{/**Problemas no aplicativo */}
-                    <TouchableOpacity onPress={handleLogout}><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
+                    <TouchableOpacity><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
                 </ImageBackground>
             </View>
        </React.Fragment>
@@ -48,7 +39,7 @@ const styles = StyleSheet.create({
         borderRadius : 7,
         color : 'white',
         paddingTop : 7,
-        marginTop : 15,
+        marginTop : 35,
     },
     options2:{
         backgroundColor : "#5271ff",
@@ -61,7 +52,7 @@ const styles = StyleSheet.create({
         borderRadius : 7,
         color : 'white',
         paddingTop : 6,
-        marginTop : 15,
+        marginTop : 35,
     },
     options3:{
         backgroundColor : "#5271ff",
@@ -74,7 +65,7 @@ const styles = StyleSheet.create({
         borderRadius : 7,
         color : 'white',
         paddingTop : 6,
-        marginTop : 15,
+        marginTop : 35,
         marginBottom : 50,
     },
     options4:{
@@ -88,8 +79,8 @@ const styles = StyleSheet.create({
         borderRadius : 7,
         color : 'white',
         paddingTop : 7,
-        marginTop : 190,
-         marginBottom : -50
+        marginTop : 100,
+         marginBottom : -100
     },
     divFoto:{
         width : 150,
