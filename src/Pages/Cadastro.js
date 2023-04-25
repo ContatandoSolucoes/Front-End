@@ -68,10 +68,9 @@ function Cadastro() {
         else{
           event.preventDefault()
         try{ 
-            // let nascimentoP = nascimento.split('/').reverse().join('-');
 
             showToastSucesso()
-            
+                 
             const data = {
               nome_usuario,email,senha,telefone,nascimento
             };
