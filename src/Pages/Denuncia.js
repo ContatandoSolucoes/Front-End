@@ -6,16 +6,20 @@ import * as Location from 'expo-location'
 import {FontAwesome} from '@expo/vector-icons';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Picker} from '@react-native-picker/picker';
 
 function Denuncia() {
     const navigation = useNavigation();
-    const [tipo_problema, setTipo_problema] = useState();
     const [imageUri, setImageUri] = useState();
     const [location , setLocation] = useState({});
     const [address, setAddress] = useState();
     const [latitude, setLatitude] = useState();
     const [longitude, setLongitude] = useState();
+    
+    const [problema, setProblema] = useState(['Buraco','Farol quebrado','Calçada quebrada','Lixo','Fio de poste solto','Outro']);
+
+    const [tipo_problema, setTipo_problema] = useState();
+
 
     useEffect(()=>{
     const getPermission = async()=>{
@@ -71,11 +75,16 @@ function Denuncia() {
             const data ={
                 imageUri,tipo_problema,longitude,latitude
             };
-            const response = await api.post('/denuncia', data)
-            console.log(response)
-            setImageUri('');
-            setAddress('');
-            setTipo_problema('');
+
+            if(data.tipo_problema === 'Nulo'){
+                alert('Selecione um tipo de problema')
+            } else{
+                const response = await api.post('/denuncia', data)
+                console.log(response)
+                setImageUri('');
+                setAddress('');
+                setTipo_problema('');
+            }
         }catch(error){
             Alert.alert(`${error}`)
             console.log(`>>> ${error}`)
@@ -103,12 +112,20 @@ function Denuncia() {
                     placeholder="Endereço"
                 ></TextInput>
 
-                <TextInput 
-                    value={tipo_problema}
-                    onChangeText={setTipo_problema}
-                    style={styles.input}
-                    placeholder="Tipo do problema"
-                ></TextInput>
+                <Picker
+                    selectedValue={tipo_problema}
+                    style={styles.select}
+                    onValueChange={(itemValue) => 
+                    setTipo_problema(itemValue)
+                    }>
+                    <Picker.Item label={'Tipo de problema'} value={"Nulo"} />
+                    {
+                        problema.map(cr => {
+                            return <Picker.Item label={cr} value={cr} />
+                        })
+                    }
+                    
+                </Picker>
 
                 {imageUri && <Image source={{uri: imageUri}} style={styles.imagem}/> }
 
@@ -217,6 +234,9 @@ const styles = StyleSheet.create({
     alinhamento:{
         marginLeft:10,
         marginRight:10
+    },
+    select:{
+        width: "80%",
     }
 })
 
