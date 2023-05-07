@@ -15,11 +15,9 @@ function Denuncia() {
     const [address, setAddress] = useState();
     const [latitude, setLatitude] = useState();
     const [longitude, setLongitude] = useState();
-    
     const [problema, setProblema] = useState(['Buraco','Farol quebrado','Calçada quebrada','Lixo','Fio de poste solto','Outro']);
-
     const [tipo_problema, setTipo_problema] = useState();
-
+    const [desc_problema,setDesc_Problema] = useState();
 
     useEffect(()=>{
     const getPermission = async()=>{
@@ -43,7 +41,6 @@ function Denuncia() {
             Alert.alert('Voce precisa dar permissao')
         }    
     }
-
     const obterImage = async() => {
         const result = await ImagePicker.launchCameraAsync()
 
@@ -51,32 +48,39 @@ function Denuncia() {
             setImageUri(result.assets[0].uri)
         }
     }
-
     const galeriaImage = async() => {
         const result = await ImagePicker.launchImageLibraryAsync()
-
 
         if(!result.canceled){
             setImageUri(result.assets[0].uri)
         }
     }
-
     const envData = async() =>{
 
-        const geocodedLocation = await Location.geocodeAsync(address);
-        console.log("Geocoded Address:");
-        console.log(geocodedLocation);
-        setLatitude(location.coords.latitude);
-        setLongitude(location.coords.longitude);
-        console.log(latitude);
-        console.log(longitude);
+        if(address === ""){
+                setLatitude(location.coords.latitude);
+                setLongitude(location.coords.longitude);
+                console.log('>>>>>>>>>>>>>>>>>> location atual >>>>>>>>>>>>>>>>>>>>')
+                console.log('latitude atual: ',latitude);
+                console.log('longitude atual: ',longitude);
+            console.log("     ");
+           }else{
+                const geocodedLocation = await Location.geocodeAsync(address);
+                console.log('>>>>>>>>>>>>', address)
+                console.log('>>>>>>>>>>>>>>>>>> location >>>>>>>>>>>>>>>>>>>>');
+                setLatitude(geocodedLocation[0].latitude);
+                setLongitude(geocodedLocation[0].longitude);
+                console.log('latitude: ',latitude);
+                console.log('longitude: ',longitude);
+                console.log("     ");
+          }
 
         try{
             const data ={
-                imageUri,tipo_problema,longitude,latitude
+                imageUri,tipo_problema,longitude,latitude,desc_problema
             };
 
-            if(data.tipo_problema === 'Nulo'){
+            if(data.tipo_problema === ''){
                 alert('Selecione um tipo de problema')
             } else{
                 const response = await api.post('/denuncia', data)
@@ -84,6 +88,7 @@ function Denuncia() {
                 setImageUri('');
                 setAddress('');
                 setTipo_problema('');
+                setDesc_Problema('');
             }
         }catch(error){
             Alert.alert(`${error}`)
@@ -140,6 +145,8 @@ function Denuncia() {
                 </View>
 
                 <TextInput 
+                    value={desc_problema} 
+                    onChangeText={setDesc_Problema}
                     style={styles.inputDesc}
                     placeholder="Descrição"
                     multiline={true}
