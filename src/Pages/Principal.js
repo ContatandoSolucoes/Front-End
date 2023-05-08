@@ -7,7 +7,7 @@ import menu from "../../assets/menu.png"
 import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert } from 'react-native'
 
 //Imports Mapa
-import MapView from 'react-native-maps'
+import MapView, {Marker} from 'react-native-maps'
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,6 +18,7 @@ function Principal() {
 
 
     const [location, setLocation] = useState(null);
+    const [marker, setmarker] = useState([])
 
      useEffect(() => {
     (async () => {
@@ -38,10 +39,11 @@ function Principal() {
   const [origin, setOrigin] = useState(null)
   const [Destination, setDestination] = useState(null)
   
+  const handleNewMarker = (coordinate) => {
+    setmarker([...marker, coordinate])
+  }
 
   return (
-
-      
 
       <View style={styles.tela}>
         <View style={styles.header}>
@@ -72,17 +74,29 @@ function Principal() {
           {/* <TextInput style={styles.pesquisa} placeholder="Pesquise alguma localização"></TextInput>*Barra de pesquisa de localização */}
         </View>
 
-        <MapView style={styles.map}
+        <MapView 
+        onPress={(e) => handleNewMarker(e.nativeEvent.coordinate)}
+        style={styles.map}
         initialRegion={{ /**Aqui ele vai indicar onde o app irá começar eu coloquei a localizção do embu de inicio */
             latitude : -23.6491,
             longitude :  -46.8526,
             latitudeDelta : 0.0922,
-            longitudeDelta: 0.0421,
-            
+            longitudeDelta: 0.0421,    
         }}
         showsUserLocation  /**Aqui nessa configuração ele mostra onde o usuário está */
         loadingEnabled
-        />
+        >
+
+        {marker.length > 0 && (
+         marker.map((m) => {
+           return (
+             <Marker 
+               coordinate = {m} key={Math.random().toString} />
+           )
+          }) 
+          )}
+
+        </MapView>
 
         <View style={styles.formDenuncia}>
           <TouchableOpacity onPress={()=>{navigation.navigate("Denuncia")}}><Text style={styles.relatar}>Relatar Problema</Text></TouchableOpacity>{/**Aqui é botão de fazer denuncia */}
