@@ -15,7 +15,7 @@ function Denuncia() {
     const [address, setAddress] = useState();
     const [latitude, setLatitude] = useState();
     const [longitude, setLongitude] = useState();
-    const [problema, setProblema] = useState(['Buraco','Farol quebrado','Calçada quebrada','Lixo','Fio de poste solto','Outro']);
+    const [problema, setProblema] = useState(['Elétrico(fio desencapado, poste caido)', 'Hidraúlico(vazão de água, cano exposto)', 'Infra(semaforo quebrado, calçada quebrada)']);
     const [tipo_problema, setTipo_problema] = useState();
     const [desc_problema,setDesc_Problema] = useState();
 
