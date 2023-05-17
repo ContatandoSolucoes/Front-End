@@ -57,6 +57,8 @@ function Denuncia() {
     }
     const envData = async() =>{
 
+        navigation.navigate("Principal")
+
         if(address === ""){
                 setLatitude(location.coords.latitude);
                 setLongitude(location.coords.longitude);

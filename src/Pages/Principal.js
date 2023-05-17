@@ -6,6 +6,8 @@ import menu from "../../assets/menu.png"
 
 import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert } from 'react-native'
 
+import api from '../api'
+
 //Imports Mapa
 import MapView, {Marker} from 'react-native-maps'
 import * as Location from 'expo-location';
@@ -18,9 +20,16 @@ function Principal() {
 
 
     const [location, setLocation] = useState(null);
-    const [marker, setmarker] = useState([])
+    const [Denuncia, setDenuncia] = useState([])
 
      useEffect(() => {
+
+      async function getD() {
+        const {data} = await api.get('/getD')
+        setDenuncia(data)
+      }
+      
+
     (async () => {
       
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -32,17 +41,15 @@ function Principal() {
       let location = await Location.getCurrentPositionAsync({});//Aqui pega a posição atual do usuário
       setLocation(location);
     })();
-  }, []);
+    getD()
+  }, [Denuncia]);
+  
 
   const navigation = useNavigation();
   // Barra de pesquisa
   const [origin, setOrigin] = useState(null)
   const [Destination, setDestination] = useState(null)
   
-  const handleNewMarker = (coordinate) => {
-    setmarker([...marker, coordinate])
-  }
-
   return (
 
       <View style={styles.tela}>
@@ -75,7 +82,6 @@ function Principal() {
         </View>
 
         <MapView 
-        onPress={(e) => handleNewMarker(e.nativeEvent.coordinate)}
         style={styles.map}
         initialRegion={{ /**Aqui ele vai indicar onde o app irá começar eu coloquei a localizção do embu de inicio */
             latitude : -23.6491,
@@ -87,8 +93,8 @@ function Principal() {
         loadingEnabled
         >
 
-        {marker.length > 0 && (
-         marker.map((m) => {
+        {Denuncia.length > 0 && (
+         Denuncia.map((m) => {
            return (
              <Marker 
                coordinate = {m} key={Math.random().toString} />
