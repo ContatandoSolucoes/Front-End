@@ -19,20 +19,49 @@ function Denuncia() {
     const [tipo_problema, setTipo_problema] = useState();
     const [desc_problema,setDesc_Problema] = useState();
 
-    useEffect(()=>{
-    const getPermission = async()=>{
-        let {status} = await Location.requestForegroundPermissionsAsync();
-        if(status !== 'granted'){
-            console.log('Please grant location permission');
-            return;
-        }
-        let currentLocation = await Location.getCurrentPositionAsync({});
-        setLocation(currentLocation);
-        console.log('location');
-        console.log(currentLocation);
-    };
-        getPermission();
-    },[]);
+    try{
+        useEffect(()=>{
+          const getPermission = async()=>{
+            let {status} = await Location.requestForegroundPermissionsAsync();
+            if(status !== 'granted'){
+              console.log('Please grant location permission');
+              return;
+            }
+            let currentLocation = await Location.getCurrentPositionAsync({});
+            setLocation(currentLocation);
+            console.log('location');
+            console.log(currentLocation);
+          };
+          getPermission();
+        },[location]);
+      }catch(err){
+        Alert.alert(`erro ${err}`)
+      }
+
+      useEffect(()=>{
+        console.log('latitude: ',latitude);
+        console.log('longitude: ',longitude);
+      },[latitude,longitude])
+
+      const geocode = async()=>{
+        try{
+            if(address === ""){
+                       setLatitude(location.coords.latitude);
+                       setLongitude(location.coords.longitude);
+                       console.log('>>>>>>>>>>>>>>>>>> location atual >>>>>>>>>>>>>>>>>>>>')
+                   console.log("     ");
+                  }else{
+                       const geocodedLocation = await Location.geocodeAsync(address);
+                       console.log('>>>>>>>>>>>>', address)
+                       console.log('>>>>>>>>>>>>>>>>>> location >>>>>>>>>>>>>>>>>>>>');
+                       setLatitude(geocodedLocation[0].latitude);
+                       setLongitude(geocodedLocation[0].longitude);
+                       console.log("     ");
+                 }
+                }catch(err){
+                  Alert.alert(`error 404: ${err}`)
+                }
+              }
 
     const obterPermissao = async () => {
 
@@ -43,39 +72,23 @@ function Denuncia() {
     }
     const obterImage = async() => {
         const result = await ImagePicker.launchCameraAsync()
-
         if(!result.canceled){
             setImageUri(result.assets[0].uri)
         }
+        await geocode()
     }
     const galeriaImage = async() => {
         const result = await ImagePicker.launchImageLibraryAsync()
-
+        
         if(!result.canceled){
             setImageUri(result.assets[0].uri)
         }
+        await geocode()
     }
     const envData = async() =>{
 
-        navigation.navigate("Principal")
-
-        if(address === ""){
-                setLatitude(location.coords.latitude);
-                setLongitude(location.coords.longitude);
-                console.log('>>>>>>>>>>>>>>>>>> location atual >>>>>>>>>>>>>>>>>>>>')
-                console.log('latitude atual: ',latitude);
-                console.log('longitude atual: ',longitude);
-            console.log("     ");
-           }else{
-                const geocodedLocation = await Location.geocodeAsync(address);
-                console.log('>>>>>>>>>>>>', address)
-                console.log('>>>>>>>>>>>>>>>>>> location >>>>>>>>>>>>>>>>>>>>');
-                setLatitude(geocodedLocation[0].latitude);
-                setLongitude(geocodedLocation[0].longitude);
-                console.log('latitude: ',latitude);
-                console.log('longitude: ',longitude);
-                console.log("     ");
-          }
+        //navigation.navigate("Principal")
+        geocode()
 
         try{
             const data ={
