@@ -147,7 +147,9 @@ function Denuncia() {
                     
                 </Picker>
 
-                {imageUri && <Image source={{uri: imageUri}} style={styles.imagem}/> }
+                <View style={styles.imagem}>
+                {imageUri && <Image source={{uri: imageUri}} style={styles.img}/> }
+                </View>
 
                 {/* ()=>{navigation.navigate("Camera")} */}
                 <View style={styles.button}>
@@ -212,9 +214,17 @@ const styles = StyleSheet.create({
         marginTop: "15%"
     },
     imagem:{
+        width: 202,
+        height: 102,
+        borderRadius:2,
+        borderWidth : 0.1,
+        marginBottom: '10%'
+    },
+    img:{
         width: 200,
         height: 100,
-        borderRadius:2
+        borderRadius:2,
+        borderWidth : 1
     },
     inputDesc:{
         margin : 10,
@@ -262,4 +272,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Denuncia
+export default {Denuncia,longitude,latitude}
