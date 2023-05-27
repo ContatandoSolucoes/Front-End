@@ -97,7 +97,9 @@ function Principal() {
          Denuncia.map((m) => {
            return (
              <Marker 
-               coordinate = {m} key={Math.random().toString} />
+             coordinate = {m} 
+             key={m.id_denuncia}
+             pinColor="blue" />
            )
           }) 
           )}
