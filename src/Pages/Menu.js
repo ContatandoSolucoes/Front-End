@@ -2,10 +2,17 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
 import back from "../../assets/Fundo.png"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Menu() {
 
     const navigation = useNavigation();
+
+    function handleLogout2 (){
+        AsyncStorage.clear()
+        navigation.navigate("Login")
+    }
+
   return (
        <React.Fragment>
             <View style={styles.container}>
@@ -16,7 +23,7 @@ function Menu() {
                     <Text style={styles.name}></Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Perfil')}><Text style={styles.options1}>Perfil</Text></TouchableOpacity>{/**Perfil */}
                     <TouchableOpacity><Text style={styles.options3}>Problemas no aplicativo</Text></TouchableOpacity>{/**Problemas no aplicativo */}
-                    <TouchableOpacity><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
+                    <TouchableOpacity onPress={handleLogout2}><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
                 </ImageBackground>
             </View>
        </React.Fragment>

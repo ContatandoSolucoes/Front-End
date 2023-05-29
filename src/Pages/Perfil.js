@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button, ImageBackground} from 'react-native';
+import { useNavigation } from '@react-navigation/native'
 
 // import useState from 'react-hook-use-state';
 
@@ -8,6 +9,8 @@ import back from "../../assets/Fundo.png"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Perfil() {
+
+  const navigation = useNavigation()
   const [imageUri, setImageUri] = useState();
   
   const [nome, setNome] = useState('');
@@ -15,6 +18,11 @@ function Perfil() {
   const [nascimento, setNascimento] = useState('');
   const [telefone, setTelefone] = useState('');
   
+  function handleLogout(){
+    AsyncStorage.clear()
+    navigation.navigate("Login")
+  }
+
   useEffect(() => {
     // Load user information from AsyncStorage
     AsyncStorage.getItem('nome_usuario').then((value) => setNome(value));
@@ -77,7 +85,7 @@ function Perfil() {
               <Text style={styles.infos}>{telefone}</Text>
             </View>
 
-            <TouchableOpacity><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
+            <TouchableOpacity onPress={handleLogout} ><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
             
           </ImageBackground>
       </View>

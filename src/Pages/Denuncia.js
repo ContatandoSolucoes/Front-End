@@ -272,4 +272,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default {Denuncia,longitude,latitude}
+export default {Denuncia}
