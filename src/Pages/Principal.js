@@ -16,6 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 //Pesquisa de localização
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
+
 function Principal() {
 
 
@@ -99,7 +100,9 @@ function Principal() {
              <Marker 
              coordinate = {m} 
              key={m.id_denuncia}
-             pinColor="blue" />
+             pinColor="blue"
+             onPress={() => navigation.navigate('PerfilDenuncia')}
+             />
            )
           }) 
           )}

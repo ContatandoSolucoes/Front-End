@@ -15,6 +15,7 @@ import Recuperação from './src/Pages/Recuperação';
 import Denuncia from './src/Pages/Denuncia';
 import AlterarSenha from './src/Pages/AlterarSenha';
 import testeImg from './src/Pages/testeImg';
+import PerfilDenuncia from './src/Pages/PerfilDenuncia.js';
 
 //Import do react navigation
 import 'react-native-gesture-handler';
@@ -37,15 +38,27 @@ export default function App() {
     
       <Stack.Screen name='Home' component={Home} options={{title:'', headerTransparent:'true',}}></Stack.Screen>{/**Essas options servem para esconder um header que aparece comum titulo toda vez que você entra naquela tela */}
       <Stack.Screen name='Cadastro' component={Cadastro} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name='Login' component={Login} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name='Perfil' component={Perfil} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name="Principal" component={Principal} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name='Menu' component={Menu} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name='Camera' component={Camera} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name='Recuperação' component={Recuperação} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name='Denuncia' component={Denuncia} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name='AlterarSenha' component={AlterarSenha} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
       <Stack.Screen name='testeImg' component={testeImg} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
+      <Stack.Screen name='PerfilDenuncia' component={PerfilDenuncia} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
+
     </Stack.Navigator>
     </NavigationContainer>
     
