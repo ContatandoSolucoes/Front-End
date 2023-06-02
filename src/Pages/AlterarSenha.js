@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground, Alert} from 'react-native';
+import { ScrollView, KeyboardAvoidingView, StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground, Alert} from 'react-native';
 import back from "../../assets/Fundo.png"
 
 import api from '../api.js'
@@ -7,6 +7,7 @@ import useState from 'react-hook-use-state'
 import { useNavigation } from '@react-navigation/native'
 
 import Toast from 'react-native-toast-message';
+
 
 function AlterarSenha() {
 
@@ -55,9 +56,20 @@ function AlterarSenha() {
     <React.Fragment>
       <ImageBackground source={back} resizeMode="cover" style={styles.image}>
 
-        <Text style={styles.title}>Trocar Senha</Text>
 
         <View style={styles.container}>
+
+        <Text style={styles.title}>Trocar Senha</Text>
+        
+        <KeyboardAvoidingView
+            contentContainerStyle={styles.form}
+            behavior = "padding"
+            keyboardVerticalOffset = {105}
+            >
+              <ScrollView
+              // style = {styles.form}
+              width = '100%'
+              >
 
           {/* inputs que pegam os dados */}
           
@@ -88,6 +100,8 @@ function AlterarSenha() {
             <Text style={styles.entrar}> Alterar senha</Text>
           </TouchableOpacity>
 
+            </ScrollView>
+          </KeyboardAvoidingView>
         </View>
       </ImageBackground>
       <Toast/>
@@ -102,12 +116,12 @@ const styles = StyleSheet.create({
   },
   container: {
     width : "85%",
-    height : "55%",
+    height : "60%",
     backgroundColor : "#659ee4",
     borderRadius : 15,
     borderWidth : 2,
     borderColor : '#5e5e5e',
-    marginTop: "14%",
+    marginTop: "35%",
     marginLeft: "8%"
   },
   title:{
@@ -119,8 +133,9 @@ const styles = StyleSheet.create({
     borderColor : '#5e5e5e',
     borderWidth : 2,
     borderRadius : 5,
-    marginTop: "16%",
-    marginLeft: "19%"
+    marginTop: "5%",
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   inputCódigo:{
     backgroundColor : 'white',
@@ -131,8 +146,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 5,
     width : '80%',
-    marginTop: "20%",
+    marginTop: "15%",
     marginLeft: "10%",
+    // textAlign: 'justify'
   },
   inputNovaSenha:{
     backgroundColor : 'white',
@@ -148,17 +164,17 @@ const styles = StyleSheet.create({
   },
   entrar:{
     backgroundColor : "#5271ff",
-    fontSize : 25,
-    width : 210,
-    height : 40,
+    fontSize : 30,
+    width : 250,
+    // height : 40,
     textAlign : 'center',
     borderColor : '#5e5e5e',
     borderWidth : 2,
     borderRadius : 30,
     color : 'white',
-    marginTop : 50,
-    // left: 50%  
-    //  alignItems : 'center'
+    marginTop : "15%",
+    marginLeft: 'auto',
+    marginRight: 'auto',
   }
 })
 

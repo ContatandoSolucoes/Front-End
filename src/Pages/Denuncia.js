@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { View, StyleSheet, TextInput, Text, Image, TouchableOpacity,ImageBackground, Button,Alert} from 'react-native'
+import { KeyboardAvoidingView, ScrollView, View, StyleSheet, TextInput, Text, Image, TouchableOpacity,ImageBackground, Button,Alert} from 'react-native'
 import api from '../api.js'
 import back from "../../assets/Fundo.png"
 import * as Location from 'expo-location'
@@ -122,8 +122,18 @@ function Denuncia() {
         <React.Fragment>
 
             <ImageBackground source={back} resizeMode="cover" style={styles.image}>
-            <Text style={styles.title}>Relatar Problema</Text>
             <View style={styles.container}>
+            <KeyboardAvoidingView
+            contentContainerStyle={styles.form}
+            behavior = "height"
+            keyboardVerticalOffset = {35}
+            >
+              <ScrollView
+              // style = {styles.form}
+              width = '100%'
+              >
+
+            <Text style={styles.title}>Relatar Problema</Text>
 
                 <TextInput 
                     value={address} 
@@ -171,7 +181,9 @@ function Denuncia() {
 
                 <TouchableOpacity
                     onPress={envData}><Text style={styles.relatar}>Enviar Relato</Text></TouchableOpacity>
-
+                
+                    </ScrollView>
+                </KeyboardAvoidingView>
             </View>
             </ImageBackground>
         </React.Fragment>
@@ -179,12 +191,27 @@ function Denuncia() {
 }
 
 const styles = StyleSheet.create({
+    form:{
+        position: 'absolute',
+        // bottom: 0,
+        // left: 0,
+        // flexDirection: 'row',
+        width : "85%",
+        height : "80%",
+        backgroundColor : "#659ee4",
+        borderRadius : 15,
+        alignItems : 'center',
+        justifyContent : 'center',
+        borderWidth : 2,
+        borderColor : '#5e5e5e',
+        marginTop: 20
+    },
     image :{
         flex : 1,
         width : "100%",
         alignItems : 'center',
         flexDirection : 'column',
-        paddingTop: "20%"
+        paddingTop: "8%",
     },
     title:{
         backgroundColor : "#5271ff",
@@ -195,6 +222,7 @@ const styles = StyleSheet.create({
         // borderColor : '#5e5e5e',
         // borderWidth : 2,
         borderRadius : 5,
+        marginTop: "20%"
     },
     input:{
         margin : 10,
@@ -206,19 +234,25 @@ const styles = StyleSheet.create({
         borderRadius : 8,
         fontSize: 15,
         padding: 10,
+        marginTop: "10%",
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     container:{
         width: "80%",
         justifyContent: 'center',
         alignItems: "center",
-        marginTop: "15%"
+        // marginTop: "1%"
     },
     imagem:{
         width: 202,
         height: 102,
         borderRadius:2,
         borderWidth : 0.1,
-        marginBottom: '10%'
+        marginBottom: '10%',
+        marginTop: "5%",
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     img:{
         width: 200,
@@ -230,13 +264,16 @@ const styles = StyleSheet.create({
         margin : 10,
         backgroundColor : 'white',
         width : '90%',
-        height : 150,
+        height : 50,
         borderWidth : 1,
         borderColor : "#5e5e5e",
         borderRadius : 8,
         fontSize: 15,
         padding: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: "5%",
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     relatar:{
         backgroundColor : "#5271ff",
@@ -250,7 +287,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         paddingTop: 6,
-        marginTop: 25
+        marginTop: "10%",
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     container2: {
         backgroundColor: 'yellow',
@@ -262,6 +301,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection: "row",
         margin: 10,
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     alinhamento:{
         marginLeft:10,
@@ -269,7 +310,10 @@ const styles = StyleSheet.create({
     },
     select:{
         width: "80%",
+        marginTop: "3%",
+        marginLeft: 'auto',
+        marginRight: 'auto',
     }
 })
 
-export default {Denuncia}
+export default Denuncia

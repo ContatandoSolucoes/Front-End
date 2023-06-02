@@ -16,7 +16,6 @@ import { useNavigation } from '@react-navigation/native';
 //Pesquisa de localização
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-
 function Principal() {
 
 
@@ -55,27 +54,8 @@ function Principal() {
 
       <View style={styles.tela}>
         <View style={styles.header}>
-          {/* Barra de pesquisa */}
-         <GooglePlacesAutocomplete
-          placeholder='Local de denúncia'
-          onPress={(data, details = null) => {
-            //Pegar Latitude e longitude
-            setDestination({
-              latitude : details.geometry.location.lat,
-              longitude :  location.coords.location.lng,
-              latitudeDelta : 0.0922,
-              longitudeDelta: 0.0421
-            })
-            console.log(data, details);
-          }}
-          query={{
-            key: 'AIzaSyAZlX4e1MClvjd60gFz78S4J8qN1NWoNm0',
-            language: 'pt-br',
-          }}
-          fetchDetails= {true}
-          style = {styles.pesquisa}
-          // styles={{listView:{height:100}}}
-          />
+  
+         
           <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
             <Image source={menu} style={styles.menu}></Image>
           </TouchableOpacity>{/**Botão que irá abrir o menu */}
@@ -100,9 +80,7 @@ function Principal() {
              <Marker 
              coordinate = {m} 
              key={m.id_denuncia}
-             pinColor="blue"
-             onPress={() => navigation.navigate('PerfilDenuncia')}
-             />
+             pinColor="blue" />
            )
           }) 
           )}
@@ -166,7 +144,7 @@ const styles = StyleSheet.create({
       width : 55,
       height : 47,
       marginTop : 36,
-      marginRight : 15
+      marginLeft : 345
     }
 
 })
