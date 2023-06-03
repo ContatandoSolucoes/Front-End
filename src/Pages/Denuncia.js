@@ -55,10 +55,6 @@ useEffect(() => {
       await setCity(response.data["features"][0]["properties"]["city"])
       await setMunicipio(response.data["features"][0]["properties"]["municipality"])
       await setCep(response.data["features"][0]["properties"]["postcode"])
-      console.log("  ")
-      console.log("  ")
-      console.log("  ")
-      console.log("  ")
     })
   }, [latitude, longitude,cep]);
     
