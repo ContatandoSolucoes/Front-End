@@ -7,6 +7,7 @@ import {FontAwesome} from '@expo/vector-icons';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import {Picker} from '@react-native-picker/picker';
+import axios from 'axios';
 
 function Denuncia() {
     const navigation = useNavigation();
@@ -19,6 +20,10 @@ function Denuncia() {
     const [address, setAddress] = useState(null);
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
+    const [street , setStreet] = useState()
+    const [city , setCity] = useState()
+    const [municipio, setMunicipio] = useState()
+    const [cep, setCep] = useState()
 
     useEffect(() => {
         (async () => {
@@ -34,11 +39,28 @@ function Denuncia() {
         geocode();
       }, []);
     
-      useEffect(() => {
-        console.log(address ? address : "Pegando geolocalização");
-        console.log(latitude);
-        console.log(longitude);
-      }, [latitude, longitude]);
+useEffect(() => {
+    console.log(address ? address : "Pegando geolocalização");
+    console.log(" ")
+    console.log("longitude: ",longitude);
+    console.log("latitude: ",latitude);
+    console.log("rua: ",street);
+    console.log("cidade: ",city);
+    console.log("municipio: ",municipio);
+    console.log("CEP: ",cep);
+
+    axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=ef172e5aac494f98ad94e03ba0d41fb8`)
+    .then(async(response)=>{
+      await setStreet(response.data["features"][0]["properties"]["street"])
+      await setCity(response.data["features"][0]["properties"]["city"])
+      await setMunicipio(response.data["features"][0]["properties"]["municipality"])
+      await setCep(response.data["features"][0]["properties"]["postcode"])
+      console.log("  ")
+      console.log("  ")
+      console.log("  ")
+      console.log("  ")
+    })
+  }, [latitude, longitude,cep]);
     
       useEffect(() => {
         if (location?.coords) {
