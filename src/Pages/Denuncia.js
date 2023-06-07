@@ -8,6 +8,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import {Picker} from '@react-native-picker/picker';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Denuncia() {
     const navigation = useNavigation();
@@ -117,7 +118,13 @@ useEffect(() => {
                 alert('Selecione um tipo de problema')
             } else{
                 const response = await api.post('/denuncia', data)
-                console.log(response)
+                
+                // token para perfil denuncia (não toque, se der erro SUPERA )
+                console.log('token denuncia >>> ',response)
+
+                AsyncStorage.setItem("tokenDenuncia",response.data.token)
+
+
                 setImageUri('');
                 setAddress('');
                 setTipo_problema('');
