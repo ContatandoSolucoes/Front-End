@@ -14,7 +14,6 @@ import Camera from './src/Pages/Camera'
 import Recuperação from './src/Pages/Recuperação';
 import Denuncia from './src/Pages/Denuncia';
 import AlterarSenha from './src/Pages/AlterarSenha';
-import testeImg from './src/Pages/testeImg';
 import PerfilDenuncia from './src/Pages/PerfilDenuncia.js';
 
 //Import do react navigation
@@ -34,7 +33,7 @@ export default function App() {
     <NavigationContainer>
       <Toast />
       {/* initial route name é para definir em qual tela teu app irá começar */}
-    <Stack.Navigator initialRouteName='Principal'> 
+    <Stack.Navigator initialRouteName='Home'> 
     
       <Stack.Screen name='Home' component={Home} options={{title:'', headerTransparent:'true',}}></Stack.Screen>{/**Essas options servem para esconder um header que aparece comum titulo toda vez que você entra naquela tela */}
       <Stack.Screen name='Cadastro' component={Cadastro} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
@@ -55,7 +54,6 @@ export default function App() {
 
       <Stack.Screen name='AlterarSenha' component={AlterarSenha} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
 
-      <Stack.Screen name='testeImg' component={testeImg} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
 
       <Stack.Screen name='PerfilDenuncia' component={PerfilDenuncia} options={{title:'', headerTransparent:'true',}}></Stack.Screen>
 

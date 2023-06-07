@@ -1,26 +1,29 @@
 import React from 'react'
 import useState from 'react-hook-use-state';
-import { useEffect } from 'react'
-
+import { useEffect,useRef} from 'react'
 import menu from "../../assets/menu.png"
-
 import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert } from 'react-native'
-
 import api from '../api'
-
 //Imports Mapa
 import MapView, {Marker} from 'react-native-maps'
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
-
 //Pesquisa de localização
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 function Principal() {
 
-
     const [location, setLocation] = useState(null);
     const [Denuncia, setDenuncia] = useState([])
+    const [address, setAddress] = useState(null);
+    const navigation = useNavigation();
+    // Barra de pesquisa
+    const [origin, setOrigin] = useState(null);
+    const [Destination, setDestination] = useState(null);
+    const [latitude, setLatitude] = useState(-23.595506);
+    const [longitude, setLongitude] = useState(-46.6684607);
+    const [newLatitude , setNewLatitude] = useState();
+    const [newLongitude , setNewLongitude] = useState();
 
      useEffect(() => {
 
@@ -43,19 +46,82 @@ function Principal() {
     })();
     getD()
   }, [Denuncia]);
-  
 
-  const navigation = useNavigation();
-  // Barra de pesquisa
-  const [origin, setOrigin] = useState(null)
-  const [Destination, setDestination] = useState(null)
-  
+  useEffect(() => {
+    console.log(address ? address : "Pegando geolocalização");
+    updateRegion()
+  }, [latitude, longitude]);
+
+
+  const [initialRegion, setInitialRegion] = useState({
+    latitude: latitude,
+    longitude: longitude,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
+
+  const mapRef = useRef(null); // Referência para o componente MapView
+
+  // Função para atualizar a latitude e longitude
+  const updateRegion = async() => {
+    if (address?.length > 0) {
+      const loc = await Location.geocodeAsync(address);
+      setNewLatitude(loc[0].latitude);
+      setNewLongitude(loc[0].longitude);
+    }
+
+    
+      setLatitude(newLatitude);
+      setLongitude(newLongitude);
+
+
+      const newRegion = {
+        latitude: newLatitude,
+        longitude: newLongitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      };
+    
+      setInitialRegion(newRegion);
+    
+    mapRef.current.animateToRegion(newRegion, 10000);
+
+  };
+
   return (
 
       <View style={styles.tela}>
         <View style={styles.header}>
-  
-         
+          {/* Barra de pesquisa */}
+        {/*} <GooglePlacesAutocomplete
+          placeholder='Local de denúncia'
+          onPress={(data, details = null) => {
+            //Pegar Latitude e longitude
+            setDestination({
+              latitude : details.geometry.location.lat,
+              longitude :  location.coords.location.lng,
+              latitudeDelta : 0.0922,
+              longitudeDelta: 0.0421
+            })
+            console.log(data, details);
+          }}
+          query={{
+            key: 'AIzaSyAZlX4e1MClvjd60gFz78S4J8qN1NWoNm0',
+            language: 'pt-br',
+          }}
+          fetchDetails= {true}
+          style = {styles.pesquisa}
+          // styles={{listView:{height:100}}}
+        />*/}
+
+            <TextInput placeholder='Local de denúncia'
+              value={address} 
+              ref={mapRef}
+              onChangeText={setAddress}
+              onBlur={updateRegion}
+              style = {styles.pesquisa}
+            />
+
           <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
             <Image source={menu} style={styles.menu}></Image>
           </TouchableOpacity>{/**Botão que irá abrir o menu */}
@@ -63,13 +129,9 @@ function Principal() {
         </View>
 
         <MapView 
+        onPress={updateRegion}
         style={styles.map}
-        initialRegion={{ /**Aqui ele vai indicar onde o app irá começar eu coloquei a localizção do embu de inicio */
-            latitude : -23.6491,
-            longitude :  -46.8526,
-            latitudeDelta : 0.0922,
-            longitudeDelta: 0.0421,    
-        }}
+        region={initialRegion}
         showsUserLocation  /**Aqui nessa configuração ele mostra onde o usuário está */
         loadingEnabled
         >
@@ -77,10 +139,14 @@ function Principal() {
         {Denuncia.length > 0 && (
          Denuncia.map((m) => {
            return (
-             <Marker 
-             coordinate = {m} 
-             key={m.id_denuncia}
-             pinColor="blue" />
+
+              <Marker 
+              coordinate = {m} 
+              key={m.id_denuncia}
+              pinColor="blue" 
+              onPress={()=>{navigation.navigate("PerfilDenuncia")}}
+              />
+
            )
           }) 
           )}
@@ -133,18 +199,20 @@ const styles = StyleSheet.create({
       paddingLeft : 6,
     },
     pesquisa:{
-      width : "70%",
-      height : 33,
+      width : "80%",
+      height : "40%",
       backgroundColor : "white",
-      marginTop : 40,
-      borderRadius : 8,
-      paddingLeft : 10
+      marginTop : 45,
+      borderRadius : 3,
+      paddingLeft : 20,
+      marginBottom:10,
+      marginRight:10
     },
     menu : {
       width : 55,
       height : 47,
       marginTop : 36,
-      marginLeft : 345
+      marginRight : 15
     }
 
 })
