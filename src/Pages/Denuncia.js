@@ -8,6 +8,9 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import {Picker} from '@react-native-picker/picker';
 import axios from 'axios';
+import { Auth,db,storage } from '../Firebase/Firebase.js';
+import { getApps,initializeApp } from 'firebase/app';
+import { uploadBytes, getDownloadURL, ref, getStorage } from "firebase/storage";
 
 function Denuncia() {
     const navigation = useNavigation();
@@ -73,9 +76,6 @@ useEffect(() => {
         }
       }
 
-
-      //==================================================================================================
-
     const obterPermissao = async () => {
 
         const {granted} = await ImagePicker.requestCameraPermissionsAsync()
@@ -83,12 +83,18 @@ useEffect(() => {
             Alert.alert('Voce precisa dar permissao')
         }    
     }
+
+    async function  envImg(){
+
+    }
+
     const obterImage = async() => {
         const result = await ImagePicker.launchCameraAsync()
         if(!result.canceled){
             setImageUri(result.assets[0].uri)
         }
         await geocode()
+        envImg
     }
     const galeriaImage = async() => {
         const result = await ImagePicker.launchImageLibraryAsync()
@@ -97,32 +103,59 @@ useEffect(() => {
             setImageUri(result.assets[0].uri)
         }
         await geocode()
+        envImg
     }
+    
+
     const envData = async() =>{
-
         if(imageUri===""){
-
             alert("É necessario anexar uma imagem para fazer a denuncia")
-
         }else{
-                    //navigation.navigate("Principal")
+        //navigation.navigate("Principal")
         geocode()
-
         try{
-            const data ={
-                imageUri,tipo_problema,longitude,latitude,desc_problema
-            };
-
-            if(data.tipo_problema === ''){
-                alert('Selecione um tipo de problema')
-            } else{
-                const response = await api.post('/denuncia', data)
-                console.log(response)
-                setImageUri('');
-                setAddress('');
-                setTipo_problema('');
-                setDesc_Problema('');
+            if(imageUri)
+            {
+                let imageRef;
+                const storageUrl = `Denuncia/${Date.now()}/${Math.random().toString()}`;
+                const response =  await fetch(imageUri);
+                const bytes =  await response.blob(); 
+                imageRef = ref(storage, storageUrl);
+    
+                uploadBytes(imageRef, bytes)
+                .then(() => {
+                getDownloadURL(imageRef)
+                    .then(async (url) => {
+                        const data ={
+                            url,tipo_problema,longitude,latitude,desc_problema
+                        };
+            
+                        if(data.tipo_problema === ''){
+                            alert('Selecione um tipo de problema')
+                        } else{
+                            const response = await api.post('/denuncia', data)
+                            console.log(response)
+                            setImageUri('');
+                            setAddress('');
+                            setTipo_problema('');
+                            setDesc_Problema('');
+                        }
+                    setUrlF(url)
+                    })
+                    .catch((err) => {
+                    console.log(err.message);
+                    });
+                })
+                .catch((err) => {
+                console.log(err.message);
+                });
+            }else{
+                imageRef = null;
+                setImageUri(null)  
+                return;
             }
+           
+
             }catch(error){
                 Alert.alert(`${error}`)
                 console.log(`>>> ${error}`)
@@ -134,66 +167,66 @@ useEffect(() => {
         obterPermissao()
     }, [])
 
-
-    return (
-        <React.Fragment>
-
-            <ImageBackground source={back} resizeMode="cover" style={styles.image}>
-            <Text style={styles.title}>Relatar Problema</Text>
-            <View style={styles.container}>
-
-                <TextInput 
-                    value={address} 
-                    onChangeText={setAddress}
-                    style={styles.input}
-                    placeholder="Endereço"
-                ></TextInput>
-
-                <Picker
-                    selectedValue={tipo_problema}
-                    style={styles.select}
-                    onValueChange={(itemValue) => 
-                    setTipo_problema(itemValue)
-                    }>
-                    <Picker.Item label={'Tipo de problema'} value={"Nulo"} />
-                    {
-                        problema.map(cr => {
-                            return <Picker.Item label={cr} value={cr} />
-                        })
-                    }
-                    
-                </Picker>
-
-                <View style={styles.imagem}>
-                {imageUri && <Image source={{uri: imageUri}} style={styles.img}/> }
+        return (
+            <React.Fragment>
+    
+                <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+                <Text style={styles.title}>Relatar Problema</Text>
+                <View style={styles.container}>
+    
+                    <TextInput 
+                        value={address} 
+                        onChangeText={setAddress}
+                        style={styles.input}
+                        placeholder="Endereço"
+                    ></TextInput>
+    
+                    <Picker
+                        selectedValue={tipo_problema}
+                        style={styles.select}
+                        onValueChange={(itemValue) => 
+                        setTipo_problema(itemValue)
+                        }>
+                        <Picker.Item label={'Tipo de problema'} value={"Nulo"} />
+                        {
+                            problema.map(cr => {
+                                return <Picker.Item label={cr} value={cr} />
+                            })
+                        }
+                        
+                    </Picker>
+    
+                    <View style={styles.imagem}>
+                    {imageUri && <Image source={{uri: imageUri}} style={styles.img}/> }
+                    </View>
+    
+                    {/* ()=>{navigation.navigate("Camera")} */}
+                    <View style={styles.button}>
+                    <TouchableOpacity onPress={obterImage} style={styles.alinhamento}>
+                    <FontAwesome name='camera' size={60} color="#5271ff"></FontAwesome>
+                    </TouchableOpacity> 
+                    <TouchableOpacity onPress={galeriaImage} style={styles.alinhamento}>
+                    <FontAwesome name='image' size={60} color="#5271ff"></FontAwesome>
+                    </TouchableOpacity>
+                    </View>
+    
+                    <TextInput 
+                        value={desc_problema} 
+                        onChangeText={setDesc_Problema}
+                        style={styles.inputDesc}
+                        placeholder="Descrição"
+                        multiline={true}
+                    ></TextInput>
+    
+                    <TouchableOpacity
+                        onPress={envData}><Text style={styles.relatar}>Enviar Relato</Text></TouchableOpacity>
+    
                 </View>
+                </ImageBackground>
+            </React.Fragment>
+        )
+    }
 
-                {/* ()=>{navigation.navigate("Camera")} */}
-                <View style={styles.button}>
-                <TouchableOpacity onPress={obterImage} style={styles.alinhamento}>
-                <FontAwesome name='camera' size={60} color="#5271ff"></FontAwesome>
-                </TouchableOpacity> 
-                <TouchableOpacity onPress={galeriaImage} style={styles.alinhamento}>
-                <FontAwesome name='image' size={60} color="#5271ff"></FontAwesome>
-                </TouchableOpacity>
-                </View>
-
-                <TextInput 
-                    value={desc_problema} 
-                    onChangeText={setDesc_Problema}
-                    style={styles.inputDesc}
-                    placeholder="Descrição"
-                    multiline={true}
-                ></TextInput>
-
-                <TouchableOpacity
-                    onPress={envData}><Text style={styles.relatar}>Enviar Relato</Text></TouchableOpacity>
-
-            </View>
-            </ImageBackground>
-        </React.Fragment>
-    )
-}
 
 const styles = StyleSheet.create({
     image :{

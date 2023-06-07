@@ -78,8 +78,8 @@ function Principal() {
       const newRegion = {
         latitude: newLatitude,
         longitude: newLongitude,
-        latitudeDelta: 0.0020,
-        longitudeDelta: 0.0020,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
       };
     
       setInitialRegion(newRegion);
