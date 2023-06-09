@@ -8,13 +8,9 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import {Picker} from '@react-native-picker/picker';
 import axios from 'axios';
-<<<<<<< HEAD
-import AsyncStorage from '@react-native-async-storage/async-storage';
-=======
 import { Auth,db,storage } from '../Firebase/Firebase.js';
 import { getApps,initializeApp } from 'firebase/app';
 import { uploadBytes, getDownloadURL, ref, getStorage } from "firebase/storage";
->>>>>>> ab78ad417bcc622113c2f30ce288ccb7e0b5ba8b
 
 function Denuncia() {
     const navigation = useNavigation();
@@ -118,27 +114,6 @@ useEffect(() => {
         //navigation.navigate("Principal")
         geocode()
         try{
-<<<<<<< HEAD
-            const data ={
-                imageUri,tipo_problema,longitude,latitude,desc_problema
-            };
-
-            if(data.tipo_problema === ''){
-                alert('Selecione um tipo de problema')
-            } else{
-                const response = await api.post('/denuncia', data)
-                
-                // token para perfil denuncia (não toque, se der erro SUPERA )
-                console.log('token denuncia >>> ',response)
-
-                AsyncStorage.setItem("tokenDenuncia",response.data.token)
-
-
-                setImageUri('');
-                setAddress('');
-                setTipo_problema('');
-                setDesc_Problema('');
-=======
             if(imageUri)
             {
                 let imageRef;
@@ -178,7 +153,6 @@ useEffect(() => {
                 imageRef = null;
                 setImageUri(null)  
                 return;
->>>>>>> ab78ad417bcc622113c2f30ce288ccb7e0b5ba8b
             }
            
 
