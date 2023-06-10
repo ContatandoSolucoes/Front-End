@@ -45,55 +45,11 @@ function Principal() {
   }, [Denuncia]);
   
 
-<<<<<<< HEAD
-  useEffect(() => {
-    console.log(address ? address : "Pegando geolocalização");
-    updateRegion()
-  }, [latitude, longitude]);
-
-
-  const [initialRegion, setInitialRegion] = useState({
-    latitude: latitude,
-    longitude: longitude,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
-
-  const mapRef = useRef(null); // Referência para o componente MapView
-
-  // Função para atualizar a latitude e longitude
-  const updateRegion = async() => {
-    if (address?.length > 0) {
-      const loc = await Location.geocodeAsync(address);
-      setNewLatitude(loc[0].latitude);
-      setNewLongitude(loc[0].longitude);
-    }
-
-    
-      setLatitude(newLatitude);
-      setLongitude(newLongitude);
-
-
-      const newRegion = {
-        latitude: newLatitude,
-        longitude: newLongitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      };
-    
-      setInitialRegion(newRegion);
-    
-    mapRef.current.animateToRegion(newRegion, 10000);
-
-  };
-
-=======
   const navigation = useNavigation();
   // Barra de pesquisa
   const [origin, setOrigin] = useState(null)
   const [Destination, setDestination] = useState(null)
   
->>>>>>> parent of 6954520 (atualização da barra de pesquisa e busca da geolocalização.)
   return (
 
       <View style={styles.tela}>

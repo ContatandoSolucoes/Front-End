@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground } from 'react-native'
+import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView } from 'react-native'
 import back from "../../assets/Fundo.png"
 
 import api from '../api.js'
@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import Toast from 'react-native-toast-message';
 import DateField from 'react-native-datefield';
+import { ScrollView } from 'react-native-gesture-handler'
 
 function Cadastro() {
 
@@ -53,12 +54,11 @@ function Cadastro() {
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
     const [nome_usuario, setUserName] = useState('');
-    const [telefone, setTelefone] = useState('');
     const [nascimento, setNascimento] = useState('');
     
     async function handleRegister(event){
 
-      if(email == "" || senha == "" || nome_usuario == ""|| telefone == "" || nascimento =="" ){
+      if(email == "" || senha == "" || nome_usuario == ""|| nascimento =="" ){
         showToastIncompleto()
       }
       else{
@@ -72,7 +72,7 @@ function Cadastro() {
             showToastSucesso()
                  
             const data = {
-              nome_usuario,email,senha,telefone,nascimento
+              nome_usuario,email,senha,nascimento
             };
 
             const response = await api.post('/user', data)
@@ -91,7 +91,19 @@ function Cadastro() {
     <React.Fragment>
         <View style={styles.container}>
           <ImageBackground source={back} resizeMode="cover" style={styles.image}>
-              <View style={styles.form}>
+            
+
+            <View style={styles.form}>
+            <KeyboardAvoidingView
+            contentContainerStyle={styles.form}
+            behavior = "height"
+            keyboardVerticalOffset = {70}
+            >
+              <ScrollView
+              // style = {styles.form}
+              width = '100%'
+              >
+
                   <Text style={styles.title}>Cadastro</Text>
                   
                   <Text style={styles.text}>Nome de usuario</Text>
@@ -99,14 +111,6 @@ function Cadastro() {
                   placeholder='Nome'style={styles.input}
                   value={nome_usuario}
                   onChangeText={event => setUserName(event)}
-                  ></TextInput>
-
-                  <Text style={styles.text}>Número de telefone</Text>
-                  <TextInput 
-                  placeholder='Telefone'style={styles.input}
-                  inputMode='tel'
-                  value={telefone}
-                  onChangeText={event => setTelefone(event)}
                   ></TextInput>
                   
                   <Text style={styles.text}>Data de nascimento</Text>
@@ -146,6 +150,8 @@ function Cadastro() {
                   style={styles.entrar}
                   >Cadastrar</Text></TouchableOpacity>
 
+                  </ScrollView>
+                  </KeyboardAvoidingView>
               </View>
           </ImageBackground>
         </View>
@@ -162,6 +168,10 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     form:{
+        position: 'absolute',
+        // bottom: 0,
+        // left: 0,
+        // flexDirection: 'row',
         width : "85%",
         height : "80%",
         backgroundColor : "#659ee4",
@@ -175,22 +185,29 @@ const styles = StyleSheet.create({
     input:{
         margin : 10,
         backgroundColor : 'white',
-        width : '80%',
+        width : '90%',
         height : 35,
         borderWidth : 1,
         borderColor : "#5e5e5e",
         borderRadius : 8,
         fontSize: 15,
         padding: 10,
+        // paddingLeft: 'auto',
+        // paddingRight: 'auto',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        textAlign: 'justify',
       },
       title:{
         backgroundColor : "#5271ff",
         fontSize : 30,
         width : 150,
         textAlign : 'center',
-        marginTop : 10,
+        marginTop : '5%',
         color : 'white',
         borderRadius : 5,
+        marginLeft: 'auto',
+        marginRight: 'auto',
       },
       entrar:{
         backgroundColor : "#5271ff",
@@ -203,6 +220,8 @@ const styles = StyleSheet.create({
           borderRadius : 30,
           color : 'white',
           marginTop : 10,
+          marginLeft: 'auto',
+          marginRight: 'auto',
           
           // alignItems : 'center'
       },
@@ -222,10 +241,15 @@ const styles = StyleSheet.create({
         margin: 4,
         height: 35,
         fontSize: 15,
+        marginLeft: 'auto',
+        marginRight: 'auto',
       },
       text: {
         fontSize: 16,
-        margin: 5
+        margin: 5,
+        justifyContent: 'center',
+        marginLeft: 'auto',
+        marginRight: 'auto',
       }
   });
 
