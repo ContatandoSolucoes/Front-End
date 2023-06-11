@@ -29,7 +29,6 @@ function Perfil() {
     AsyncStorage.getItem('email').then((value) => setEmail(value));
     AsyncStorage.getItem('nascimento').then((value) => setNascimento(value));
     AsyncStorage.getItem('telefone').then((value) => setTelefone(value));
-
   }, []);
 
 
