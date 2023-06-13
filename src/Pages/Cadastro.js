@@ -77,6 +77,13 @@ function Cadastro() {
 
             const response = await api.post('/user', data)
             
+            setEmail("")
+            setSenha("")
+            setConfirmaSenha("")
+            setUserName("")
+            setTelefone("")
+            setNascimento("")
+
             navigation.navigate("Login")
         } catch(error){
             showToastErro()

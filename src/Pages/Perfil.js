@@ -16,7 +16,6 @@ function Perfil() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [nascimento, setNascimento] = useState('');
-  const [telefone, setTelefone] = useState('');
   
   function handleLogout(){
     AsyncStorage.clear()
@@ -28,7 +27,6 @@ function Perfil() {
     AsyncStorage.getItem('nome_usuario').then((value) => setNome(value));
     AsyncStorage.getItem('email').then((value) => setEmail(value));
     AsyncStorage.getItem('nascimento').then((value) => setNascimento(value));
-    AsyncStorage.getItem('telefone').then((value) => setTelefone(value));
   }, []);
 
 
@@ -81,7 +79,6 @@ function Perfil() {
               <Text style={styles.infos}>{nome}</Text>
               <Text style={styles.infos}>{email}</Text>
               <Text style={styles.infos}>{nascimento.slice(0,10).split('-').reverse().join('/')}</Text>
-              <Text style={styles.infos}>{telefone}</Text>
             </View>
 
             <TouchableOpacity onPress={handleLogout} ><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>

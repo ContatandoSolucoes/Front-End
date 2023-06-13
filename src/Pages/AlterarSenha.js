@@ -46,6 +46,10 @@ function AlterarSenha() {
 
       navigation.navigate("Login")
 
+
+      setEmail("")
+      setCodigo("")
+      setSenha("")
     } catch(error){
       showToastErro()
       console.log(`>>> ${error}`)
