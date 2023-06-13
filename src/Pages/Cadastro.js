@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground } from 'react-native'
+import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView,ScrollView } from 'react-native'
 import back from "../../assets/Fundo.png"
 
 import api from '../api.js'
@@ -135,6 +135,14 @@ function Cadastro() {
               inputMode='email'
               value={email}
               onChangeText={event => setEmail(event)}
+              ></TextInput>
+
+              <Text style={styles.text}>Telefone </Text>
+              <TextInput 
+              placeholder='Telefone'style={styles.input}
+              inputMode='tel'
+              value={telefone}
+              onChangeText={event => setTelefone(event)}
               ></TextInput>
               
               <Text style={styles.text}>Senha</Text>

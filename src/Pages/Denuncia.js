@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { View, StyleSheet, TextInput, Text, Image, TouchableOpacity,ImageBackground, Button,Alert} from 'react-native'
+import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView,ScrollView } from 'react-native'
 import api from '../api.js'
 import back from "../../assets/Fundo.png"
 import * as Location from "expo-location";
@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Auth,db,storage } from '../Firebase/Firebase.js';
 import { getApps,initializeApp } from 'firebase/app';
 import { uploadBytes, getDownloadURL, ref, getStorage } from "firebase/storage";
+import Toast from 'react-native-toast-message';
 
 function Denuncia() {
     const navigation = useNavigation();
@@ -27,6 +28,15 @@ function Denuncia() {
     const [city , setCity] = useState()
     const [municipio, setMunicipio] = useState()
     const [cep, setCep] = useState()
+
+    function showToastSucesso(){
+        Toast.show({
+          type: "success",
+          text1: "Denuncia realizada!",
+          text2: "Bom trabalho.",
+          visibilityTime: 6000
+        });
+      }
 
     useEffect(() => {
         (async () => {
@@ -134,6 +144,7 @@ useEffect(() => {
                             alert('Selecione um tipo de problema')
                         } else{
                             const response = await api.post('/denuncia', data)
+                            showToastSucesso()
                             console.log(response)
                             setImageUri('');
                             setAddress('');
