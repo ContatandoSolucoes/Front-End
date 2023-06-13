@@ -169,157 +169,201 @@ useEffect(() => {
 
         return (
             <React.Fragment>
-    
-                <ImageBackground source={back} resizeMode="cover" style={styles.image}>
-                <Text style={styles.title}>Relatar Problema</Text>
-                <View style={styles.container}>
-    
-                    <TextInput 
-                        value={address} 
-                        onChangeText={setAddress}
-                        style={styles.input}
-                        placeholder="Endereço"
-                    ></TextInput>
-    
-                    <Picker
-                        selectedValue={tipo_problema}
-                        style={styles.select}
-                        onValueChange={(itemValue) => 
-                        setTipo_problema(itemValue)
-                        }>
-                        <Picker.Item label={'Tipo de problema'} value={"Nulo"} />
-                        {
-                            problema.map(cr => {
-                                return <Picker.Item label={cr} value={cr} />
-                            })
-                        }
-                        
-                    </Picker>
-    
-                    <View style={styles.imagem}>
-                    {imageUri && <Image source={{uri: imageUri}} style={styles.img}/> }
-                    </View>
-    
-                    {/* ()=>{navigation.navigate("Camera")} */}
-                    <View style={styles.button}>
-                    <TouchableOpacity onPress={obterImage} style={styles.alinhamento}>
-                    <FontAwesome name='camera' size={60} color="#5271ff"></FontAwesome>
-                    </TouchableOpacity> 
-                    <TouchableOpacity onPress={galeriaImage} style={styles.alinhamento}>
-                    <FontAwesome name='image' size={60} color="#5271ff"></FontAwesome>
-                    </TouchableOpacity>
-                    </View>
-    
-                    <TextInput 
-                        value={desc_problema} 
-                        onChangeText={setDesc_Problema}
-                        style={styles.inputDesc}
-                        placeholder="Descrição"
-                        multiline={true}
-                    ></TextInput>
-    
-                    <TouchableOpacity
-                        onPress={envData}><Text style={styles.relatar}>Enviar Relato</Text></TouchableOpacity>
-    
+
+            <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+            <View style={styles.container}>
+            <KeyboardAvoidingView
+            contentContainerStyle={styles.form}
+            behavior = "height"
+            keyboardVerticalOffset = {35}
+            >
+              <ScrollView
+              // style = {styles.form}
+              width = '100%'
+              >
+
+            <Text style={styles.title}>Relatar Problema</Text>
+
+                <TextInput 
+                    value={address} 
+                    onChangeText={setAddress}
+                    style={styles.input}
+                    placeholder="Endereço"
+                ></TextInput>
+
+                <Picker
+                    selectedValue={tipo_problema}
+                    style={styles.select}
+                    onValueChange={(itemValue) => 
+                    setTipo_problema(itemValue)
+                    }>
+                    <Picker.Item label={'Tipo de problema'} value={"Nulo"} />
+                    {
+                        problema.map(cr => {
+                            return <Picker.Item label={cr} value={cr} />
+                        })
+                    }
+                    
+                </Picker>
+
+                <View style={styles.imagem}>
+                {imageUri && <Image source={{uri: imageUri}} style={styles.img}/> }
                 </View>
-                </ImageBackground>
-            </React.Fragment>
+
+                {/* ()=>{navigation.navigate("Camera")} */}
+                <View style={styles.button}>
+                <TouchableOpacity onPress={obterImage} style={styles.alinhamento}>
+                <FontAwesome name='camera' size={60} color="#5271ff"></FontAwesome>
+                </TouchableOpacity> 
+                <TouchableOpacity onPress={galeriaImage} style={styles.alinhamento}>
+                <FontAwesome name='image' size={60} color="#5271ff"></FontAwesome>
+                </TouchableOpacity>
+                </View>
+
+                <TextInput 
+                    value={desc_problema} 
+                    onChangeText={setDesc_Problema}
+                    style={styles.inputDesc}
+                    placeholder="Descrição"
+                    multiline={true}
+                ></TextInput>
+
+                <TouchableOpacity
+                    onPress={envData}><Text style={styles.relatar}>Enviar Relato</Text></TouchableOpacity>
+                
+                    </ScrollView>
+                </KeyboardAvoidingView>
+            </View>
+            </ImageBackground>
+        </React.Fragment>
         )
     }
 
 
-const styles = StyleSheet.create({
-    image :{
-        flex : 1,
-        width : "100%",
-        alignItems : 'center',
-        flexDirection : 'column',
-        paddingTop: "20%"
-    },
-    title:{
-        backgroundColor : "#5271ff",
-        fontSize : 30,
-        width : 300,
-        textAlign : 'center',
-        color : 'white',
-        // borderColor : '#5e5e5e',
-        // borderWidth : 2,
-        borderRadius : 5,
-    },
-    input:{
-        margin : 10,
-        backgroundColor : 'white',
-        width : '80%',
-        height : 35,
-        borderWidth : 1,
-        borderColor : "#5e5e5e",
-        borderRadius : 8,
-        fontSize: 15,
-        padding: 10,
-    },
-    container:{
-        width: "80%",
-        justifyContent: 'center',
-        alignItems: "center",
-        marginTop: "15%"
-    },
-    imagem:{
-        width: 202,
-        height: 102,
-        borderRadius:2,
-        borderWidth : 0.1,
-        marginBottom: '10%'
-    },
-    img:{
-        width: 200,
-        height: 100,
-        borderRadius:2,
-        borderWidth : 1
-    },
-    inputDesc:{
-        margin : 10,
-        backgroundColor : 'white',
-        width : '90%',
-        height : 150,
-        borderWidth : 1,
-        borderColor : "#5e5e5e",
-        borderRadius : 8,
-        fontSize: 15,
-        padding: 10,
-        alignItems: 'center'
-    },
-    relatar:{
-        backgroundColor : "#5271ff",
-        fontSize : 25,
-        width : 200,
-        height : 50,
-        borderColor : '#5e5e5e',
-        borderWidth : 2,
-        borderRadius : 30,
-        color : 'white',
-        alignItems: 'center',
-        textAlign: 'center',
-        paddingTop: 6,
-        marginTop: 25
-    },
-    container2: {
-        backgroundColor: 'yellow',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginLeft: 10
-    },
-    button: {
-        justifyContent: "space-between",
-        flexDirection: "row",
-        margin: 10,
-    },
-    alinhamento:{
-        marginLeft:10,
-        marginRight:10
-    },
-    select:{
-        width: "80%",
-    }
-})
-
-export default Denuncia
+    const styles = StyleSheet.create({
+        form:{
+            position: 'absolute',
+            // bottom: 0,
+            // left: 0,
+            // flexDirection: 'row',
+            width : "85%",
+            height : "80%",
+            backgroundColor : "#659ee4",
+            borderRadius : 15,
+            alignItems : 'center',
+            justifyContent : 'center',
+            borderWidth : 2,
+            borderColor : '#5e5e5e',
+            marginTop: 20
+        },
+        image :{
+            flex : 1,
+            width : "100%",
+            alignItems : 'center',
+            flexDirection : 'column',
+            paddingTop: "8%",
+        },
+        title:{
+            backgroundColor : "#5271ff",
+            fontSize : 30,
+            width : 300,
+            textAlign : 'center',
+            color : 'white',
+            // borderColor : '#5e5e5e',
+            // borderWidth : 2,
+            borderRadius : 5,
+            marginTop: "20%"
+        },
+        input:{
+            margin : 10,
+            backgroundColor : 'white',
+            width : '80%',
+            height : 35,
+            borderWidth : 1,
+            borderColor : "#5e5e5e",
+            borderRadius : 8,
+            fontSize: 15,
+            padding: 10,
+            marginTop: "10%",
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+        container:{
+            width: "80%",
+            justifyContent: 'center',
+            alignItems: "center",
+            // marginTop: "1%"
+        },
+        imagem:{
+            width: 202,
+            height: 102,
+            borderRadius:2,
+            borderWidth : 0.1,
+            marginBottom: '10%',
+            marginTop: "5%",
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+        img:{
+            width: 200,
+            height: 100,
+            borderRadius:2,
+            borderWidth : 1
+        },
+        inputDesc:{
+            margin : 10,
+            backgroundColor : 'white',
+            width : '90%',
+            height : 50,
+            borderWidth : 1,
+            borderColor : "#5e5e5e",
+            borderRadius : 8,
+            fontSize: 15,
+            padding: 10,
+            alignItems: 'center',
+            marginTop: "5%",
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+        relatar:{
+            backgroundColor : "#5271ff",
+            fontSize : 25,
+            width : 200,
+            height : 50,
+            borderColor : '#5e5e5e',
+            borderWidth : 2,
+            borderRadius : 30,
+            color : 'white',
+            alignItems: 'center',
+            textAlign: 'center',
+            paddingTop: 6,
+            marginTop: "10%",
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+        container2: {
+            backgroundColor: 'yellow',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginLeft: 10
+        },
+        button: {
+            justifyContent: "space-between",
+            flexDirection: "row",
+            margin: 10,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+        alinhamento:{
+            marginLeft:10,
+            marginRight:10
+        },
+        select:{
+            width: "80%",
+            marginTop: "3%",
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        }
+    })
+    
+    export default Denuncia

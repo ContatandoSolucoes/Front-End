@@ -96,144 +96,168 @@ function Cadastro() {
   return (
     
     <React.Fragment>
-        <View style={styles.container}>
-          <ImageBackground source={back} resizeMode="cover" style={styles.image}>
-              <View style={styles.form}>
-                  <Text style={styles.title}>Cadastro</Text>
-                  
-                  <Text style={styles.text}>Nome de usuario</Text>
-                  <TextInput 
-                  placeholder='Nome'style={styles.input}
-                  value={nome_usuario}
-                  onChangeText={event => setUserName(event)}
-                  ></TextInput>
+    <View style={styles.container}>
+      <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+        
 
-                  <Text style={styles.text}>Número de telefone</Text>
-                  <TextInput 
-                  placeholder='Telefone'style={styles.input}
-                  inputMode='tel'
-                  value={telefone}
-                  onChangeText={event => setTelefone(event)}
-                  ></TextInput>
-                  
-                  <Text style={styles.text}>Data de nascimento</Text>
-                  <DateField 
-                    styleInput={styles.date}
-                    labelDate="Dia"
-                    labelMonth="Mês"
-                    labelYear="Ano"
-                    onSubmit={e => setNascimento(e)}
-                    />
+        <View style={styles.form}>
+        <KeyboardAvoidingView
+        contentContainerStyle={styles.form}
+        behavior = "height"
+        keyboardVerticalOffset = {70}
+        >
+          <ScrollView
+          // style = {styles.form}
+          width = '100%'
+          >
 
-                  <Text style={styles.text}>E-mail </Text>
-                  <TextInput 
-                  placeholder='Email'style={styles.input}
-                  inputMode='email'
-                  value={email}
-                  onChangeText={event => setEmail(event)}
-                  ></TextInput>
-                  
-                  <Text style={styles.text}>Senha</Text>
-                  <TextInput 
-                  placeholder='Senha'style={styles.input}
-                  secureTextEntry={true}
-                  value={senha}
-                  onChangeText={event=>setSenha(event)}
-                  ></TextInput>
-                  
-                  <Text style={styles.text}>Confirme a senha</Text>
-                  <TextInput 
-                  placeholder='Confirmar senha'style={styles.input}
-                  secureTextEntry={true}
-                  value={confirmaSenha}
-                  onChangeText={event => setConfirmaSenha(event)}
-                  ></TextInput>
-                  
-                  <TouchableOpacity onPress={handleRegister}><Text 
-                  style={styles.entrar}
-                  >Cadastrar</Text></TouchableOpacity>
+              <Text style={styles.title}>Cadastro</Text>
+              
+              <Text style={styles.text}>Nome de usuario</Text>
+              <TextInput 
+              placeholder='Nome'style={styles.input}
+              value={nome_usuario}
+              onChangeText={event => setUserName(event)}
+              ></TextInput>
+              
+              <Text style={styles.text}>Data de nascimento</Text>
+              <DateField 
+                styleInput={styles.date}
+                labelDate="Dia"
+                labelMonth="Mês"
+                labelYear="Ano"
+                onSubmit={e => setNascimento(e)}
+                />
 
-              </View>
-          </ImageBackground>
-        </View>
-        <Toast />
-    </React.Fragment>
+              <Text style={styles.text}>E-mail </Text>
+              <TextInput 
+              placeholder='Email'style={styles.input}
+              inputMode='email'
+              value={email}
+              onChangeText={event => setEmail(event)}
+              ></TextInput>
+              
+              <Text style={styles.text}>Senha</Text>
+              <TextInput 
+              placeholder='Senha'style={styles.input}
+              secureTextEntry={true}
+              value={senha}
+              onChangeText={event=>setSenha(event)}
+              ></TextInput>
+              
+              <Text style={styles.text}>Confirme a senha</Text>
+              <TextInput 
+              placeholder='Confirmar senha'style={styles.input}
+              secureTextEntry={true}
+              value={confirmaSenha}
+              onChangeText={event => setConfirmaSenha(event)}
+              ></TextInput>
+              
+              <TouchableOpacity onPress={handleRegister}><Text 
+              style={styles.entrar}
+              >Cadastrar</Text></TouchableOpacity>
+
+              </ScrollView>
+              </KeyboardAvoidingView>
+          </View>
+      </ImageBackground>
+    </View>
+    <Toast />
+</React.Fragment>
   )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'white',
-      alignItems: 'center',
-      justifyContent: 'center',
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  form:{
+      position: 'absolute',
+      // bottom: 0,
+      // left: 0,
+      // flexDirection: 'row',
+      width : "85%",
+      height : "80%",
+      backgroundColor : "#659ee4",
+      borderRadius : 15,
+      alignItems : 'center',
+      justifyContent : 'center',
+      borderWidth : 2,
+      borderColor : '#5e5e5e',
+      marginTop: 20
+  },
+  input:{
+      margin : 10,
+      backgroundColor : 'white',
+      width : '90%',
+      height : 35,
+      borderWidth : 1,
+      borderColor : "#5e5e5e",
+      borderRadius : 8,
+      fontSize: 15,
+      padding: 10,
+      // paddingLeft: 'auto',
+      // paddingRight: 'auto',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      textAlign: 'justify',
     },
-    form:{
-        width : "85%",
-        height : "80%",
-        backgroundColor : "#659ee4",
-        borderRadius : 15,
-        alignItems : 'center',
-        justifyContent : 'center',
-        borderWidth : 2,
-        borderColor : '#5e5e5e',
-        marginTop: 20
+    title:{
+      backgroundColor : "#5271ff",
+      fontSize : 30,
+      width : 150,
+      textAlign : 'center',
+      marginTop : '5%',
+      color : 'white',
+      borderRadius : 5,
+      marginLeft: 'auto',
+      marginRight: 'auto',
     },
-    input:{
-        margin : 10,
-        backgroundColor : 'white',
-        width : '80%',
-        height : 35,
-        borderWidth : 1,
-        borderColor : "#5e5e5e",
-        borderRadius : 8,
-        fontSize: 15,
-        padding: 10,
-      },
-      title:{
-        backgroundColor : "#5271ff",
-        fontSize : 30,
+    entrar:{
+      backgroundColor : "#5271ff",
+        fontSize : 25,
         width : 150,
+        height : 40,
         textAlign : 'center',
-        marginTop : 10,
+        borderColor : '#5e5e5e',
+        borderWidth : 2,
+        borderRadius : 30,
         color : 'white',
-        borderRadius : 5,
-      },
-      entrar:{
-        backgroundColor : "#5271ff",
-          fontSize : 25,
-          width : 150,
-          height : 40,
-          textAlign : 'center',
-          borderColor : '#5e5e5e',
-          borderWidth : 2,
-          borderRadius : 30,
-          color : 'white',
-          marginTop : 10,
-          
-          // alignItems : 'center'
-      },
-      image :{
-        flex : 1,
-        justifyContent : 'center',
-        width : "100%",
-        alignItems : 'center',
-        flexDirection : 'column'
-      },
-      date: {
-        backgroundColor : 'white',
-        borderWidth : 1,
-        borderColor : "#5e5e5e",
-        borderRadius : 8,
-        width : '25%',
-        margin: 4,
-        height: 35,
-        fontSize: 15,
-      },
-      text: {
-        fontSize: 16,
-        margin: 5
-      }
-  });
+        marginTop : 10,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        
+        // alignItems : 'center'
+    },
+    image :{
+      flex : 1,
+      justifyContent : 'center',
+      width : "100%",
+      alignItems : 'center',
+      flexDirection : 'column'
+    },
+    date: {
+      backgroundColor : 'white',
+      borderWidth : 1,
+      borderColor : "#5e5e5e",
+      borderRadius : 8,
+      width : '25%',
+      margin: 4,
+      height: 35,
+      fontSize: 15,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+    text: {
+      fontSize: 16,
+      margin: 5,
+      justifyContent: 'center',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }
+});
 
 export default Cadastro

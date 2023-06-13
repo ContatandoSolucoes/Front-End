@@ -58,58 +58,58 @@ function AlterarSenha() {
 
   return (
     <React.Fragment>
-      <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+    <ImageBackground source={back} resizeMode="cover" style={styles.image}>
 
 
-        <View style={styles.container}>
+      <View style={styles.container}>
 
-        <Text style={styles.title}>Trocar Senha</Text>
-        
-        <KeyboardAvoidingView
-            contentContainerStyle={styles.form}
-            behavior = "padding"
-            keyboardVerticalOffset = {105}
+      <Text style={styles.title}>Trocar Senha</Text>
+      
+      <KeyboardAvoidingView
+          contentContainerStyle={styles.form}
+          behavior = "padding"
+          keyboardVerticalOffset = {105}
+          >
+            <ScrollView
+            // style = {styles.form}
+            width = '100%'
             >
-              <ScrollView
-              // style = {styles.form}
-              width = '100%'
-              >
 
-          {/* inputs que pegam os dados */}
-          
-          <TextInput 
-            style={styles.inputCódigo} 
-            placeholder="Coloque seu email"
-            value={email}
-            onChangeText={event => setEmail(event)}
-          />
+        {/* inputs que pegam os dados */}
+        
+        <TextInput 
+          style={styles.inputCódigo} 
+          placeholder="Coloque seu email"
+          value={email}
+          onChangeText={event => setEmail(event)}
+        />
 
-          <TextInput 
-            style={styles.inputCódigo} 
-            placeholder="Coloque o código"
-            value={codigo}
-            onChangeText={event => setCodigo(event)}
-          />
+        <TextInput 
+          style={styles.inputCódigo} 
+          placeholder="Coloque o código"
+          value={codigo}
+          onChangeText={event => setCodigo(event)}
+        />
 
-          <TextInput 
-            style={styles.inputNovaSenha} 
-            placeholder="Digite sua nova senha"
-            value={senha}
-            onChangeText={event => setSenha(event)}
-          />
+        <TextInput 
+          style={styles.inputNovaSenha} 
+          placeholder="Digite sua nova senha"
+          value={senha}
+          onChangeText={event => setSenha(event)}
+        />
 
-          {/* botão para acionar a function para Alterar senha */}
-          
-          <TouchableOpacity onPress={updateCodigo}>
-            <Text style={styles.entrar}> Alterar senha</Text>
-          </TouchableOpacity>
+        {/* botão para acionar a function para Alterar senha */}
+        
+        <TouchableOpacity onPress={updateCodigo}>
+          <Text style={styles.entrar}> Alterar senha</Text>
+        </TouchableOpacity>
 
-            </ScrollView>
-          </KeyboardAvoidingView>
-        </View>
-      </ImageBackground>
-      <Toast/>
-    </React.Fragment>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </View>
+    </ImageBackground>
+    <Toast/>
+  </React.Fragment>
   )
 }
 
