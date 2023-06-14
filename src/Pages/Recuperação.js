@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
+import { StyleSheet, Keyboard, TouchableWithoutFeedback, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
 import back from "../../assets/Fundo.png"
 import { StatusBar } from 'expo-status-bar';
 
@@ -10,6 +10,12 @@ import { useNavigation } from '@react-navigation/native';
 import Toast from "react-native-toast-message"
 
 function Recuperação() {
+
+  const DismissKeyboard = ({children}) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}        
+    </TouchableWithoutFeedback>
+  )
 
   function showToastErro(){
     Toast.show({
@@ -53,8 +59,9 @@ function Recuperação() {
 
   return (
     <React.Fragment>
-      
+      <DismissKeyboard>
         <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+        <DismissKeyboard>
             <View style={styles.container}>
                 
                 <Text style={styles.title}>Recuperação de senha</Text>
@@ -71,7 +78,9 @@ function Recuperação() {
                 </TouchableOpacity>
 
             </View>
+            </DismissKeyboard>
         </ImageBackground>
+        </DismissKeyboard>
         <Toast/>
     </React.Fragment>
   )

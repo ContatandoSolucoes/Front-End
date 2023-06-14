@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, KeyboardAvoidingView, StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground, Alert} from 'react-native';
+import { ScrollView,Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground, Alert} from 'react-native';
 import back from "../../assets/Fundo.png"
 
 import api from '../api.js'
@@ -10,6 +10,12 @@ import Toast from 'react-native-toast-message';
 
 
 function AlterarSenha() {
+
+  const DismissKeyboard = ({children}) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}        
+    </TouchableWithoutFeedback>
+  )
 
   function showToastErro(){
     Toast.show({
@@ -58,8 +64,10 @@ function AlterarSenha() {
 
   return (
     <React.Fragment>
+    <DismissKeyboard>
     <ImageBackground source={back} resizeMode="cover" style={styles.image}>
 
+    <DismissKeyboard>
 
       <View style={styles.container}>
 
@@ -107,7 +115,9 @@ function AlterarSenha() {
           </ScrollView>
         </KeyboardAvoidingView>
       </View>
+        </DismissKeyboard>
     </ImageBackground>
+      </DismissKeyboard>
     <Toast/>
   </React.Fragment>
   )

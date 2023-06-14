@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Image} from 'react-native';
+import { StyleSheet, Keyboard, TouchableWithoutFeedbackBase, Text, TextInput, View, Image} from 'react-native';
 import Form from '../Components/Form/Form';
 import FormCad from '../Components/FormCad/FormCad';
 import React from 'react';

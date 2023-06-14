@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView,ScrollView } from 'react-native'
+import React, { Children } from 'react'
+import { View, TouchableWithoutFeedback, Keyboard, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView,ScrollView, TouchableWithoutFeedbackBase } from 'react-native'
 import back from "../../assets/Fundo.png"
 
 import api from '../api.js'
@@ -10,6 +10,14 @@ import Toast from 'react-native-toast-message';
 import DateField from 'react-native-datefield';
 
 function Cadastro() {
+
+  const DismissKeyboard = ({children}) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}        
+    </TouchableWithoutFeedback>
+  )
+
+
 
   function showToastErro(){
     Toast.show({
@@ -53,12 +61,11 @@ function Cadastro() {
     const [senha, setSenha] = useState('');
     const [confirmaSenha, setConfirmaSenha] = useState('');
     const [nome_usuario, setUserName] = useState('');
-    const [telefone, setTelefone] = useState('');
     const [nascimento, setNascimento] = useState('');
     
     async function handleRegister(event){
 
-      if(email == "" || senha == "" || nome_usuario == ""|| telefone == "" || nascimento =="" ){
+      if(email == "" || senha == "" || nome_usuario == ""|| nascimento =="" ){
         showToastIncompleto()
       }
       else{
@@ -72,7 +79,7 @@ function Cadastro() {
             showToastSucesso()
                  
             const data = {
-              nome_usuario,email,senha,telefone,nascimento
+              nome_usuario,email,senha,nascimento
             };
 
             const response = await api.post('/user', data)
@@ -96,6 +103,7 @@ function Cadastro() {
   return (
     
     <React.Fragment>
+  <DismissKeyboard>
     <View style={styles.container}>
       <ImageBackground source={back} resizeMode="cover" style={styles.image}>
         
@@ -136,14 +144,6 @@ function Cadastro() {
               value={email}
               onChangeText={event => setEmail(event)}
               ></TextInput>
-
-              <Text style={styles.text}>Telefone </Text>
-              <TextInput 
-              placeholder='Telefone'style={styles.input}
-              inputMode='tel'
-              value={telefone}
-              onChangeText={event => setTelefone(event)}
-              ></TextInput>
               
               <Text style={styles.text}>Senha</Text>
               <TextInput 
@@ -170,6 +170,7 @@ function Cadastro() {
           </View>
       </ImageBackground>
     </View>
+  </DismissKeyboard>
     <Toast />
 </React.Fragment>
   )

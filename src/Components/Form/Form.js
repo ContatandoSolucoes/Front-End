@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, ImageBackground, Alert } from 'react-native'
+import { View, TouchableWithoutFeedback, Keyboard, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, ImageBackground, Alert } from 'react-native'
 import logo from "./icon.png"
 import { getHeaderTitle } from '@react-navigation/elements';
 import Cadastro from '../../Pages/Cadastro';
@@ -16,6 +16,12 @@ import jwtDecode from 'jwt-decode';
 import Toast from "react-native-toast-message"
 
 function Form() {
+
+  const DismissKeyboard = ({children}) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}        
+    </TouchableWithoutFeedback>
+  )
 
   function showToastErro(){
     Toast.show({
@@ -79,7 +85,9 @@ function Form() {
   return (
     <React.Fragment>
       
+        <DismissKeyboard>
       <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+        <DismissKeyboard>
           <View style={styles.container}>
             <Text style={styles.title}>LOGIN</Text>
             <TextInput 
@@ -97,8 +105,10 @@ function Form() {
             <TouchableOpacity onPress={handleLogin}><Text style={styles.entrar}>Entrar</Text></TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Recuperação')}><Text style={styles.esqueceu}>Esqueceu sua senha?</Text></TouchableOpacity>
           </View>
+          </DismissKeyboard>
           <FormCad></FormCad>
         </ImageBackground>
+          </DismissKeyboard>
         <Toast/>
     </React.Fragment>
   )

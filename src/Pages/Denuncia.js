@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { View, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView,ScrollView } from 'react-native'
+import { View, TouchableWithoutFeedback, Keyboard, StyleSheet, TextInput, TextInputComponent, Text, Image, Button, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView,ScrollView } from 'react-native'
 import api from '../api.js'
 import back from "../../assets/Fundo.png"
 import * as Location from "expo-location";
@@ -14,6 +14,13 @@ import { uploadBytes, getDownloadURL, ref, getStorage } from "firebase/storage";
 import Toast from 'react-native-toast-message';
 
 function Denuncia() {
+
+    const DismissKeyboard = ({children}) => (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          {children}        
+        </TouchableWithoutFeedback>
+      )
+
     const navigation = useNavigation();
     const [imageUri, setImageUri] = useState();
     const [problema, setProblema] = useState(['Elétrico(fio desencapado, poste caido)', 'Hidraúlico(vazão de água, cano exposto)', 'Infra(semaforo quebrado, calçada quebrada)']);
@@ -181,7 +188,9 @@ useEffect(() => {
         return (
             <React.Fragment>
 
+            <DismissKeyboard>
             <ImageBackground source={back} resizeMode="cover" style={styles.image}>
+            <DismissKeyboard>
             <View style={styles.container}>
             <KeyboardAvoidingView
             contentContainerStyle={styles.form}
@@ -245,7 +254,9 @@ useEffect(() => {
                     </ScrollView>
                 </KeyboardAvoidingView>
             </View>
+            </DismissKeyboard>
             </ImageBackground>
+            </DismissKeyboard>
         </React.Fragment>
         )
     }
