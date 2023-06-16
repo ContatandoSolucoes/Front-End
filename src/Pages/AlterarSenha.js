@@ -11,12 +11,6 @@ import Toast from 'react-native-toast-message';
 
 function AlterarSenha() {
 
-  const DismissKeyboard = ({children}) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {children}        
-    </TouchableWithoutFeedback>
-  )
-
   function showToastErro(){
     Toast.show({
       type: "error",
@@ -64,10 +58,17 @@ function AlterarSenha() {
 
   return (
     <React.Fragment>
-    <DismissKeyboard>
+      <TouchableWithoutFeedback
+      touchSoundDisable
+      onPress={() => Keyboard.dismiss()}
+      >
+    
     <ImageBackground source={back} resizeMode="cover" style={styles.image}>
 
-    <DismissKeyboard>
+    <TouchableWithoutFeedback
+      touchSoundDisable
+      onPress={() => Keyboard.dismiss()}
+      >
 
       <View style={styles.container}>
 
@@ -115,9 +116,9 @@ function AlterarSenha() {
           </ScrollView>
         </KeyboardAvoidingView>
       </View>
-        </DismissKeyboard>
+        </TouchableWithoutFeedback>
     </ImageBackground>
-      </DismissKeyboard>
+      </TouchableWithoutFeedback>
     <Toast/>
   </React.Fragment>
   )

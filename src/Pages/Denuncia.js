@@ -15,12 +15,6 @@ import Toast from 'react-native-toast-message';
 
 function Denuncia() {
 
-    const DismissKeyboard = ({children}) => (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          {children}        
-        </TouchableWithoutFeedback>
-      )
-
     const navigation = useNavigation();
     const [imageUri, setImageUri] = useState();
     const [problema, setProblema] = useState(['Elétrico(fio desencapado, poste caido)', 'Hidraúlico(vazão de água, cano exposto)', 'Infra(semaforo quebrado, calçada quebrada)']);
@@ -188,9 +182,15 @@ useEffect(() => {
         return (
             <React.Fragment>
 
-            <DismissKeyboard>
+            <TouchableWithoutFeedback
+            touchSoundDisable
+            onPress={() => Keyboard.dismiss()}
+            >
             <ImageBackground source={back} resizeMode="cover" style={styles.image}>
-            <DismissKeyboard>
+            <TouchableWithoutFeedback
+            touchSoundDisable
+            onPress={() => Keyboard.dismiss()}
+            >
             <View style={styles.container}>
             <KeyboardAvoidingView
             contentContainerStyle={styles.form}
@@ -254,9 +254,9 @@ useEffect(() => {
                     </ScrollView>
                 </KeyboardAvoidingView>
             </View>
-            </DismissKeyboard>
+            </TouchableWithoutFeedback>
             </ImageBackground>
-            </DismissKeyboard>
+            </TouchableWithoutFeedback>
         </React.Fragment>
         )
     }

@@ -11,12 +11,6 @@ import Toast from "react-native-toast-message"
 
 function Recuperação() {
 
-  const DismissKeyboard = ({children}) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {children}        
-    </TouchableWithoutFeedback>
-  )
-
   function showToastErro(){
     Toast.show({
       type: "error",
@@ -59,9 +53,15 @@ function Recuperação() {
 
   return (
     <React.Fragment>
-      <DismissKeyboard>
+      <TouchableWithoutFeedback
+      touchSoundDisable
+      onPress={() => Keyboard.dismiss()}
+      >
         <ImageBackground source={back} resizeMode="cover" style={styles.image}>
-        <DismissKeyboard>
+        <TouchableWithoutFeedback
+      touchSoundDisable
+      onPress={() => Keyboard.dismiss()}
+      >
             <View style={styles.container}>
                 
                 <Text style={styles.title}>Recuperação de senha</Text>
@@ -78,9 +78,9 @@ function Recuperação() {
                 </TouchableOpacity>
 
             </View>
-            </DismissKeyboard>
+            </TouchableWithoutFeedback>
         </ImageBackground>
-        </DismissKeyboard>
+        </TouchableWithoutFeedback>
         <Toast/>
     </React.Fragment>
   )

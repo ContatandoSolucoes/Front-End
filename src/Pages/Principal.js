@@ -139,8 +139,8 @@ function Principal() {
            return (
 
               <Marker 
-              coordinate = {m} 
               key={m.id_denuncia}
+              coordinate = {m} 
               title={m.tipo_problema}
               description={m.desc_problema}
               pinColor="blue" 

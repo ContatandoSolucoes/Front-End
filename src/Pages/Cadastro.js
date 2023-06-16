@@ -11,14 +11,6 @@ import DateField from 'react-native-datefield';
 
 function Cadastro() {
 
-  const DismissKeyboard = ({children}) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {children}        
-    </TouchableWithoutFeedback>
-  )
-
-
-
   function showToastErro(){
     Toast.show({
       type: "error",
@@ -65,6 +57,8 @@ function Cadastro() {
     
     async function handleRegister(event){
 
+     console.log(nascimento)
+
       if(email == "" || senha == "" || nome_usuario == ""|| nascimento =="" ){
         showToastIncompleto()
       }
@@ -73,6 +67,7 @@ function Cadastro() {
           showToastSenha()
         }
         else{
+          // if(nascimento )
           event.preventDefault()
         try{ 
 
@@ -88,7 +83,6 @@ function Cadastro() {
             setSenha("")
             setConfirmaSenha("")
             setUserName("")
-            setTelefone("")
             setNascimento("")
 
             navigation.navigate("Login")
@@ -103,7 +97,10 @@ function Cadastro() {
   return (
     
     <React.Fragment>
-  <DismissKeyboard>
+      <TouchableWithoutFeedback
+      touchSoundDisable
+      onPress={() => Keyboard.dismiss()}
+      >
     <View style={styles.container}>
       <ImageBackground source={back} resizeMode="cover" style={styles.image}>
         
@@ -170,7 +167,7 @@ function Cadastro() {
           </View>
       </ImageBackground>
     </View>
-  </DismissKeyboard>
+  </TouchableWithoutFeedback>
     <Toast />
 </React.Fragment>
   )
