@@ -33,7 +33,7 @@ export default function App() {
     <NavigationContainer>
       <Toast />
       {/* initial route name é para definir em qual tela teu app irá começar */}
-    <Stack.Navigator initialRouteName='PerfilUpdate'> 
+    <Stack.Navigator initialRouteName='Home'> 
     
       <Stack.Screen name='Home' component={Home} options={{title:'', headerTransparent:'true',}}></Stack.Screen>{/**Essas options servem para esconder um header que aparece comum titulo toda vez que você entra naquela tela */}
       <Stack.Screen name='Cadastro' component={Cadastro} options={{title:'', headerTransparent:'true',}}></Stack.Screen>

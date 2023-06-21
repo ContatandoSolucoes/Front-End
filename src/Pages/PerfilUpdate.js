@@ -18,10 +18,12 @@ function PerfilDenuncia() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
 
+
   useEffect(() => {
     // Load user information from AsyncStorage
     AsyncStorage.getItem('nome_usuario').then((value) => setNome(value));
     AsyncStorage.getItem('email').then((value) => setEmail(value));
+    AsyncStorage.getItem('imgPerfil').then((value) => setImageUri(value));
   }, []);
 
   const galeriaImage = async() => {
@@ -31,11 +33,7 @@ function PerfilDenuncia() {
       setImageUri(result.assets[0].uri)
 
       let uri = result.assets[0].uri
-
-      
-
-      
-      
+ 
     }
   }
 
@@ -59,9 +57,15 @@ function PerfilDenuncia() {
                       url,nome,email
                   };
     
-                  console.log('url fire >>> ', url)
+                  console.log('url email >>> ', email)
+
+                  AsyncStorage.setItem('imgPerfil', url);
+                  AsyncStorage.setItem('nome_usuario', nome)
+                  AsyncStorage.setItem('email', email)
 
                   const response = api.put('/imgPerfil',data)
+
+                  console.log('dados do usu>>', )
           
               })
               .catch((err) => {
@@ -76,7 +80,7 @@ function PerfilDenuncia() {
       else{
         try{
           const data ={
-            url,nome,email
+            imageUri,nome,email
           };
   
           console.log('url fire >>> ', url)
@@ -134,6 +138,9 @@ function PerfilDenuncia() {
         <TouchableOpacity onPress={() => {
           envData() 
         }}><Text style={styles.entrar}>Finalizar</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => 
+          navigation.navigate('PerfilUpdate') 
+        }><Text >Tetse</Text></TouchableOpacity>
 
         </View>
 

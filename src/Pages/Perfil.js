@@ -42,29 +42,6 @@ function Perfil() {
       }
   }
 
-  const obterImage = async() => {
-    const result = await ImagePicker.launchCameraAsync()
-
-    if(!result.canceled){
-      setImageUri(result.assets[0].uri)
-    }
-  }
-
-  const galeriaImage = async() => {
-    const result = await ImagePicker.launchImageLibraryAsync()
-
-    if(!result.canceled){
-      setImageUri(result.assets[0].uri)
-
-      let uri = result.assets[0].uri
-      
-    }
-  }
-
-  async function envImgPerfil(){
-    
-  }
-
 
   React.useEffect(() => {
     obterPermissao()
@@ -77,19 +54,20 @@ function Perfil() {
           
           <ImageBackground source={back} resizeMode="cover" style={styles.image}>
           
-            <TouchableOpacity onPress={galeriaImage}>
+            
               
               <View style={styles.divFoto}>
                 <Image source={imageUri}/>
                 {imageUri && <Image source={{uri: imageUri}} style={styles.imagemPerfil}/> }
               </View>
             
-            </TouchableOpacity>
+            
               
             <View style={styles.form}>
               <Text style={styles.infos}>{nome}</Text>
               <Text style={styles.infos}>{email}</Text>
               <Text style={styles.infos}>{nascimento.slice(0,10).split('-').reverse().join('/')}</Text>
+              <TouchableOpacity onPress={() => navigation.navigate('PerfilUpdate')}><Text style={styles.atualizar}>Atualizar perfil ?</Text></TouchableOpacity>
             </View>
 
             <TouchableOpacity onPress={handleLogout} ><Text style={styles.sair}>Sair da conta</Text></TouchableOpacity>
@@ -162,6 +140,22 @@ const styles = StyleSheet.create({
       height: 150,
       width: 150,
       borderRadius : 180,
+    },
+    atualizar:{
+      backgroundColor : "#5271ff",
+        fontSize : 25,
+        width : 230,
+        height : 40,
+        textAlign : 'center',
+        borderColor : '#5e5e5e',
+        borderWidth : 2,
+        borderRadius : 30,
+        color : 'white',
+        marginTop : 10,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        
+        // alignItems : 'center'
     }
 
 })
