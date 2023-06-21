@@ -1,10 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react'
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, ImageBackground} from 'react-native';
+import React, {useState, useEffect} from 'react'
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Button, ImageBackground} from 'react-native';
 import back from "../../assets/Fundo.png"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Menu() {
+
+    const [imageUri, setImageUri] = useState('');
+
+    useEffect(() => {
+        // Load user information from AsyncStorage
+        AsyncStorage.getItem('imgPerfil').then((value) => setImageUri(value));
+      }, []);
 
     const navigation = useNavigation();
 
@@ -16,11 +23,15 @@ function Menu() {
   return (
        <React.Fragment>
             <View style={styles.container}>
+                
                 <ImageBackground source={back} resizeMode="cover" style={styles.image}>
-                    <View style={styles.divFoto}>
-                        <Image></Image>
-                    </View>
-                    <Text style={styles.name}></Text>
+                    
+                <View style={styles.divFoto}>
+                    
+                    <Image source={imageUri}/>
+                    {imageUri && <Image source={{uri: imageUri}} style={styles.imagemPerfil}/> }
+                </View>
+
                     <TouchableOpacity onPress={() => navigation.navigate('Perfil')}><Text style={styles.options1}>Perfil</Text></TouchableOpacity>{/**Perfil */}
                     <TouchableOpacity><Text style={styles.options3}>Problemas no aplicativo</Text></TouchableOpacity>{/**Problemas no aplicativo */}
                     <TouchableOpacity onPress={handleLogout2}><Text style={styles.options4}>Sair da conta</Text></TouchableOpacity>{/**Sair da conta */}
@@ -86,7 +97,7 @@ const styles = StyleSheet.create({
         borderRadius : 7,
         color : 'white',
         paddingTop : 7,
-        marginTop : 100,
+        marginTop : 50,
          marginBottom : -100
     },
     divFoto:{
@@ -94,6 +105,9 @@ const styles = StyleSheet.create({
         height : 150,
         backgroundColor : '#5271ff',
         borderRadius : 180,
+        marginBottom: 25,
+        alignItems : "center",
+        justifyContent : "center",
         borderColor : '#5e5e5e',
         borderWidth : 2,
     },
@@ -102,6 +116,11 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         width : "100%",
         alignItems : 'center',
+      },
+      imagemPerfil: {
+        height: 150,
+        width: 150,
+        borderRadius : 180,
       }
 })
 export default Menu
