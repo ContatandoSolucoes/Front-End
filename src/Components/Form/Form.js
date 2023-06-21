@@ -54,15 +54,14 @@ function Form() {
 
       let nome = decodedHeader.nome_usuario
       let emailUSer = decodedHeader.email
-      let telefone = decodedHeader.telefone
       let nascimento = decodedHeader.nascimento
       
       console.log(nascimento)
 
       AsyncStorage.setItem("nome_usuario",nome)
       AsyncStorage.setItem("email",emailUSer)
-      AsyncStorage.setItem("telefone",telefone)
       AsyncStorage.setItem("nascimento",nascimento)
+      AsyncStorage.setItem("imgPerfil","https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
 
   
       navigation.navigate("Principal")

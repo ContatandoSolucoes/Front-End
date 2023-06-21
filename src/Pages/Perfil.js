@@ -8,10 +8,12 @@ import * as ImagePicker from 'expo-image-picker';
 import back from "../../assets/Fundo.png"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import api from '../api';
+
 function Perfil() {
 
   const navigation = useNavigation()
-  const [imageUri, setImageUri] = useState();
+  const [imageUri, setImageUri] = useState('');
   
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -27,6 +29,7 @@ function Perfil() {
     AsyncStorage.getItem('nome_usuario').then((value) => setNome(value));
     AsyncStorage.getItem('email').then((value) => setEmail(value));
     AsyncStorage.getItem('nascimento').then((value) => setNascimento(value));
+    AsyncStorage.getItem('imgPerfil').then((value) => setImageUri(value));
   }, []);
 
 
@@ -52,7 +55,14 @@ function Perfil() {
 
     if(!result.canceled){
       setImageUri(result.assets[0].uri)
+
+      let uri = result.assets[0].uri
+      
     }
+  }
+
+  async function envImgPerfil(){
+    
   }
 
 
@@ -70,6 +80,7 @@ function Perfil() {
             <TouchableOpacity onPress={galeriaImage}>
               
               <View style={styles.divFoto}>
+                <Image source={imageUri}/>
                 {imageUri && <Image source={{uri: imageUri}} style={styles.imagemPerfil}/> }
               </View>
             
