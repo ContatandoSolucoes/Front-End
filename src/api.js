@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL : 'http://192.168.63.1:8000'
+    baseURL : 'https://thoughtful-underclothes-fawn.cyclic.app'
 });
 
 export default api;
